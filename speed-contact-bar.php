@@ -10,9 +10,9 @@
  * Plugin Name:       Speed Contact Bar
  * Plugin URI:        http://wordpress.org/plugins/speed-contact-bar/
  * Description:       Let your website visitors get in touch with you easily with permanent seen contact informations
- * Version:           0.1
+ * Version:           0.2
  * Author:            Alexandra Mutter, Martin Stehle
- * Author URI:        http://alexandra-mutter.de/
+ * Author URI:        http://www.alexandra-mutter.de/
  * Text Domain:       speed-contact-bar
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt

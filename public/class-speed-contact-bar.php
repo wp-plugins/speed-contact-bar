@@ -93,13 +93,7 @@ class Speed_Contact_Bar {
 	 *
 	 * @var      array
 	 */
-	private $default_settings = array(
-		'enable' => 1,
-		'fixed' => 1,
-		'bg_color'  => '#dfdfdf',
-		'email'  => 'me@work.site',
-		'phone'  => '+49 98 / 76 54 321',
-	);
+	private $default_settings = array();
 	/**
 	 * Initialize the plugin by setting localization and loading public scripts
 	 * and styles.
@@ -370,8 +364,11 @@ class Speed_Contact_Bar {
 	 * @since    1.0
 	 */
 	public function enqueue_styles() {
-		if ( 1 == $this->stored_settings[ 'enable' ] && 1 == $this->stored_settings[ 'fixed' ] ) {
+		if ( 1 == $this->stored_settings[ 'enable' ] ) {
 			wp_enqueue_style( $this->plugin_slug . '-plugin-styles', plugins_url( 'assets/css/public.css', __FILE__ ), array(), self::VERSION );
+			if ( 1 == $this->stored_settings[ 'fixed' ] ) {
+				add_action( 'body_class', array( $this, 'add_body_padding' ) );
+			}
 		}
 	}
 
@@ -385,18 +382,6 @@ class Speed_Contact_Bar {
 	}
 
 	/**
-	 * Display the contact bar on the frontend
-	 *
-	 * @since    1.0
-	 */
-	public function _deprecated_print_contact_bar() {
-		// only display contact bar if user selected 'enable'
-		if ( 1 == $this->stored_settings[ 'enable' ] ) {
-			include_once( 'views/public.php' );
-		}
-	}
-
-	/**
 	 * Set default settings
 	 *
 	 * @since    1.0
@@ -407,6 +392,14 @@ class Speed_Contact_Bar {
 			wp_die( __( 'You do not have sufficient permissions to manage options for this site.' ) );
 		}
 		
+		$this->default_settings = array(
+			'enable' => 1,
+			'fixed' => 1,
+			'bg_color'  => '#dfdfdf',
+			'email'  => 'me@work.site',
+			'phone'  => '+49 98 / 76 54 321',
+			'headline'  => __( 'Contact to us', $this->plugin_slug ),
+		);
 		// store default values in the db as a single and serialized entry
 		add_option( $this->settings_db_slug, $this->default_settings );
 		
@@ -462,19 +455,26 @@ class Speed_Contact_Bar {
 		$content = ob_get_clean(); 
 		// only display contact bar if user selected 'enable'
 		if ( 1 == $this->stored_settings[ 'enable' ] ) {
-			// get the settings
-			$bg_color = esc_attr( $this->stored_settings[ 'bg_color' ] );
-			$email = esc_attr( $this->stored_settings[ 'email' ] );
-			$phone = esc_attr( $this->stored_settings[ 'phone' ] );
-			// build html
-			$inject = sprintf( '<div id="speed-contact-bar-wrapper" style="background-color: %s; padding: 10px;">', $bg_color );
-			if ( '' != $phone ) {
-				$inject .= sprintf( '<span id="speed-contact-bar-phone">%s: %s</span>	| ', __( 'Phone', $this->plugin_slug ), $phone );
-			} // phone
-			if ( '' != $email ) {
-				$inject .= sprintf( '<span id="speed-contact-bar-email">%s: <a href="mailto:%s">%s</a></span>', __( 'E-Mail', $this->plugin_slug ), $email, $email );
-			} // email
-			$inject .= '</div>';
+			$inject = '<div id="scb-wrapper"';
+			/*if ( 1 == $this->stored_settings[ 'fixed' ] ) { 
+				$inject .= ' class="speed-contact-bar-fixed"'; 
+			}*/
+			if ( '' != $this->stored_settings[ 'bg_color' ] ) { 
+				$inject .= sprintf( ' style="background-color: %s;"', esc_attr( $this->stored_settings[ 'bg_color' ] ) ); 
+			}
+			$inject .= '>';
+			if ( '' != $this->stored_settings[ 'headline' ] ) {
+				$inject .= sprintf( '<h2 id="speed-contact-bar-headline">%s</h2>', esc_html( $this->stored_settings[ 'headline' ] ) );
+			}
+			$inject .= '<dl>';
+			if ( '' != $this->stored_settings[ 'phone' ] ) {
+				$inject .= sprintf( '<dt id="speed-contact-bar-phone">%s: </dt><dd>%s</dd>', __( 'Phone', $this->plugin_slug ), esc_html( $this->stored_settings[ 'phone' ] ) );
+			}
+			if ( '' != $this->stored_settings[ 'email' ] ) {
+				$inject .= sprintf( '<dt id="speed-contact-bar-email">%s: </dt><dd><a href="mailto:%s">%s</a></dd>', __( 'E-Mail', $this->plugin_slug ), esc_attr( $this->stored_settings[ 'email' ] ), esc_html( $this->stored_settings[ 'email' ] ) );
+			}
+			$inject .= '</dl></div>';
+			// esc_url() should be used on all URLs, including those in the 'src' and 'href' attributes of an HTML element.
 			// find opening body element and add contact bar html code after it
 			$content = preg_replace('/<[bB][oO][dD][yY]([^>]*)>/',"<body$1>{$inject}", $content);
 		}
@@ -494,4 +494,13 @@ class Speed_Contact_Bar {
 		print $html;
 	}
 
+	/**
+	 * Add the custom body class 'scb-fixed'
+	 * 
+	 * @since    1.0
+	 */
+	public function add_body_padding( $classes ) {
+	  $classes[] = 'scb-fixed';
+	  return $classes;
+	}
 }

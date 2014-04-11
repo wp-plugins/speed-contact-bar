@@ -292,6 +292,10 @@ class Speed_Contact_Bar_Admin {
 				'headline' => __( 'Contact Data', self::$plugin_slug ),
 				'description' => __( 'Set the contact informations. To supress displaying a field leave it empty.', self::$plugin_slug ),
 				'options' => array(
+					'headline' => array(
+						'title'   => __( 'Headline', self::$plugin_slug ),
+						'label'   => __( 'Headline', self::$plugin_slug ),
+					),
 					'email' => array(
 						'title'   => __( 'E-Mail', self::$plugin_slug ),
 						'label'   => __( 'Contact E-Mail Adress', self::$plugin_slug ),
@@ -401,6 +405,23 @@ class Speed_Contact_Bar_Admin {
 	* @return  array              Options and their sanatized values
 	*/
 	public function sanitize_options ( $input ) {
+	/*
+	source: http://codex.wordpress.org/Validating_Sanitizing_and_Escaping_User_Data
+	WP functions for sanitizing user inputs:
+	sanitize_email() 
+	sanitize_file_name() 
+	sanitize_html_class() 
+	sanitize_key() 
+	sanitize_meta() 
+	sanitize_mime_type() 
+	sanitize_option() 
+	sanitize_sql_orderby() 
+	sanitize_text_field() 
+	sanitize_title() 
+	sanitize_title_for_query() 
+	sanitize_title_with_dashes() 
+	sanitize_user()
+	*/
 		foreach ( self::$form_structure as $section_name => $section_values ) {
 			foreach ( array_keys( $section_values[ 'options' ] ) as $option_name ) {
 				switch ( $option_name ) {
@@ -408,6 +429,10 @@ class Speed_Contact_Bar_Admin {
 					case 'enable':
 					case 'fixed':
 						$input[ $option_name ] = isset( $input[ $option_name ] ) ? 1 : 0 ;
+						break;
+					// clean email value
+					case 'email':
+						$input[ $option_name ] = sanitize_email( $input[ $option_name ] );
 						break;
 					// clean text field data
 					default:

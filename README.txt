@@ -1,10 +1,10 @@
 === Speed Contact Bar ===
-Contributors: Hinjiriyo, Alexandra Mutter
+Contributors: Hinjiriyo, allamoda07
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SBF76TCGTRNX2
 Tags: contact, contacts, email, e-mail, phone, telephone, number, adress, url, link, web
 Requires at least: 3.5.1
 Tested up to: 3.8.1
-Stable tag: 0.1
+Stable tag: 0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,6 +42,13 @@ Speed Contact Bar enables your visitors to get in contact with you quickly. The 
 
 == Frequently Asked Questions ==
 
+= What does the plugin need to work fine? =
+
+Speed Contact bar requires two conditions fullfilled:
+
+1. The WordPress installation version is equal or greater than 3.5.1
+2. The theme supports the body_class() function for a fine style if the contact bar should be fixed on top of the pages
+
 = I want to display this and that. How to add it? =
 
 Write your request in the plugin's [support forum at wordpress.org](http://wordpress.org/support/plugin/speed-contact-bar). I will try to take a look and answer as soon as possible.
@@ -54,10 +61,18 @@ Write your request in the plugin's [support forum at wordpress.org](http://wordp
 
 == Changelog ==
 
+= 0.2 =
+* Added headline in the contact bar
+* Better CSS logic for fixed position
+* Sanitize input and output of user given data
+
 = 0.1 =
 First release for just trying it
 
 == Upgrade Notice ==
+
+= 0.2 =
+Improvements in sanitizing user data and style
 
 = 0.1 =
 First release in beta status

@@ -1,13 +1,27 @@
-/* make space on the top of the viewport for the contact bar */
-body {
-	padding-top: 38px !important;
+/* make space on the top of the viewport for the contact bar if fixed bar */
+body.scb-fixed {
+	padding-top: 55px !important;
 }
-/* contact bar styles */
-#speed-contact-bar-wrapper {
+body.scb-fixed #scb-wrapper {
 	position: fixed;
 	top: 0;
 	left: 0;
 	z-index: 10000;
+}
+/* contact bar styles */
+#scb-wrapper {
 	width: 100%;
 	padding: 10px;
+}
+#scb-wrapper h2,
+#scb-wrapper dl,
+#scb-wrapper dt,
+#scb-wrapper dd,
+#scb-wrapper a {
+	display: inline;
+	font-size: 1em;
+}
+#scb-wrapper h2,
+#scb-wrapper dd {
+	margin-right: 1em;
 }
