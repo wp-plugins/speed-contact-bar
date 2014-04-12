@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/plugins/plugin-name\n"
-"POT-Creation-Date: 2014-04-11 15:16+0100\n"
-"PO-Revision-Date: 2014-04-11 15:17+0100\n"
+"POT-Creation-Date: 2014-04-12 17:41+0100\n"
+"PO-Revision-Date: 2014-04-12 17:42+0100\n"
 "Last-Translator: Martin Stehle <m.stehle@gmx.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -55,7 +55,7 @@ msgid "Headline"
 msgstr "Überschrift"
 
 #: admin/class-speed-contact-bar-admin.php:300
-#: public/class-speed-contact-bar.php:474 public/views/public.php:25
+#: public/class-speed-contact-bar.php:481 public/views/public.php:25
 msgid "E-Mail"
 msgstr "E-Mail"
 
@@ -95,6 +95,41 @@ msgstr "Hintergrundfarbe"
 msgid "Select the background color"
 msgstr "Stelle die Hintergrundfarbe ein"
 
+#: admin/class-speed-contact-bar-admin.php:322
+msgid "Text Color"
+msgstr "Textfarbe"
+
+#: admin/class-speed-contact-bar-admin.php:323
+msgid "Select the text color"
+msgstr "Stelle die Textfarbe ein"
+
+#: admin/views/admin.php:32
+#, fuzzy
+msgid "Credits and informations"
+msgstr "Danksagungen und Hinweise"
+
+#: admin/views/admin.php:34
+#, fuzzy
+msgid "Do you like the plugin?"
+msgstr "Gefällt dir das Plugin?"
+
+#: admin/views/admin.php:34
+msgid "Rate it at wordpress.org!"
+msgstr "Benote es auf wordpress.org."
+
+#: admin/views/admin.php:35
+#, fuzzy
+msgid "Do you need support or have an idea for the plugin?"
+msgstr "Brauchst du Unterstützung oder hast du eine Idee zum Plugin?"
+
+#: admin/views/admin.php:35
+msgid "Post your questions and ideas in the forum at wordpress.org!"
+msgstr "Füge deine Fragen und Ideen zum im Forum auf wordpress.org hinzu."
+
+#: admin/views/admin.php:36
+msgid "Idea by"
+msgstr "Idee von"
+
 #: public/class-speed-contact-bar.php:208
 #, php-format
 msgid ""
@@ -106,15 +141,15 @@ msgstr ""
 "es nicht aktiviert. Falls du dieses Plugin nutzen willst, aktualisiere die "
 "WordPress-Dateien auf die neueste Version."
 
-#: public/class-speed-contact-bar.php:401
+#: public/class-speed-contact-bar.php:404
 msgid "Contact to us"
 msgstr "Kontakt zu uns"
 
-#: public/class-speed-contact-bar.php:471 public/views/public.php:22
+#: public/class-speed-contact-bar.php:478 public/views/public.php:22
 msgid "Phone"
 msgstr "Telefon"
 
-#: public/class-speed-contact-bar.php:492
+#: public/class-speed-contact-bar.php:499
 #, php-format
 msgid "Welcome to %s! You can find the plugin at %s."
 msgstr "Willkommen zu %s! Du kannst das Plugin finden unter %s"

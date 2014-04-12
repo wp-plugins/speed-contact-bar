@@ -4,9 +4,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/plugins/plugin-name\n"
-"POT-Creation-Date: 2014-04-04 18:21+0100\n"
-"PO-Revision-Date: 2014-04-04 18:40+0100\n"
+"POT-Creation-Date: 2014-04-12 17:41+0100\n"
+"PO-Revision-Date: 2014-04-12 17:42+0100\n"
 "Last-Translator: Martin Stehle <m.stehle@gmx.de>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -43,56 +44,100 @@ msgid "Set the contact informations. To supress displaying a field leave it empt
 msgstr ""
 
 #: admin/class-speed-contact-bar-admin.php:296
-#: public/class-speed-contact-bar.php:475 public/views/public.php:26
-msgid "E-Mail"
-msgstr ""
-
 #: admin/class-speed-contact-bar-admin.php:297
-msgid "Contact E-Mail Adress"
+msgid "Headline"
 msgstr ""
 
 #: admin/class-speed-contact-bar-admin.php:300
-msgid "Phone Number"
+#: public/class-speed-contact-bar.php:481 public/views/public.php:25
+msgid "E-Mail"
 msgstr ""
 
 #: admin/class-speed-contact-bar-admin.php:301
+msgid "Contact E-Mail Adress"
+msgstr ""
+
+#: admin/class-speed-contact-bar-admin.php:304
+msgid "Phone Number"
+msgstr ""
+
+#: admin/class-speed-contact-bar-admin.php:305
 msgid "Contact Phone Number"
 msgstr ""
 
-#: admin/class-speed-contact-bar-admin.php:306
+#: admin/class-speed-contact-bar-admin.php:310
 msgid "Appeareance"
 msgstr ""
 
-#: admin/class-speed-contact-bar-admin.php:307
+#: admin/class-speed-contact-bar-admin.php:311
 msgid "Set the style of the contact bar."
 msgstr ""
 
-#: admin/class-speed-contact-bar-admin.php:310
-msgid "Always on top"
-msgstr ""
-
-#: admin/class-speed-contact-bar-admin.php:311
+#: admin/class-speed-contact-bar-admin.php:314
 msgid "Enable fixed position"
 msgstr ""
 
-#: admin/class-speed-contact-bar-admin.php:314
+#: admin/class-speed-contact-bar-admin.php:315
+msgid "Always on top"
+msgstr ""
+
+#: admin/class-speed-contact-bar-admin.php:318
 msgid "Background Color"
 msgstr ""
 
-#: admin/class-speed-contact-bar-admin.php:315
+#: admin/class-speed-contact-bar-admin.php:319
 msgid "Select the background color"
 msgstr ""
 
-#: public/class-speed-contact-bar.php:214
+#: admin/class-speed-contact-bar-admin.php:322
+msgid "Text Color"
+msgstr ""
+
+#: admin/class-speed-contact-bar-admin.php:323
+msgid "Select the text color"
+msgstr ""
+
+#: admin/views/admin.php:32
+#, fuzzy
+msgid "Credits and informations"
+msgstr ""
+
+#: admin/views/admin.php:34
+#, fuzzy
+msgid "Do you like the plugin?"
+msgstr ""
+
+#: admin/views/admin.php:34
+msgid "Rate it at wordpress.org!"
+msgstr ""
+
+#: admin/views/admin.php:35
+#, fuzzy
+msgid "Do you need support or have an idea for the plugin?"
+msgstr ""
+
+#: admin/views/admin.php:35
+msgid "Post your questions and ideas in the forum at wordpress.org!"
+msgstr ""
+
+#: admin/views/admin.php:36
+msgid "Idea by"
+msgstr ""
+
+#: public/class-speed-contact-bar.php:208
 #, php-format
 msgid "The plugin requires WordPress version %s or higher. Therefore, WordPress did not activate it. If you want to use this plugin update the Wordpress files to the latest version."
 msgstr ""
 
-#: public/class-speed-contact-bar.php:472 public/views/public.php:20
+#: public/class-speed-contact-bar.php:404
+msgid "Contact to us"
+msgstr ""
+
+#: public/class-speed-contact-bar.php:478 public/views/public.php:22
 msgid "Phone"
 msgstr ""
 
-#: public/class-speed-contact-bar.php:492
+#: public/class-speed-contact-bar.php:499
 #, php-format
 msgid "Welcome to %s! You can find the plugin at %s."
 msgstr ""

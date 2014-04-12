@@ -3,8 +3,8 @@ Contributors: Hinjiriyo, allamoda07
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SBF76TCGTRNX2
 Tags: contact, contacts, email, e-mail, phone, telephone, number, adress, url, link, web
 Requires at least: 3.5.1
-Tested up to: 3.8.1
-Stable tag: 0.2
+Tested up to: 3.8.2
+Stable tag: 0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -61,6 +61,11 @@ Write your request in the plugin's [support forum at wordpress.org](http://wordp
 
 == Changelog ==
 
+= 0.3 =
+* Added dashicons
+* Added text color option
+* Updated *.pot file and german translation
+
 = 0.2 =
 * Added headline in the contact bar
 * Better CSS logic for fixed position
@@ -70,6 +75,9 @@ Write your request in the plugin's [support forum at wordpress.org](http://wordp
 First release for just trying it
 
 == Upgrade Notice ==
+
+= 0.3 =
+Added dashicons and text color option
 
 = 0.2 =
 Improvements in sanitizing user data and style

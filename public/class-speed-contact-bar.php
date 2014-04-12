@@ -22,7 +22,7 @@ class Speed_Contact_Bar {
 	 *
 	 * @var     string
 	 */
-	const VERSION = '1.0';
+	const VERSION = '0.3';
 
 	/**
 	 * Lowest Wordpress version to run with this plugin
@@ -369,6 +369,8 @@ class Speed_Contact_Bar {
 			if ( 1 == $this->stored_settings[ 'fixed' ] ) {
 				add_action( 'body_class', array( $this, 'add_body_padding' ) );
 			}
+			// add css for dashicons
+			wp_enqueue_style( 'dashicons' );
 		}
 	}
 
@@ -396,6 +398,7 @@ class Speed_Contact_Bar {
 			'enable' => 1,
 			'fixed' => 1,
 			'bg_color'  => '#dfdfdf',
+			'text_color_dl'  => '#333333',
 			'email'  => 'me@work.site',
 			'phone'  => '+49 98 / 76 54 321',
 			'headline'  => __( 'Contact to us', $this->plugin_slug ),
@@ -466,7 +469,11 @@ class Speed_Contact_Bar {
 			if ( '' != $this->stored_settings[ 'headline' ] ) {
 				$inject .= sprintf( '<h2 id="speed-contact-bar-headline">%s</h2>', esc_html( $this->stored_settings[ 'headline' ] ) );
 			}
-			$inject .= '<dl>';
+			$inject .= '<dl';
+			if ( '' != $this->stored_settings[ 'text_color_dl' ] ) { 
+				$inject .= sprintf( ' style="color: %s;"', esc_attr( $this->stored_settings[ 'text_color_dl' ] ) ); 
+			}
+			$inject .= '>';
 			if ( '' != $this->stored_settings[ 'phone' ] ) {
 				$inject .= sprintf( '<dt id="speed-contact-bar-phone">%s: </dt><dd>%s</dd>', __( 'Phone', $this->plugin_slug ), esc_html( $this->stored_settings[ 'phone' ] ) );
 			}

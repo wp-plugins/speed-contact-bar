@@ -318,6 +318,10 @@ class Speed_Contact_Bar_Admin {
 						'title'   => __( 'Background Color', self::$plugin_slug ),
 						'label'   => __( 'Select the background color', self::$plugin_slug ),
 					),
+					'text_color_dl' => array(
+						'title'   => __( 'Text Color', self::$plugin_slug ),
+						'label'   => __( 'Select the text color', self::$plugin_slug ),
+					),
 				),
 			),
 		);
@@ -350,10 +354,11 @@ class Speed_Contact_Bar_Admin {
 						break;
 					// if color picker
 					case 'bg_color':
+					case 'text_color_dl':
 						$title = sprintf( '<label for="%s">%s</label>', $option_name, $option_values['title'] );
 						$html = '<div class="color-picker" style="position: relative;">';
 						$html .= sprintf( '<input type="text" id="%s" name="%s[%s]" value="%s">', $option_name, self::$settings_db_slug, $option_name, self::$stored_settings[ $option_name ] );
-						$html .= '<div id="colorpicker"></div></div>';
+						$html .= '<div id="colorpicker-' . $option_name . '"></div></div>';
 						break;
 					// else text field
 					default:
