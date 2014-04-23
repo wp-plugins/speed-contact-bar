@@ -5,6 +5,7 @@
 
 	// JS for the background color wheel
 
+	// bg color
     $('#colorpicker-bg_color').hide();
     $('#colorpicker-bg_color').farbtastic('#bg_color');
 
@@ -20,15 +21,32 @@
         });
     });
 
-    $('#colorpicker-text_color_dl').hide();
-    $('#colorpicker-text_color_dl').farbtastic('#text_color_dl');
+    // text color
+	$('#colorpicker-text_color').hide();
+    $('#colorpicker-text_color').farbtastic('#text_color');
 
-    $('#text_color_dl').click(function() {
-        $('#colorpicker-text_color_dl').fadeIn();
+    $('#text_color').click(function() {
+        $('#colorpicker-text_color').fadeIn();
     });
 
     $(document).mousedown(function() {
-        $('#colorpicker-text_color_dl').each(function() {
+        $('#colorpicker-text_color').each(function() {
+            var display = $(this).css('display');
+            if ( display == 'block' )
+                $(this).fadeOut();
+        });
+    });
+
+    // link color
+	$('#colorpicker-link_color').hide();
+    $('#colorpicker-link_color').farbtastic('#link_color');
+
+    $('#link_color').click(function() {
+        $('#colorpicker-link_color').fadeIn();
+    });
+
+    $(document).mousedown(function() {
+        $('#colorpicker-link_color').each(function() {
             var display = $(this).css('display');
             if ( display == 'block' )
                 $(this).fadeOut();

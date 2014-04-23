@@ -1,50 +1,44 @@
-/* make space on the top of the viewport for the contact bar if fixed bar */
-body.scb-fixed {
-	padding-top: 2.5em !important;
-}
-body.scb-fixed #scb-wrapper {
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: 10000;
-}
 /* contact bar styles */
 #scb-wrapper {
-	width: 100%;
-	padding: .625em;
+	padding: 1em 0;
 }
 #scb-wrapper h2,
-#scb-wrapper dl,
-#scb-wrapper dt,
-#scb-wrapper dd,
+#scb-wrapper ul,
+#scb-wrapper li,
 #scb-wrapper a {
 	display: inline;
+	margin: 0;
+	padding: 0;
 	font-family: sans-serif;
-	font-size: 1em;
+	font-size: 0.96em;
 	line-height: 1;
 }
 #scb-wrapper h2,
-#scb-wrapper dd {
-	margin-right: 1em;
+#scb-wrapper li {
+	margin: 0 .5em;
 }
-/* Dashicons: common values */
-#scb-wrapper dt:before {
-	font-family: "dashicons";
-	font-size: 2em;
-	line-height: 1;
-	/*position: relative;
-	top: 0.25em;*/
-	margin: 0;
-	padding: 0px;
+#scb-wrapper img {
 	vertical-align: middle;
-	text-align: center;
 }
-/* Dashicons: single values */
-dt#speed-contact-bar-email:before {
-	content: "\f466"; /* Email glyph */
-	margin-right: 5px;
+#scb-wrapper #scb-email {
+	padding-right: 3em;
 }
-dt#speed-contact-bar-phone:before {
-	content: "\f470"; /* Smartphone glyph */
-	margin-right: 0;
+
+@media screen and (min-width: 640px) {
+	/* fixed header */
+	#scb-wrapper.scb-fixed {
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 10000;
+		width: 100%;
+	}
+}
+@media screen and (max-width: 640px) {
+	/* hide some icons */
+	#scb-wrapper h2,
+	#scb-wrapper #scb-phone,
+	#scb-wrapper #scb-cellphone {	
+		display: none;
+	}
 }

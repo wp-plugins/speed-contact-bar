@@ -33,7 +33,8 @@ submit_button();
 				<dl>
 					<dt><?php _e( 'Do you like the plugin?', self::$plugin_slug ); ?></dt><dd><a href="http://wordpress.org/support/view/plugin-reviews/speed-contact-bar"><?php _e( 'Rate it at wordpress.org!', self::$plugin_slug ); ?></a></dd>
 					<dt><?php _e( 'Do you need support or have an idea for the plugin?', self::$plugin_slug ); ?></dt><dd><a href="http://wordpress.org/support/plugin/speed-contact-bar"><?php _e( 'Post your questions and ideas in the forum at wordpress.org!', self::$plugin_slug ); ?></a></dd>
-					<dt><?php _e( 'Idea by', self::$plugin_slug ); ?></dt><dd><a href="http://alexandra-mutter.de/?ref=speed-contact-bar"> <?php echo get_avatar( 'allamoda07@googlemail.com', 64 ); ?>Alexandra Mutter Design</a></dd>
+					<dt><?php _e( 'Idea and styles by', self::$plugin_slug ); ?></dt><dd><a href="http://alexandra-mutter.de/?ref=speed-contact-bar"> <?php echo get_avatar( 'allamoda07@googlemail.com', 44 ); ?>Alexandra Mutter Design</a></dd>
+					<dt><?php _e( 'Plugin development by', self::$plugin_slug ); ?></dt><dd><a href="http://stehle-internet.de/?ref=speed-contact-bar"> <?php echo get_avatar( 'm.stehle@gmx.de', 44 ); ?>Stehle Internet</a></dd>
 				</dl>
 			</div><!-- .th_content -->
 		</div><!-- #th_footer -->
