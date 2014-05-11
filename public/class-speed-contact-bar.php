@@ -22,7 +22,7 @@ class Speed_Contact_Bar {
 	 *
 	 * @var     string
 	 */
-	const VERSION = '1.0';
+	const VERSION = '1.1';
 
 	/**
 	 * Lowest Wordpress version to run with this plugin
@@ -31,7 +31,7 @@ class Speed_Contact_Bar {
 	 *
 	 * @var     string
 	 */
-	const REQUIRED_WP_VERSION = '3.4'; /* because of color wheel picker 'farbtastic' */
+	const REQUIRED_WP_VERSION = '3.5'; /* because of color wheel picker 'color-picker' */
 
 	/**
 	 * Name of this plugin.
@@ -486,7 +486,7 @@ class Speed_Contact_Bar {
 			}
 			if ( isset( $this->stored_settings[ 'email' ] ) && '' != $this->stored_settings[ 'email' ] ) {
 				//if ( isset( $this->stored_settings[ 'show_labels' ] ) && 1 == $this->stored_settings[ 'show_labels' ] ) {}
-				$inject .= sprintf( '<li id="scb-email"><img src="%sassets/images/email_%s.svg" width="26" height="26" alt="%s" /> <a href="mailto:%s">%s</a></li>', $root_url, $icon_family, __( 'E-Mail', $this->plugin_slug ), esc_attr( $this->stored_settings[ 'email' ] ), esc_html( $this->stored_settings[ 'email' ] ) );
+				$inject .= sprintf( '<li id="scb-email"><img src="%sassets/images/email_%s.svg" width="26" height="26" alt="%s" /> <a href="mailto:%s">%s</a></li>', $root_url, $icon_family, __( 'E-Mail', $this->plugin_slug ), antispambot( esc_attr( $this->stored_settings[ 'email' ] ) ), antispambot( esc_html( $this->stored_settings[ 'email' ] ) ) );
 			}
 			if ( isset( $this->stored_settings[ 'facebook' ] ) && '' != $this->stored_settings[ 'facebook' ] ) {
 				$inject .= sprintf( '<li id="scb-facebook"><a href="%s"><img src="%sassets/images/facebook.svg" width="26" height="26" alt="Facebook" /></a></li>', esc_url( $this->stored_settings[ 'facebook' ] ), $root_url );

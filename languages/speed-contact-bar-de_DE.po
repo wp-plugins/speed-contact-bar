@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/plugins/plugin-name\n"
 "POT-Creation-Date: 2014-04-23 14:48+0100\n"
-"PO-Revision-Date: 2014-04-23 14:58+0100\n"
+"PO-Revision-Date: 2014-04-28 16:06+0100\n"
 "Last-Translator: Martin Stehle <m.stehle@gmx.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -160,7 +160,7 @@ msgstr "Stelle die Textfarbe ein"
 
 #: admin/class-speed-contact-bar-admin.php:344
 msgid "Link Color"
-msgstr "Linkfarb"
+msgstr "Linkfarbe"
 
 #: admin/class-speed-contact-bar-admin.php:345
 msgid "Select the link color"
