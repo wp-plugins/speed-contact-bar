@@ -44,7 +44,7 @@
 #th_footer dl dd img {
 	display: inline;
 	float: left;
-	margin: 0 8px 8px 0;
+	margin: 0 8px 0 0;
 }
 /* If auto-folding of the admin menu */
 @media only screen and (max-width: 900px) {

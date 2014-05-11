@@ -174,12 +174,13 @@ class Speed_Contact_Bar_Admin {
 
 		$screen = get_current_screen();
 		if ( self::$plugin_screen_hook_suffix == $screen->id ) {
-			wp_enqueue_style( self::$plugin_slug .'-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array(), Speed_Contact_Bar::VERSION );
+			wp_enqueue_style( self::$plugin_slug .'-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array( ), Speed_Contact_Bar::VERSION );
 		}
 
 		/* collect css for the color picker */
-		wp_enqueue_style( 'farbtastic' );
-	}
+		#wp_enqueue_style( 'farbtastic' );
+		wp_enqueue_style( 'wp-color-picker' );
+ 	}
 
 	/**
 	 * Register and enqueue admin-specific JavaScript.
@@ -194,12 +195,13 @@ class Speed_Contact_Bar_Admin {
 			return;
 		}
 
+		/* collect js for the color picker */
 		$screen = get_current_screen();
 		if ( self::$plugin_screen_hook_suffix == $screen->id ) {
 			wp_enqueue_script( self::$plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery' ), Speed_Contact_Bar::VERSION );
 		}
-		/* collect js for the color picker */
-		wp_enqueue_script( 'farbtastic' );
+		#wp_enqueue_script( 'farbtastic' );
+		wp_enqueue_script( 'wp-color-picker' );
 	}
 
 	/**
@@ -269,17 +271,6 @@ class Speed_Contact_Bar_Admin {
 		$title = null;
 		$html = null;
 		
-		$content_alignments = array(
-			'left' => __( 'left-aligned', self::$plugin_slug ),
-			'center' => __( 'centered', self::$plugin_slug ),
-			'right' => __( 'right-aligned', self::$plugin_slug ),
-		);
-		$icon_families = array(
-			'bright' => __( 'bright', self::$plugin_slug ),
-			'dark' => __( 'dark', self::$plugin_slug ),
-		);
-
-
 		// define the form sections, order by appereance, with headlines, and options
 		self::$form_structure = array(
 			'1st_section' => array(
@@ -287,36 +278,44 @@ class Speed_Contact_Bar_Admin {
 				'description' => __( 'Set the contact informations. To supress displaying a field leave it empty.', self::$plugin_slug ),
 				'options' => array(
 					'show_headline' => array(
+						'type'    => 'checkbox',
 						'title'   => __( 'Show headline', self::$plugin_slug ),
-						'label'   => __( 'Activate to show the headline', self::$plugin_slug ),
+						'desc'    => __( 'Activate to show the headline', self::$plugin_slug ),
 					),
 					'headline' => array(
+						'type'    => 'textfield',
 						'title'   => __( 'Headline', self::$plugin_slug ),
-						'label'   => __( 'Enter a short headline for the contact bar', self::$plugin_slug ),
+						'desc'    => __( 'Enter a short headline for the contact bar', self::$plugin_slug ),
 					),
 					'email' => array(
+						'type'    => 'email',
 						'title'   => __( 'E-Mail', self::$plugin_slug ),
-						'label'   => __( 'Enter a valid email address. If the email address is invalid it will not be used.', self::$plugin_slug ),
+						'desc'    => __( 'Enter a valid email address. If the email address is invalid it will not be used.', self::$plugin_slug ),
 					),
 					'phone' => array(
+						'type'    => 'textfield',
 						'title'   => __( 'Phone Number', self::$plugin_slug ),
-						'label'   => __( 'Enter your official contact phone number', self::$plugin_slug ),
+						'desc'    => __( 'Enter your official contact phone number', self::$plugin_slug ),
 					),
 					'cellphone' => array(
+						'type'    => 'textfield',
 						'title'   => __( 'Cell Phone Number', self::$plugin_slug ),
-						'label'   => __( 'Enter your official contact cell phone number', self::$plugin_slug ),
+						'desc'    => __( 'Enter your official contact cell phone number', self::$plugin_slug ),
 					),
 					/*'contact form' => array(
+						'type'    => 'url',
 						'title'   => __( 'Contact Form URL', self::$plugin_slug ),
-						'label'   => __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
+						'desc'    => __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
 					),*/
 					'facebook' => array(
+						'type'    => 'url',
 						'title'   => __( 'Facebook Page URL', self::$plugin_slug ),
-						'label'   => __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
+						'desc'    => __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
 					),
 					'googleplus' => array(
+						'type'    => 'url',
 						'title'   => __( 'Google Plus Profile URL', self::$plugin_slug ),
-						'label'   => __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
+						'desc'    => __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
 					),
 				),
 			),
@@ -325,32 +324,41 @@ class Speed_Contact_Bar_Admin {
 				'description' => __( 'Set the style of the contact bar.', self::$plugin_slug ),
 				'options' => array(
 					'fixed' => array(
+						'type'    => 'checkbox',
 						'title'   => __( 'Enable fixed position', self::$plugin_slug ),
-						'label'   => __( 'Always on top', self::$plugin_slug ),
+						'desc'    => __( 'Always on top', self::$plugin_slug ),
 					),
 					'content_alignment' => array(
+						'type'    => 'selection',
 						'title'   => __( 'Text Alignment', self::$plugin_slug ),
-						'label'   => __( 'Select the alignment of the content within the bar', self::$plugin_slug ),
+						'desc'    => __( 'Select the alignment of the content within the bar', self::$plugin_slug ),
+						'values'  => array( 'left' => __( 'left-aligned', self::$plugin_slug ), 'center' => __( 'centered', self::$plugin_slug ), 'right' => __( 'right-aligned', self::$plugin_slug ) ),
 					),
 					'bg_color' => array(
+						'type'    => 'colorpicker',
 						'title'   => __( 'Background Color', self::$plugin_slug ),
-						'label'   => __( 'Select the background color', self::$plugin_slug ),
+						'desc'    => __( 'Select the background color', self::$plugin_slug ),
 					),
 					'text_color' => array(
+						'type'    => 'colorpicker',
 						'title'   => __( 'Text Color', self::$plugin_slug ),
-						'label'   => __( 'Select the text color', self::$plugin_slug ),
+						'desc'    => __( 'Select the text color', self::$plugin_slug ),
 					),
 					'link_color' => array(
+						'type'    => 'colorpicker',
 						'title'   => __( 'Link Color', self::$plugin_slug ),
-						'label'   => __( 'Select the link color', self::$plugin_slug ),
+						'desc'    => __( 'Select the link color', self::$plugin_slug ),
 					),
 					'icon_family' => array(
+						'type'    => 'selection',
 						'title'   => __( 'Icon Brightness', self::$plugin_slug ),
-						'label'   => __( 'Select the brightness of the icons', self::$plugin_slug ),
+						'desc'    => __( 'Select the brightness of the icons', self::$plugin_slug ),
+						'values'  => array( 'bright' => __( 'bright', self::$plugin_slug ), 'dark' => __( 'dark', self::$plugin_slug ) ),
 					),
 					'show_shadow' => array(
+						'type'    => 'checkbox',
 						'title'   => __( 'Show shadow', self::$plugin_slug ),
-						'label'   => __( 'Activate to show a slight shadow under the bar', self::$plugin_slug ),
+						'desc'    => __( 'Activate to show a slight shadow under the bar', self::$plugin_slug ),
 					),
 				),
 			),
@@ -374,59 +382,85 @@ class Speed_Contact_Bar_Admin {
 			
 			// set labels and callback function names per option name
 			foreach ( $section_values[ 'options' ] as $option_name => $option_values ) {
-				// set default values
-				$title = sprintf( '<label for="%s">%s</label>', $option_name, $option_values[ 'title' ] );
-				$desc = sprintf( '<p class="description">%s</p>', $option_values[ 'label' ] );
-				// overwrite or extend the values
-				switch ( $option_name ) {
-					// if checkbox
-					case 'fixed':
-					case 'show_headline':
-					case 'show_shadow':
-						$value = isset( self::$stored_settings[ $option_name ] ) ? esc_attr( self::$stored_settings[ $option_name ] ) : '1';
+				// set default description
+				$desc = '';
+				if ( isset( $option_values[ 'desc' ] ) and '' != $option_values[ 'desc' ] ) {
+					if ( 'checkbox' == $option_values[ 'type' ] ) {
+						$desc =  $option_values[ 'desc' ];
+					} else {
+						$desc =  sprintf( '<p class="description">%s</p>', $option_values[ 'desc' ] );
+					}
+				}
+				// build the form elements values
+				switch ( $option_values[ 'type' ] ) {
+					case 'radiobuttons':
 						$title = $option_values[ 'title' ];
+						$stored_value = isset( self::$stored_settings[ $option_name ] ) ? esc_attr( self::$stored_settings[ $option_name ] ) : '';
+						$html = sprintf( '<fieldset><legend class="screen-reader-text"><span>%s</span></legend>', $title );
+						foreach ( $option_values[ 'values' ] as $value => $label ) {
+							$checked = $stored_value ? checked( $stored_value, $value, false ) : '';
+							$html .= sprintf( '<label><input type="radio" name="%s[%s]" value="%s"%s /> <span>%s</span></label><br />', self::$settings_db_slug, $option_name, $value, $checked, $label );
+						}
+						$html .= '</fieldset>';
+						$html .= $desc;
+						break;
+					case 'checkboxes':
+						$title = $option_values[ 'title' ];
+						$html = sprintf( '<fieldset><legend class="screen-reader-text"><span>%s</span></legend>', $title );
+						foreach ( $option_values[ 'values' ] as $value => $label ) {
+							$stored_value = isset( self::$stored_settings[ $option_name ] ) ? esc_attr( self::$stored_settings[ $option_name ] ) : '0';
+							$checked = $stored_value ? checked( '1', $value, false ) : '';
+							$html .= sprintf( '<label for="%s"><input name="%s[%s]" type="checkbox" id="%s" value="1"%s /> %s</label><br />' , $value, self::$settings_db_slug, $value, $value, $checked, $label );
+						}
+						$html .= '</fieldset>';
+						$html .= $desc;
+						break;
+					case 'selection':
+						$title = $option_values[ 'title' ];
+						$stored_value = isset( self::$stored_settings[ $option_name ] ) ? esc_attr( self::$stored_settings[ $option_name ] ) : '';
+						$html = sprintf( '<select id="%s" name="%s[%s]">', $option_name, self::$settings_db_slug, $option_name );
+						foreach ( $option_values[ 'values' ] as $value => $label ) {
+							$selected = $stored_value ? selected( $stored_value, $value, false ) : '';
+							$html .= sprintf( '<option value="%s"%s>%s</option>', $value, $selected, $label );
+						}
+						$html .= '</select>';
+						$html .= $desc;
+						break;
+					case 'checkbox':
+						$title = $option_values[ 'title' ];
+						$value = isset( self::$stored_settings[ $option_name ] ) ? esc_attr( self::$stored_settings[ $option_name ] ) : '0';
 						$checked = $value ? checked( '1', $value, false ) : '';
-						$html = sprintf( '<input type="checkbox" id="%s" name="%s[%s]" value="1" %s /><label for="%s">%s</label>', $option_name, self::$settings_db_slug, $option_name, $checked, $option_name, $option_values[ 'label' ] );
+						$html = sprintf( '<label for="%s"><input name="%s[%s]" type="checkbox" id="%s" value="1"%s /> %s</label>' , $option_name, self::$settings_db_slug, $option_name, $option_name, $checked, $desc );
 						break;
-					case 'content_alignment':
-						$value = isset( self::$stored_settings[ $option_name ] ) ? esc_attr( self::$stored_settings[ $option_name ] ) : 'left';
-						$html = sprintf( '<select id="%s" name="%s[%s]">', $option_name, self::$settings_db_slug, $option_name );
-						foreach ( $content_alignments as $key => $label ) {
-							$selected = $value ? selected( $value, $key, false ) : '';
-							$html .= sprintf( '<option value="%s" %s>%s</option>', $key, $selected, $label );
-						}
-						$html .= '</select>';
-						$html .= $desc;
-						break;
-					case 'icon_family':
-						$value = isset( self::$stored_settings[ $option_name ] ) ? esc_attr( self::$stored_settings[ $option_name ] ) : 'dark';
-						$html = sprintf( '<select id="%s" name="%s[%s]">', $option_name, self::$settings_db_slug, $option_name );
-						foreach ( $icon_families as $key => $label ) {
-							$selected = $value ? selected( $value, $key, false ) : '';
-							$html .= sprintf( '<option value="%s" %s>%s</option>', $key, $selected, $label );
-						}
-						$html .= '</select>';
-						$html .= $desc;
-						break;
-					// if url
-					case 'facebook':
-					case 'googleplus':
+					case 'url':
+						$title = sprintf( '<label for="%s">%s</label>', $option_name, $option_values[ 'title' ] );
 						$value = isset( self::$stored_settings[ $option_name ] ) ? esc_url( self::$stored_settings[ $option_name ] ) : '';
 						$html = sprintf( '<input type="text" id="%s" name="%s[%s]" value="%s">', $option_name, self::$settings_db_slug, $option_name, $value );
 						$html .= $desc;
 						break;
-					// if color picker
-					case 'bg_color':
-					case 'text_color':
-					case 'link_color':
+					case 'textarea':
+						$title = sprintf( '<label for="%s">%s</label>', $option_name, $option_values[ 'title' ] );
+						$value = isset( self::$stored_settings[ $option_name ] ) ? esc_textarea( self::$stored_settings[ $option_name ] ) : '';
+						$html = sprintf( '<textarea id="%s" name="%s[%s]" cols="30" rows="5">%s</textarea>', $option_name, self::$settings_db_slug, $option_name, $value );
+						$html .= $desc;
+						break;
+					case 'farbtastic':
+						$title = sprintf( '<label for="%s">%s</label>', $option_name, $option_values[ 'title' ] );
 						$value = isset( self::$stored_settings[ $option_name ] ) ? esc_attr( self::$stored_settings[ $option_name ] ) : '#cccccc';
-						$html = '<div class="color-picker" style="position: relative;">';
+						$html = '<div class="farbtastic-container" style="position: relative;">';
 						$html .= sprintf( '<input type="text" id="%s" name="%s[%s]" value="%s">', $option_name, self::$settings_db_slug, $option_name, $value );
-						$html .= sprintf( '<div id="colorpicker-%s"></div></div>', $option_name );
+						$html .= sprintf( '<div id="farbtastic-%s"></div></div>', $option_name );
+						$html .= $desc;
+						break;
+					case 'colorpicker':
+						$title = sprintf( '<label for="%s">%s</label>', $option_name, $option_values[ 'title' ] );
+						$value = isset( self::$stored_settings[ $option_name ] ) ? esc_attr( self::$stored_settings[ $option_name ] ) : '#cccccc';
+						$html = sprintf( '<input type="text" id="%s" class="wp-color-picker" name="%s[%s]" value="%s">', $option_name, self::$settings_db_slug, $option_name, $value );
 						$html .= $desc;
 						break;
 					// else text field
 					default:
+						$title = sprintf( '<label for="%s">%s</label>', $option_name, $option_values[ 'title' ] );
 						$value = isset( self::$stored_settings[ $option_name ] ) ? esc_attr( self::$stored_settings[ $option_name ] ) : '';
 						$html = sprintf( '<input type="text" id="%s" name="%s[%s]" value="%s">', $option_name, self::$settings_db_slug, $option_name, $value );
 						$html .= $desc;
@@ -475,14 +509,12 @@ class Speed_Contact_Bar_Admin {
 	* 
 	* @return  array              Options and their sanatized values
 	*/
-	public function sanitize_options ( $input ) {
+	public static function sanitize_options ( $input ) {
 		foreach ( self::$form_structure as $section_name => $section_values ) {
-			foreach ( array_keys( $section_values[ 'options' ] ) as $option_name ) {
-				switch ( $option_name ) {
+			foreach ( $section_values[ 'options' ] as $option_name => $option_values ) {
+				switch ( $option_values[ 'type' ] ) {
 					// if checkbox is set assign '1', else '0'
-					case 'fixed':
-					case 'show_headline':
-					case 'show_shadow':
+					case 'checkbox':
 						$input[ $option_name ] = isset( $input[ $option_name ] ) ? 1 : 0 ;
 						break;
 					// clean email value
@@ -491,21 +523,10 @@ class Speed_Contact_Bar_Admin {
 						$input[ $option_name ] = is_email( $email ) ? $email : '';
 						break;
 					// clean url values
-					case 'facebook':
-					case 'googleplus':
+					case 'url':
 						$input[ $option_name ] = esc_url_raw( $input[ $option_name ] );
 						break;
-					// clean selection box 
-					/*case 'content_alignment': // also: icon_family
-						$value = 'center'; // default value
-						foreach ( array_keys( $content_alignments ) as $key ) {
-							if ( $key == $input[ $option_name ] ) {
-								$value = $input[ $option_name ];
-							}
-						}
-						$input[ $option_name ] = sanitize_text_field( $value );
-						break;*/
-					// clean text field data
+					// clean all other form elements values
 					default:
 						$input[ $option_name ] = sanitize_text_field( $input[ $option_name ] );
 				} // end switch()

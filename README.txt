@@ -2,9 +2,9 @@
 Contributors: Hinjiriyo, allamoda07
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SBF76TCGTRNX2
 Tags: contact, contacts, email, e-mail, phone, telephone, cell phone, number, address, url, link, web, facebook, google plus, google+, g+, social media, responsive
-Requires at least: 3.4
-Tested up to: 3.9
-Stable tag: 1.0
+Requires at least: 3.5
+Tested up to: 3.9.1
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ Let your website visitors get in touch with you easily with permanent visible co
 
 == Description ==
 
-= What does it do? =
+= Quick contact to you =
 
 Speed Contact Bar enables your visitors to get in contact with you quickly. The plugin shows a colored bar with your contact data and social media URLs on the top of every page of your website. 
 
@@ -47,12 +47,14 @@ And of course you can set the **design of the contact bar** to be suitable to th
 
 1. Scroll with the content or fixed the bar on top of every page
 2. Background color
-3. Text olor
+3. Text color
 4. Link color
 5. Dark or bright icons
 6. Content alignment within the bar
 7. Define a headline and whether to show it or not
 8. Show a slight shadow under the bar for a chic 3D effect
+
+Do you miss some options? We will add it! Please write your request in the plugin's [support forum at wordpress.org](http://wordpress.org/support/plugin/speed-contact-bar). We will try to take a look and answer as soon as possible.
 
 == Installation ==
 
@@ -79,7 +81,7 @@ And of course you can set the **design of the contact bar** to be suitable to th
 2. Extract the `speed-contact-bar` directory to your computer
 3. Upload the `speed-contact-bar` directory to the `/wp-content/plugins/` directory
 4. Activate the plugin in the Plugin dashboard
-5. Configure the plugin with the options page at "Settings" => "Speed Contact Bar".
+5. Configure the plugin with the options page at "Settings" =&gt; "Speed Contact Bar".
 
 
 == Frequently Asked Questions ==
@@ -90,11 +92,13 @@ Speed Contact bar requires a WordPress installation version equal or greater tha
 
 = I am loggend in as administrator. Why do I not see the contact bar? =
 
-The most likely reason is the **WordPress Admin Bar fixed on top of the page**. It that case it overlaps the Speed Contact Bar. Just call your website in another browser and do not log in with that browser as a WordPress administrator.
+The most likely reason is the **WordPress Admin Bar fixed on top of the page**. In this case it overlaps the Speed Contact Bar. 
+
+**How to solve this problem?** Just call your website in another browser and do not log in with that browser as a WordPress administrator.
 
 = I want to display this and that. How to add it? =
 
-Write your request in the plugin's [support forum at wordpress.org](http://wordpress.org/support/plugin/speed-contact-bar). I will try to take a look and answer as soon as possible.
+Please write your request in the plugin's [support forum at wordpress.org](http://wordpress.org/support/plugin/speed-contact-bar). We will try to take a look and answer as soon as possible.
 
 = I want to switch of the contact bar for a while without losing all settings. How? =
 
@@ -106,7 +110,7 @@ If you deactivate and delete the plugin on the plugins page all files and your s
 
 Translations are available in English and German. If you want to see another language it would be great if you would provide the translation.
 
-Write your request in the plugin's [support forum at wordpress.org](http://wordpress.org/support/plugin/speed-contact-bar). I will try to take a look and answer as soon as possible.
+Please write your request in the plugin's [support forum at wordpress.org](http://wordpress.org/support/plugin/speed-contact-bar). We will try to take a look and answer as soon as possible.
 
 == Screenshots ==
 
@@ -114,6 +118,13 @@ Write your request in the plugin's [support forum at wordpress.org](http://wordp
 2. The options page of the contact bar in the WordPress backend
 
 == Changelog ==
+
+= 1.1 =
+* Fixed incorrect call of a non-static method in the admin area
+* Added WordPress function antispambot() to prevent spam bots recognizing the email address
+* Changed color picker type from Fantastic to modern Iris
+* Refactoring the options page
+* Fixed a german typo
 
 = 1.0 =
 First official release
@@ -132,6 +143,9 @@ First official release
 First release for just trying it
 
 == Upgrade Notice ==
+
+= 1.1 =
+Fixed errors and changed color picker
 
 = 1.0 =
 Added new options and security for data inputs and outputs, removed dashicons
