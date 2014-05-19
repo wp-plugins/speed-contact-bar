@@ -3,9 +3,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
-"Report-Msgid-Bugs-To: http://wordpress.org/plugins/speed-contact-bar\n"
-"POT-Creation-Date: 2014-04-23 14:48+0100\n"
-"PO-Revision-Date: 2014-04-23 14:58+0100\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/plugins/plugin-name\n"
+"POT-Creation-Date: 2014-05-19 15:01+0100\n"
+"PO-Revision-Date: 2014-05-19 15:04+0100\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -16,160 +16,160 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: admin/class-speed-contact-bar-admin.php:214
+#: admin/class-speed-contact-bar-admin.php:216
 msgid "Options"
 msgstr ""
 
-#: admin/class-speed-contact-bar-admin.php:273
-msgid "left-aligned"
-msgstr ""
-
-#: admin/class-speed-contact-bar-admin.php:274
-msgid "centered"
-msgstr ""
-
-#: admin/class-speed-contact-bar-admin.php:275
-msgid "right-aligned"
-msgstr ""
-
-#: admin/class-speed-contact-bar-admin.php:278
-msgid "bright"
-msgstr ""
-
-#: admin/class-speed-contact-bar-admin.php:279
-msgid "dark"
-msgstr ""
-
-#: admin/class-speed-contact-bar-admin.php:286
+#: admin/class-speed-contact-bar-admin.php:277
 msgid "Contact Data"
 msgstr ""
 
-#: admin/class-speed-contact-bar-admin.php:287
+#: admin/class-speed-contact-bar-admin.php:278
 msgid "Set the contact informations. To supress displaying a field leave it empty."
 msgstr ""
 
-#: admin/class-speed-contact-bar-admin.php:290
+#: admin/class-speed-contact-bar-admin.php:282
 msgid "Show headline"
 msgstr ""
 
-#: admin/class-speed-contact-bar-admin.php:291
+#: admin/class-speed-contact-bar-admin.php:283
 msgid "Activate to show the headline"
 msgstr ""
 
-#: admin/class-speed-contact-bar-admin.php:294
+#: admin/class-speed-contact-bar-admin.php:287
 msgid "Headline"
 msgstr ""
 
-#: admin/class-speed-contact-bar-admin.php:295
+#: admin/class-speed-contact-bar-admin.php:288
 msgid "Enter a short headline for the contact bar"
 msgstr ""
 
-#: admin/class-speed-contact-bar-admin.php:298
-#: public/class-speed-contact-bar.php:488 public/views/public.php:25
+#: admin/class-speed-contact-bar-admin.php:292
+#: public/class-speed-contact-bar.php:491
 msgid "E-Mail"
 msgstr ""
 
-#: admin/class-speed-contact-bar-admin.php:299
+#: admin/class-speed-contact-bar-admin.php:293
 msgid "Enter a valid email address. If the email address is invalid it will not be used."
 msgstr ""
 
-#: admin/class-speed-contact-bar-admin.php:302
-#: public/class-speed-contact-bar.php:480
+#: admin/class-speed-contact-bar-admin.php:297
+#: public/class-speed-contact-bar.php:482
 msgid "Phone Number"
 msgstr ""
 
-#: admin/class-speed-contact-bar-admin.php:303
+#: admin/class-speed-contact-bar-admin.php:298
 msgid "Enter your official contact phone number"
 msgstr ""
 
-#: admin/class-speed-contact-bar-admin.php:306
-#: public/class-speed-contact-bar.php:484
+#: admin/class-speed-contact-bar-admin.php:302
+#: public/class-speed-contact-bar.php:486
 msgid "Cell Phone Number"
 msgstr ""
 
-#: admin/class-speed-contact-bar-admin.php:307
+#: admin/class-speed-contact-bar-admin.php:303
 msgid "Enter your official contact cell phone number"
 msgstr ""
 
-#: admin/class-speed-contact-bar-admin.php:310
-msgid "Contact Form URL"
-msgstr ""
-
-#: admin/class-speed-contact-bar-admin.php:311
-#: admin/class-speed-contact-bar-admin.php:315
-#: admin/class-speed-contact-bar-admin.php:319
-msgid "Enter a valid URL. If the URL is invalid it will not be used."
-msgstr ""
-
-#: admin/class-speed-contact-bar-admin.php:314
+#: admin/class-speed-contact-bar-admin.php:312
 msgid "Facebook Page URL"
 msgstr ""
 
+#: admin/class-speed-contact-bar-admin.php:313
 #: admin/class-speed-contact-bar-admin.php:318
+#: admin/class-speed-contact-bar-admin.php:323
+msgid "Enter a valid URL. If the URL is invalid it will not be used."
+msgstr ""
+
+#: admin/class-speed-contact-bar-admin.php:317
 msgid "Google Plus Profile URL"
 msgstr ""
 
-#: admin/class-speed-contact-bar-admin.php:324
-msgid "Appeareance"
-msgstr ""
-
-#: admin/class-speed-contact-bar-admin.php:325
-msgid "Set the style of the contact bar."
+#: admin/class-speed-contact-bar-admin.php:322
+msgid "Pinterest Page URL"
 msgstr ""
 
 #: admin/class-speed-contact-bar-admin.php:328
-msgid "Enable fixed position"
+msgid "Appeareance"
 msgstr ""
 
 #: admin/class-speed-contact-bar-admin.php:329
-msgid "Always on top"
-msgstr ""
-
-#: admin/class-speed-contact-bar-admin.php:332
-msgid "Text Alignment"
+msgid "Set the style of the contact bar."
 msgstr ""
 
 #: admin/class-speed-contact-bar-admin.php:333
+msgid "Enable fixed position"
+msgstr ""
+
+#: admin/class-speed-contact-bar-admin.php:334
+msgid "Always on top"
+msgstr ""
+
+#: admin/class-speed-contact-bar-admin.php:338
+msgid "Text Alignment"
+msgstr ""
+
+#: admin/class-speed-contact-bar-admin.php:339
 msgid "Select the alignment of the content within the bar"
 msgstr ""
 
-#: admin/class-speed-contact-bar-admin.php:336
-msgid "Background Color"
-msgstr ""
-
-#: admin/class-speed-contact-bar-admin.php:337
-msgid "Select the background color"
+#: admin/class-speed-contact-bar-admin.php:340
+msgid "left-aligned"
 msgstr ""
 
 #: admin/class-speed-contact-bar-admin.php:340
-msgid "Text Color"
+msgid "centered"
 msgstr ""
 
-#: admin/class-speed-contact-bar-admin.php:341
-msgid "Select the text color"
+#: admin/class-speed-contact-bar-admin.php:340
+msgid "right-aligned"
 msgstr ""
 
 #: admin/class-speed-contact-bar-admin.php:344
-msgid "Link Color"
+msgid "Background Color"
 msgstr ""
 
 #: admin/class-speed-contact-bar-admin.php:345
-msgid "Select the link color"
-msgstr ""
-
-#: admin/class-speed-contact-bar-admin.php:348
-msgid "Icon Brightness"
+msgid "Select the background color"
 msgstr ""
 
 #: admin/class-speed-contact-bar-admin.php:349
+msgid "Text Color"
+msgstr ""
+
+#: admin/class-speed-contact-bar-admin.php:350
+msgid "Select the text color"
+msgstr ""
+
+#: admin/class-speed-contact-bar-admin.php:354
+msgid "Link Color"
+msgstr ""
+
+#: admin/class-speed-contact-bar-admin.php:355
+msgid "Select the link color"
+msgstr ""
+
+#: admin/class-speed-contact-bar-admin.php:359
+msgid "Icon Brightness"
+msgstr ""
+
+#: admin/class-speed-contact-bar-admin.php:360
 msgid "Select the brightness of the icons"
 msgstr ""
 
-#: admin/class-speed-contact-bar-admin.php:352
+#: admin/class-speed-contact-bar-admin.php:361
+msgid "bright"
+msgstr ""
+
+#: admin/class-speed-contact-bar-admin.php:361
+msgid "dark"
+msgstr ""
+
+#: admin/class-speed-contact-bar-admin.php:365
 msgid "Show shadow"
 msgstr ""
 
-#: admin/class-speed-contact-bar-admin.php:353
+#: admin/class-speed-contact-bar-admin.php:366
 msgid "Activate to show a slight shadow under the bar"
 msgstr ""
 
@@ -206,15 +206,11 @@ msgstr ""
 msgid "The plugin requires WordPress version %s or higher. Therefore, WordPress did not activate it. If you want to use this plugin update the Wordpress files to the latest version."
 msgstr ""
 
-#: public/class-speed-contact-bar.php:393
+#: public/class-speed-contact-bar.php:394
 msgid "Contact to us"
 msgstr ""
 
-#: public/class-speed-contact-bar.php:513
+#: public/class-speed-contact-bar.php:519
 #, php-format
 msgid "Welcome to the plugin %s! You can configure it at %s."
-msgstr ""
-
-#: public/views/public.php:22
-msgid "Phone"
 msgstr ""

@@ -22,7 +22,7 @@ class Speed_Contact_Bar {
 	 *
 	 * @var     string
 	 */
-	const VERSION = '1.1';
+	const VERSION = '1.2';
 
 	/**
 	 * Lowest Wordpress version to run with this plugin
@@ -398,6 +398,7 @@ class Speed_Contact_Bar {
 			'contact form'  => '',
 			'facebook'  => '',
 			'googleplus'  => '',
+			'pinterest'  => '',
 		);
 
 		// store default values in the db as a single and serialized entry
@@ -486,13 +487,17 @@ class Speed_Contact_Bar {
 			}
 			if ( isset( $this->stored_settings[ 'email' ] ) && '' != $this->stored_settings[ 'email' ] ) {
 				//if ( isset( $this->stored_settings[ 'show_labels' ] ) && 1 == $this->stored_settings[ 'show_labels' ] ) {}
-				$inject .= sprintf( '<li id="scb-email"><img src="%sassets/images/email_%s.svg" width="26" height="26" alt="%s" /> <a href="mailto:%s">%s</a></li>', $root_url, $icon_family, __( 'E-Mail', $this->plugin_slug ), antispambot( esc_attr( $this->stored_settings[ 'email' ] ) ), antispambot( esc_html( $this->stored_settings[ 'email' ] ) ) );
+				$safe_email = antispambot( esc_html( $this->stored_settings[ 'email' ] ) );
+				$inject .= sprintf( '<li id="scb-email"><img src="%sassets/images/email_%s.svg" width="26" height="26" alt="%s" /> <a href="mailto:%s">%s</a></li>', $root_url, $icon_family, __( 'E-Mail', $this->plugin_slug ), $safe_email, $safe_email );
 			}
 			if ( isset( $this->stored_settings[ 'facebook' ] ) && '' != $this->stored_settings[ 'facebook' ] ) {
 				$inject .= sprintf( '<li id="scb-facebook"><a href="%s"><img src="%sassets/images/facebook.svg" width="26" height="26" alt="Facebook" /></a></li>', esc_url( $this->stored_settings[ 'facebook' ] ), $root_url );
 			}
 			if ( isset( $this->stored_settings[ 'googleplus' ] ) && '' != $this->stored_settings[ 'googleplus' ] ) {
 				$inject .= sprintf( '<li id="scb-googleplus"><a href="%s"><img src="%sassets/images/googleplus.svg" width="26" height="26" alt="Google Plus" /></a></li>', esc_url( $this->stored_settings[ 'googleplus' ] ), $root_url );
+			}
+			if ( isset( $this->stored_settings[ 'pinterest' ] ) && '' != $this->stored_settings[ 'pinterest' ] ) {
+				$inject .= sprintf( '<li id="scb-pinterest"><a href="%s"><img src="%sassets/images/pinterest.svg" width="26" height="26" alt="Pinterest" /></a></li>', esc_url( $this->stored_settings[ 'pinterest' ] ), $root_url );
 			}
 			// closes list and bar
 			$inject .= '</ul></div>';
