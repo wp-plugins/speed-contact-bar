@@ -317,6 +317,11 @@ class Speed_Contact_Bar_Admin {
 						'title'   => __( 'Google Plus Profile URL', self::$plugin_slug ),
 						'desc'    => __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
 					),
+					'pinterest' => array(
+						'type'    => 'url',
+						'title'   => __( 'Pinterest Page URL', self::$plugin_slug ),
+						'desc'    => __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
+					),
 				),
 			),
 			'2nd_section' => array(

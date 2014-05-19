@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: contact, contacts, email, e-mail, phone, telephone, cell phone, number, address, url, link, web, facebook, google plus, google+, g+, social media, responsive
 Requires at least: 3.5
 Tested up to: 3.9.1
-Stable tag: 1.1
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -114,10 +114,13 @@ Please write your request in the plugin's [support forum at wordpress.org](http:
 
 == Screenshots ==
 
-1. The contact bar in black with headline, phone number, cell phone number, e-mail address, Facebook icon and Google Plus icons on top of a webpage
+1. The contact bar in black with headline, phone number, cell phone number, e-mail address, icons of Facebook icon and Google Plus icons on top of a webpage
 2. The options page of the contact bar in the WordPress backend
 
 == Changelog ==
+
+= 1.2 =
+Added Pinterest option
 
 = 1.1 =
 * Fixed incorrect call of a non-static method in the admin area
@@ -143,6 +146,10 @@ First official release
 First release for just trying it
 
 == Upgrade Notice ==
+
+= 1.2 =
+* Added Pinterest option
+* Updated pot file and german translation
 
 = 1.1 =
 Fixed errors and changed color picker
