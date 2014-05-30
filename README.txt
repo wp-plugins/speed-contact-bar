@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: contact, contacts, email, e-mail, phone, telephone, cell phone, number, address, url, link, web, facebook, google plus, google+, g+, social media, responsive
 Requires at least: 3.5
 Tested up to: 3.9.1
-Stable tag: 1.2
+Stable tag: 1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,19 +40,21 @@ Up till now Speed Contact Bar supports links to these **social media platforms**
 
 1. Facebook
 2. Google Plus
+3. Twitter
+4. Pinterest
 
 More social media plattforms will come in future.
 
 And of course you can set the **design of the contact bar** to be suitable to the design of your website:
 
-1. Scroll with the content or fixed the bar on top of every page
-2. Background color
-3. Text color
-4. Link color
-5. Dark or bright icons
-6. Content alignment within the bar
-7. Define a headline and whether to show it or not
-8. Show a slight shadow under the bar for a chic 3D effect
+1. The contact bar appears on top of every page. You can set whether it should **scroll** with the content or **stay fixed**
+2. **Background color**
+3. **Text color**
+4. **Link color**
+5. **Lightness of icons**: Dark or bright icons
+6. **Content alignment** within the bar
+7. Define a **headline** and whether to show it or not
+8. Show a slight **shadow under the bar** for a chic 3D effect
 
 Do you miss some options? We will add it! Please write your request in the plugin's [support forum at wordpress.org](http://wordpress.org/support/plugin/speed-contact-bar). We will try to take a look and answer as soon as possible.
 
@@ -119,8 +121,13 @@ Please write your request in the plugin's [support forum at wordpress.org](http:
 
 == Changelog ==
 
+= 1.3 =
+* Added Twitter option
+* Updated *.pot file and german translation
+
 = 1.2 =
-Added Pinterest option
+* Added Pinterest option
+* Updated *.pot file and german translation
 
 = 1.1 =
 * Fixed incorrect call of a non-static method in the admin area
@@ -128,6 +135,7 @@ Added Pinterest option
 * Changed color picker type from Fantastic to modern Iris
 * Refactoring the options page
 * Fixed a german typo
+* Updated *.pot file and german translation
 
 = 1.0 =
 First official release
@@ -147,9 +155,11 @@ First release for just trying it
 
 == Upgrade Notice ==
 
+= 1.3 =
+Added Twitter option
+
 = 1.2 =
-* Added Pinterest option
-* Updated pot file and german translation
+Added Pinterest option
 
 = 1.1 =
 Fixed errors and changed color picker
