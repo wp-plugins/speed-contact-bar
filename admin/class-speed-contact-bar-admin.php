@@ -121,6 +121,7 @@ class Speed_Contact_Bar_Admin {
 		// Load admin style sheet and JavaScript.
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
+		add_action( 'admin_head',			 array( $this, 'print_admin_css' ) );
 
 		// Add the options page and menu item.
 		add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
@@ -204,6 +205,27 @@ class Speed_Contact_Bar_Admin {
 		wp_enqueue_script( 'wp-color-picker' );
 	}
 
+	/**
+	 * Print dynamic CSS in the HTML Head section
+	 *
+	 * @since     1.4
+	 *
+	 */
+	public function print_admin_css() {
+		$root_url = plugin_dir_url( dirname( __FILE__ ) );
+		print '<style type="text/css">';
+		print "\n";
+		foreach ( array( 'phone', 'cellphone', 'email' ) as $name ) {
+			printf( ".form-table th label[for='%s'] { display: block; height: 85px; background: url('%spublic/assets/images/%s_dark.svg') no-repeat scroll 0 2.5em transparent; background-size: 40px 40px; }", $name, $root_url, $name );
+			print "\n";
+		}
+		foreach ( array( 'facebook', 'googleplus', 'twitter', 'pinterest', 'youtube' ) as $name ) {
+			printf( ".form-table th label[for='%s'] { display: block; height: 85px; background: url('%spublic/assets/images/%s.svg') no-repeat scroll 0 2.5em transparent; background-size: 40px 40px; }", $name, $root_url, $name );
+			print "\n";
+		}
+		print '</style>';
+		print "\n";
+	}
 	/**
 	 * Register the administration menu for this plugin into the WordPress Dashboard menu.
 	 *
@@ -302,30 +324,30 @@ class Speed_Contact_Bar_Admin {
 						'title'   => __( 'Cell Phone Number', self::$plugin_slug ),
 						'desc'    => __( 'Enter your official contact cell phone number', self::$plugin_slug ),
 					),
-					/*'contact form' => array(
-						'type'    => 'url',
-						'title'   => __( 'Contact Form URL', self::$plugin_slug ),
-						'desc'    => __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
-					),*/
 					'facebook' => array(
 						'type'    => 'url',
-						'title'   => __( 'Facebook Page URL', self::$plugin_slug ),
-						'desc'    => __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
+						'title'   => __( 'Facebook Fan Page URL', self::$plugin_slug ),
+						'desc'    => __( 'Example', self::$plugin_slug ) . ': http://www.facebook.com/name<br />'. __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
 					),
 					'googleplus' => array(
 						'type'    => 'url',
-						'title'   => __( 'Google Plus Profile URL', self::$plugin_slug ),
-						'desc'    => __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
+						'title'   => __( 'Google Plus Page URL', self::$plugin_slug ),
+						'desc'    => __( 'Example', self::$plugin_slug ) . ': https://plus.google.com/name<br />'. __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
 					),
 					'twitter' => array(
 						'type'    => 'url',
 						'title'   => __( 'Twitter Profile URL', self::$plugin_slug ),
-						'desc'    => __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
+						'desc'    => __( 'Example', self::$plugin_slug ) . ': http://www.twitter.com/username<br />'. __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
 					),
 					'pinterest' => array(
 						'type'    => 'url',
 						'title'   => __( 'Pinterest Page URL', self::$plugin_slug ),
-						'desc'    => __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
+						'desc'    => __( 'Example', self::$plugin_slug ) . ': http://www.pinterest.com/username<br />'. __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
+					),
+					'youtube' => array(
+						'type'    => 'url',
+						'title'   => __( 'YouTube Channel/Video URL', self::$plugin_slug ),
+						'desc'    => __( 'Example', self::$plugin_slug ) . ': http://www.youtube.com/username<br />'. __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
 					),
 				),
 			),

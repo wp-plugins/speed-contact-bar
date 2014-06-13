@@ -22,7 +22,7 @@ class Speed_Contact_Bar {
 	 *
 	 * @var     string
 	 */
-	const VERSION = '1.3';
+	const VERSION = '1.4';
 
 	/**
 	 * Lowest Wordpress version to run with this plugin
@@ -400,6 +400,7 @@ class Speed_Contact_Bar {
 			'googleplus'  => '',
 			'pinterest'  => '',
 			'twitter'  => '',
+			'youtube'  => '',
 		);
 
 		// store default values in the db as a single and serialized entry
@@ -488,15 +489,12 @@ class Speed_Contact_Bar {
 			$contact_list = array();
 			$root_url = plugin_dir_url( __FILE__ );
 			if ( isset( $this->stored_settings[ 'phone' ] ) && '' != $this->stored_settings[ 'phone' ] ) {
-				//if ( isset( $this->stored_settings[ 'show_labels' ] ) && 1 == $this->stored_settings[ 'show_labels' ] ) {}
 				$contact_list[] = sprintf( '<li id="scb-phone"><img src="%sassets/images/phone_%s.svg" width="26" height="26" alt="%s" />%s</li>', $root_url, $icon_family, __( 'Phone Number', $this->plugin_slug ), esc_html( $this->stored_settings[ 'phone' ] ) );
 			}
 			if ( isset( $this->stored_settings[ 'cellphone' ] ) && '' != $this->stored_settings[ 'cellphone' ] ) {
-				//if ( isset( $this->stored_settings[ 'show_labels' ] ) && 1 == $this->stored_settings[ 'show_labels' ] ) {}
 				$contact_list[] = sprintf( '<li id="scb-cellphone"><img src="%sassets/images/cellphone_%s.svg" width="26" height="26" alt="%s" />%s</li>', $root_url, $icon_family, __( 'Cell Phone Number', $this->plugin_slug ), esc_html( $this->stored_settings[ 'cellphone' ] ) );
 			}
 			if ( isset( $this->stored_settings[ 'email' ] ) && '' != $this->stored_settings[ 'email' ] ) {
-				//if ( isset( $this->stored_settings[ 'show_labels' ] ) && 1 == $this->stored_settings[ 'show_labels' ] ) {}
 				$safe_email = antispambot( esc_html( $this->stored_settings[ 'email' ] ) );
 				$contact_list[] = sprintf( '<li id="scb-email"><img src="%sassets/images/email_%s.svg" width="26" height="26" alt="%s" /> <a href="mailto:%s">%s</a></li>', $root_url, $icon_family, __( 'E-Mail', $this->plugin_slug ), $safe_email, $safe_email );
 			}
@@ -511,7 +509,7 @@ class Speed_Contact_Bar {
 
 			// the socia media data
 			$contact_list = array();
-			$icons = array( 'facebook', 'googleplus', 'twitter', 'pinterest' );
+			$icons = array( 'facebook', 'googleplus', 'twitter', 'pinterest', 'youtube' );
 			foreach ( $icons as $icon ) {
 				if ( isset( $this->stored_settings[ $icon ] ) && '' != $this->stored_settings[ $icon ] ) {
 					$contact_list[] = sprintf( '<li id="scb-%s"><a href="%s"><img src="%sassets/images/%s.svg" width="26" height="26" alt="%s" /></a></li>', $icon, esc_url( $this->stored_settings[ $icon ] ), $root_url, $icon, ucfirst( $icon ) );
