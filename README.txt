@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: contact, contacts, email, e-mail, phone, telephone, cell phone, number, address, url, link, web, facebook, google plus, google+, g+, social media, responsive
 Requires at least: 3.5
 Tested up to: 3.9.1
-Stable tag: 1.3
+Stable tag: 1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -42,6 +42,7 @@ Up till now Speed Contact Bar supports links to these **social media platforms**
 2. Google Plus
 3. Twitter
 4. Pinterest
+5. Youtube
 
 More social media plattforms will come in future.
 
@@ -121,6 +122,11 @@ Please write your request in the plugin's [support forum at wordpress.org](http:
 
 == Changelog ==
 
+= 1.4 =
+* Added Youtube option
+* Added icons in options page
+* Updated *.pot file and german translation
+
 = 1.3 =
 * Added Twitter option
 * Updated *.pot file and german translation
@@ -154,6 +160,9 @@ First official release
 First release for just trying it
 
 == Upgrade Notice ==
+
+= 1.3 =
+Added Youtube option
 
 = 1.3 =
 Added Twitter option

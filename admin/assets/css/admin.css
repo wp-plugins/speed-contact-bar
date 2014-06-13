@@ -46,6 +46,10 @@
 	float: left;
 	margin: 0 8px 0 0;
 }
+.form-table td {
+	vertical-align: top;
+}
+
 /* If auto-folding of the admin menu */
 @media only screen and (max-width: 900px) {
 	/* dissolve floating */
@@ -58,4 +62,3 @@
 		margin: 0;
 	}
 }
-

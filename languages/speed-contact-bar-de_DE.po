@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/plugins/plugin-name\n"
-"POT-Creation-Date: 2014-05-30 13:58+0100\n"
-"PO-Revision-Date: 2014-05-30 13:59+0100\n"
+"POT-Creation-Date: 2014-06-13 13:41+0100\n"
+"PO-Revision-Date: 2014-06-13 14:51+0100\n"
 "Last-Translator: Martin Stehle <m.stehle@gmx.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -22,6 +22,11 @@ msgstr ""
 #: admin/class-speed-contact-bar-admin.php:216
 msgid "Options"
 msgstr "Einstellmöglichkeiten"
+
+#: admin/class-speed-contact-bar-admin.php:243
+#: public/class-speed-contact-bar.php:545
+msgid "Settings"
+msgstr ""
 
 #: admin/class-speed-contact-bar-admin.php:277
 msgid "Contact Data"
@@ -52,7 +57,7 @@ msgstr "Gebe eine kurze Überschrift für die Kontaktleiste ein"
 #: admin/class-speed-contact-bar-admin.php:292
 #: public/class-speed-contact-bar.php:501
 msgid "E-Mail"
-msgstr "E-Mail"
+msgstr "E-Mailadresse"
 
 #: admin/class-speed-contact-bar-admin.php:293
 msgid ""
@@ -74,16 +79,25 @@ msgstr "Gebe deine offizielle Kontakttelefonnummer ein"
 #: admin/class-speed-contact-bar-admin.php:302
 #: public/class-speed-contact-bar.php:496
 msgid "Cell Phone Number"
-msgstr "Mobilnnummer"
+msgstr "Mobiltelefon-Nummer"
 
 #: admin/class-speed-contact-bar-admin.php:303
 msgid "Enter your official contact cell phone number"
 msgstr "Gebe deine offizielle Kontaktmobilnummer ein"
 
-#: admin/class-speed-contact-bar-admin.php:312
-msgid "Facebook Page URL"
-msgstr "URL der Facebook-Seite"
+#: admin/class-speed-contact-bar-admin.php:307
+msgid "Facebook Fan Page URL"
+msgstr "Facebook-Seiten-URL"
 
+#: admin/class-speed-contact-bar-admin.php:308
+#: admin/class-speed-contact-bar-admin.php:313
+#: admin/class-speed-contact-bar-admin.php:318
+#: admin/class-speed-contact-bar-admin.php:323
+#: admin/class-speed-contact-bar-admin.php:328
+msgid "Example"
+msgstr "Beispiel"
+
+#: admin/class-speed-contact-bar-admin.php:308
 #: admin/class-speed-contact-bar-admin.php:313
 #: admin/class-speed-contact-bar-admin.php:318
 #: admin/class-speed-contact-bar-admin.php:323
@@ -91,17 +105,21 @@ msgstr "URL der Facebook-Seite"
 msgid "Enter a valid URL. If the URL is invalid it will not be used."
 msgstr "Gebe eine gültige URL ein. Ist sie ungültig, wird sie nicht verwendet."
 
+#: admin/class-speed-contact-bar-admin.php:312
+msgid "Google Plus Page URL"
+msgstr "Google-Plus-Profil-URL"
+
 #: admin/class-speed-contact-bar-admin.php:317
-msgid "Google Plus Profile URL"
-msgstr "URL des Google-Plus-Profils"
+msgid "Twitter Profile URL"
+msgstr "Twitter-Profil-URL"
 
 #: admin/class-speed-contact-bar-admin.php:322
-msgid "Twitter Profile URL"
-msgstr "URL des Twitter-Profils"
+msgid "Pinterest Page URL"
+msgstr "Pinterest-Seiten-URL"
 
 #: admin/class-speed-contact-bar-admin.php:327
-msgid "Pinterest Page URL"
-msgstr "URL der Pinterest-Seite"
+msgid "YouTube Channel/Video URL"
+msgstr "YouTube-Kanal/-Video-URL"
 
 #: admin/class-speed-contact-bar-admin.php:333
 msgid "Appeareance"
@@ -225,6 +243,10 @@ msgstr ""
 "Das Plugin erfordert WordPress Version %s oder höher.  Daher hat WordPress "
 "es nicht aktiviert. Falls du dieses Plugin nutzen willst, aktualisiere die "
 "WordPress-Dateien auf die neueste Version."
+
+#: public/class-speed-contact-bar.php:379
+msgid "You do not have sufficient permissions to manage options for this site."
+msgstr ""
 
 #: public/class-speed-contact-bar.php:394
 msgid "Contact to us"
