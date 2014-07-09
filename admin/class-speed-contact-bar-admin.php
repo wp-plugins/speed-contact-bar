@@ -34,6 +34,15 @@ class Speed_Contact_Bar_Admin {
 	protected static $plugin_screen_hook_suffix = null;
 
 	/**
+	 * version of this plugin.
+	 *
+	 * @since    1.5
+	 *
+	 * @var      string
+	 */
+	protected static $plugin_version = null;
+
+	/**
 	 * Name of this plugin.
 	 *
 	 * @since    1.0
@@ -105,6 +114,16 @@ class Speed_Contact_Bar_Admin {
 	protected static $stored_settings = array();
 
 	/**
+	 * Social networks
+	 *
+	 *
+	 * @since    1.5
+	 *
+	 * @var      array
+	 */
+	protected static $social_networks = array();
+	
+	/**
 	 * Initialize the plugin by loading admin scripts & styles and adding a
 	 * settings page and menu.
 	 *
@@ -117,6 +136,8 @@ class Speed_Contact_Bar_Admin {
 		self::$plugin_name = $plugin->get_plugin_name();
 		self::$plugin_slug = $plugin->get_plugin_slug();
 		self::$settings_db_slug = $plugin->get_settings_db_slug();
+		self::$social_networks = $plugin->get_social_networks();
+		self::$plugin_version = $plugin->get_plugin_version();
 
 		// Load admin style sheet and JavaScript.
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
@@ -175,7 +196,7 @@ class Speed_Contact_Bar_Admin {
 
 		$screen = get_current_screen();
 		if ( self::$plugin_screen_hook_suffix == $screen->id ) {
-			wp_enqueue_style( self::$plugin_slug .'-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array( ), Speed_Contact_Bar::VERSION );
+			wp_enqueue_style( self::$plugin_slug .'-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array( ), self::$plugin_version );
 		}
 
 		/* collect css for the color picker */
@@ -199,7 +220,7 @@ class Speed_Contact_Bar_Admin {
 		/* collect js for the color picker */
 		$screen = get_current_screen();
 		if ( self::$plugin_screen_hook_suffix == $screen->id ) {
-			wp_enqueue_script( self::$plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery' ), Speed_Contact_Bar::VERSION );
+			wp_enqueue_script( self::$plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery' ), self::$plugin_version );
 		}
 		#wp_enqueue_script( 'farbtastic' );
 		wp_enqueue_script( 'wp-color-picker' );
@@ -219,13 +240,14 @@ class Speed_Contact_Bar_Admin {
 			printf( ".form-table th label[for='%s'] { display: block; height: 85px; background: url('%spublic/assets/images/%s_dark.svg') no-repeat scroll 0 2.5em transparent; background-size: 40px 40px; }", $name, $root_url, $name );
 			print "\n";
 		}
-		foreach ( array( 'facebook', 'googleplus', 'twitter', 'pinterest', 'youtube' ) as $name ) {
+		foreach ( self::$social_networks as $name ) {
 			printf( ".form-table th label[for='%s'] { display: block; height: 85px; background: url('%spublic/assets/images/%s.svg') no-repeat scroll 0 2.5em transparent; background-size: 40px 40px; }", $name, $root_url, $name );
 			print "\n";
 		}
 		print '</style>';
 		print "\n";
 	}
+	
 	/**
 	 * Register the administration menu for this plugin into the WordPress Dashboard menu.
 	 *
@@ -349,6 +371,16 @@ class Speed_Contact_Bar_Admin {
 						'title'   => __( 'YouTube Channel/Video URL', self::$plugin_slug ),
 						'desc'    => __( 'Example', self::$plugin_slug ) . ': http://www.youtube.com/username<br />'. __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
 					),
+					'linkedin' => array(
+						'type'    => 'url',
+						'title'   => __( 'LinkedIn Profile URL', self::$plugin_slug ),
+						'desc'    => __( 'Example', self::$plugin_slug ) . ': http://www.linkedin.com/in/username<br />'. __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
+					),
+					'xing' => array(
+						'type'    => 'url',
+						'title'   => __( 'Xing Profile URL', self::$plugin_slug ),
+						'desc'    => __( 'Example', self::$plugin_slug ) . ': http://www.xing.com/profile/username<br />'. __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
+					),
 				),
 			),
 			'2nd_section' => array(
@@ -440,8 +472,8 @@ class Speed_Contact_Bar_Admin {
 						$title = $option_values[ 'title' ];
 						$html = sprintf( '<fieldset><legend class="screen-reader-text"><span>%s</span></legend>', $title );
 						foreach ( $option_values[ 'values' ] as $value => $label ) {
-							$stored_value = isset( self::$stored_settings[ $option_name ] ) ? esc_attr( self::$stored_settings[ $option_name ] ) : '0';
-							$checked = $stored_value ? checked( '1', $value, false ) : '';
+							$stored_value = isset( self::$stored_settings[ $value ] ) ? esc_attr( self::$stored_settings[ $value ] ) : '0';
+							$checked = $stored_value ? checked( '1', $stored_value, false ) : '0';
 							$html .= sprintf( '<label for="%s"><input name="%s[%s]" type="checkbox" id="%s" value="1"%s /> %s</label><br />' , $value, self::$settings_db_slug, $value, $value, $checked, $label );
 						}
 						$html .= '</fieldset>';

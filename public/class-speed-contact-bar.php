@@ -22,16 +22,7 @@ class Speed_Contact_Bar {
 	 *
 	 * @var     string
 	 */
-	const VERSION = '1.4';
-
-	/**
-	 * Lowest Wordpress version to run with this plugin
-	 *
-	 * @since   1.0
-	 *
-	 * @var     string
-	 */
-	const REQUIRED_WP_VERSION = '3.5'; /* because of color wheel picker 'color-picker' */
+	private $plugin_version = '1.5';
 
 	/**
 	 * Name of this plugin.
@@ -87,6 +78,16 @@ class Speed_Contact_Bar {
 	private $stored_settings = array();
 
 	/**
+	 * Social networks
+	 *
+	 *
+	 * @since    1.5
+	 *
+	 * @var      array
+	 */
+	private $social_networks = array( 'facebook', 'googleplus', 'twitter', 'pinterest', 'youtube', 'linkedin', 'xing' );
+
+	/**
 	 * Initialize the plugin by setting localization and loading public scripts
 	 * and styles.
 	 *
@@ -124,6 +125,17 @@ class Speed_Contact_Bar {
 	}
 
 	/**
+	 * Return the plugin version.
+	 *
+	 * @since    1.5
+	 *
+	 * @return    Plugin version variable.
+	 */
+	public function get_plugin_version() {
+		return $this->plugin_version;
+	}
+
+	/**
 	 * Return the plugin name.
 	 *
 	 * @since    1.0
@@ -157,6 +169,17 @@ class Speed_Contact_Bar {
 	}
 
 	/**
+	 * Return the supported social networks
+	 *
+	 * @since    1.5
+	 *
+	 * @return    Social networks variable.
+	 */
+	public function get_social_networks() {
+		return $this->social_networks;
+	}
+
+	/**
 	 * Return an instance of this class.
 	 *
 	 * @since     1.0
@@ -184,9 +207,11 @@ class Speed_Contact_Bar {
 	 *                                       activated on an individual blog.
 	 */
 	public static function activate( $network_wide ) {
+	
+		$required_wp_version = '3.5';
 
 		// check minimum version
-		if ( ! version_compare( $GLOBALS['wp_version'], self::REQUIRED_WP_VERSION, '>=' ) ) {
+		if ( ! version_compare( $GLOBALS['wp_version'], $required_wp_version, '>=' ) ) {
 			// deactivate plugin
 			deactivate_plugins( plugin_basename( __FILE__ ), false, is_network_admin() );
 			// load language file for a message in the language of the WP installation
@@ -198,7 +223,7 @@ class Speed_Contact_Bar {
 					'<p>%s</p>', 
 					sprintf( 
 						__( 'The plugin requires WordPress version %s or higher. Therefore, WordPress did not activate it. If you want to use this plugin update the Wordpress files to the latest version.', 'speed-contact-bar' ), 
-						self::REQUIRED_WP_VERSION 
+						$required_wp_version 
 					)
 				),
 				// title in title tag
@@ -343,10 +368,7 @@ class Speed_Contact_Bar {
 	 */
 	public function load_plugin_textdomain() {
 
-		$domain = $this->plugin_slug;
-		#$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
-		#load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
-		load_plugin_textdomain( $domain, false, dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/' );
+		load_plugin_textdomain( $this->plugin_slug, false, dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/' );
 
 	}
 
@@ -356,7 +378,7 @@ class Speed_Contact_Bar {
 	 * @since    1.0
 	 */
 	public function enqueue_styles() {
-		wp_enqueue_style( $this->plugin_slug . '-plugin-styles', plugins_url( 'assets/css/public.css', __FILE__ ), array(), self::VERSION );
+		wp_enqueue_style( $this->plugin_slug . '-plugin-styles', plugins_url( 'assets/css/public.css', __FILE__ ), array(), $this->plugin_version );
 	}
 
 	/**
@@ -365,7 +387,7 @@ class Speed_Contact_Bar {
 	 * @since    1.0
 	 */
 	public function enqueue_scripts() {
-		wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/public.js', __FILE__ ), array( 'jquery' ), self::VERSION );
+		wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/public.js', __FILE__ ), array( 'jquery' ), $this->plugin_version );
 	}
 
 	/**
@@ -396,12 +418,11 @@ class Speed_Contact_Bar {
 			'phone'  => '',
 			'cellphone'  => '',
 			'contact form'  => '',
-			'facebook'  => '',
-			'googleplus'  => '',
-			'pinterest'  => '',
-			'twitter'  => '',
-			'youtube'  => '',
 		);
+		// add social networks to array
+		foreach ( $this->social_networks as $name ) {
+			$default_settings[ $name ] = '';
+		}
 
 		// store default values in the db as a single and serialized entry
 		add_option( $this->settings_db_slug, $default_settings );
@@ -509,8 +530,7 @@ class Speed_Contact_Bar {
 
 			// the socia media data
 			$contact_list = array();
-			$icons = array( 'facebook', 'googleplus', 'twitter', 'pinterest', 'youtube' );
-			foreach ( $icons as $icon ) {
+			foreach ( $this->social_networks as $icon ) {
 				if ( isset( $this->stored_settings[ $icon ] ) && '' != $this->stored_settings[ $icon ] ) {
 					$contact_list[] = sprintf( '<li id="scb-%s"><a href="%s"><img src="%sassets/images/%s.svg" width="26" height="26" alt="%s" /></a></li>', $icon, esc_url( $this->stored_settings[ $icon ] ), $root_url, $icon, ucfirst( $icon ) );
 				}
