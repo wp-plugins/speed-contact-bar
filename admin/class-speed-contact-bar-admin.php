@@ -233,19 +233,28 @@ class Speed_Contact_Bar_Admin {
 	 *
 	 */
 	public function print_admin_css() {
-		$root_url = plugin_dir_url( dirname( __FILE__ ) );
-		print '<style type="text/css">';
-		print "\n";
-		foreach ( array( 'phone', 'cellphone', 'email' ) as $name ) {
-			printf( ".form-table th label[for='%s'] { display: block; height: 85px; background: url('%spublic/assets/images/%s_dark.svg') no-repeat scroll 0 2.5em transparent; background-size: 40px 40px; }", $name, $root_url, $name );
+	
+		if ( ! isset( self::$plugin_screen_hook_suffix ) ) {
+			return;
+		}
+		
+		// print CSS only on this plugin's page
+		$screen = get_current_screen();
+		if ( self::$plugin_screen_hook_suffix == $screen->id ) {
+			$root_url = plugin_dir_url( dirname( __FILE__ ) );
+			print '<style type="text/css">';
+			print "\n";
+			foreach ( array( 'phone', 'cellphone', 'email' ) as $name ) {
+				printf( ".form-table th label[for='%s'] { display: block; height: 85px; background: url('%spublic/assets/images/%s_dark.svg') no-repeat scroll 0 2.5em transparent; background-size: 40px 40px; }", $name, $root_url, $name );
+				print "\n";
+			}
+			foreach ( self::$social_networks as $name ) {
+				printf( ".form-table th label[for='%s'] { display: block; height: 85px; background: url('%spublic/assets/images/%s.svg') no-repeat scroll 0 2.5em transparent; background-size: 40px 40px; }", $name, $root_url, $name );
+				print "\n";
+			}
+			print '</style>';
 			print "\n";
 		}
-		foreach ( self::$social_networks as $name ) {
-			printf( ".form-table th label[for='%s'] { display: block; height: 85px; background: url('%spublic/assets/images/%s.svg') no-repeat scroll 0 2.5em transparent; background-size: 40px 40px; }", $name, $root_url, $name );
-			print "\n";
-		}
-		print '</style>';
-		print "\n";
 	}
 	
 	/**
@@ -380,6 +389,21 @@ class Speed_Contact_Bar_Admin {
 						'type'    => 'url',
 						'title'   => __( 'Xing Profile URL', self::$plugin_slug ),
 						'desc'    => __( 'Example', self::$plugin_slug ) . ': http://www.xing.com/profile/username<br />'. __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
+					),
+					'flickr' => array(
+						'type'    => 'url',
+						'title'   => __( 'Flickr Profile URL', self::$plugin_slug ),
+						'desc'    => __( 'Example', self::$plugin_slug ) . ': https://www.flickr.com/people/user-id/<br />'. __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
+					),
+					'slideshare' => array(
+						'type'    => 'url',
+						'title'   => __( 'SlideShare Channel URL', self::$plugin_slug ),
+						'desc'    => __( 'Example', self::$plugin_slug ) . ': http://www.slideshare.net/channelname<br />'. __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
+					),
+					'tumblr' => array(
+						'type'    => 'url',
+						'title'   => __( 'tumblr Blog URL', self::$plugin_slug ),
+						'desc'    => __( 'Example', self::$plugin_slug ) . ': http://blogname.tumblr.com/<br />'. __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
 					),
 				),
 			),
