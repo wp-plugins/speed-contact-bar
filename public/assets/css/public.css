@@ -40,7 +40,8 @@
 @media screen and (max-width: 770px) {
 	#scb-wrapper h2,
 	#scb-wrapper #scb-phone,
-	#scb-wrapper #scb-cellphone {	
+	#scb-wrapper #scb-cellphone,
+	#scb-wrapper #scb-email img  {
 		display: none;
 	}
 }

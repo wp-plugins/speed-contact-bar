@@ -85,7 +85,7 @@ class Speed_Contact_Bar {
 	 *
 	 * @var      array
 	 */
-	private $social_networks = array( 'facebook', 'googleplus', 'twitter', 'pinterest', 'youtube', 'linkedin', 'xing' );
+	private $social_networks = array( 'facebook', 'googleplus', 'twitter', 'pinterest', 'youtube', 'linkedin', 'xing', 'flickr', 'slideshare', 'tumblr' );
 
 	/**
 	 * Initialize the plugin by setting localization and loading public scripts
@@ -452,7 +452,7 @@ class Speed_Contact_Bar {
 			$stored_settings = get_option( $this->settings_db_slug );
 		}
 		
-		return $stored_settings;
+		return $stored_settings; # todo: return $this->sanitize_options( $stored_settings );
 	}
 	
 	/**
@@ -485,7 +485,7 @@ class Speed_Contact_Bar {
 	 * @since    1.0
 	 */
 	public function include_contact_bar() {
-		if ( ! $this->is_login_page() ) {
+		if ( ! ( $this->is_login_page() or is_admin() ) ) {
 			// get current buffer content and clean buffer
 			$content = ob_get_clean(); 
 			// esc_url() should be used on all URLs, including those in the 'src' and 'href' attributes of an HTML element.

@@ -1,10 +1,10 @@
 === Speed Contact Bar ===
 Contributors: Hinjiriyo, allamoda07
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SBF76TCGTRNX2
-Tags: contact, contacts, email, e-mail, phone, telephone, cell phone, number, address, url, link, web, facebook, google plus, google+, g+, social media, responsive
+Tags: contact, contacts, email, e-mail, phone, telephone, cell phone, number, address, url, link, web, facebook, google plus, google+, g+, social media, responsive, linkedin, xing, flickr, slideshare, tumblr
 Requires at least: 3.5
 Tested up to: 3.9.1
-Stable tag: 1.5
+Stable tag: 1.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,6 +45,9 @@ Up till now Speed Contact Bar supports links to these **social media platforms**
 5. Youtube
 6. LinkedIn
 7. Xing
+8. Flickr
+9. SlideShare
+10. tumblr
 
 More social media plattforms will come in future.
 
@@ -124,6 +127,12 @@ Please write your request in the plugin's [support forum at wordpress.org](http:
 
 == Changelog ==
 
+= 1.8 =
+* Added Flickr option
+* Added SlideShare option
+* Added tumblr option
+* Fixed undesired occurrence of the contact bar on admin error pages
+
 = 1.5 =
 * Added LinkedIn option
 * Added Xing option
@@ -167,6 +176,9 @@ First official release
 First release for just trying it
 
 == Upgrade Notice ==
+
+= 1.8 =
+Added Flickr, SlideShare and tumblr option
 
 = 1.5 =
 Added LinkedIn and Xing options
