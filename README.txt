@@ -3,8 +3,8 @@ Contributors: Hinjiriyo, allamoda07
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SBF76TCGTRNX2
 Tags: contact, contacts, email, e-mail, phone, telephone, cell phone, number, address, url, link, web, facebook, google plus, google+, g+, social media, responsive, linkedin, xing, flickr, slideshare, tumblr
 Requires at least: 3.5
-Tested up to: 3.9.1
-Stable tag: 1.8
+Tested up to: 3.9.2
+Stable tag: 1.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -127,6 +127,10 @@ Please write your request in the plugin's [support forum at wordpress.org](http:
 
 == Changelog ==
 
+= 1.9 =
+* Improve uninstall routine
+* Tested successfully with WordPress 3.9.2
+
 = 1.8 =
 * Added Flickr option
 * Added SlideShare option
@@ -176,6 +180,9 @@ First official release
 First release for just trying it
 
 == Upgrade Notice ==
+
+= 1.9 =
+Improved uninstall routine, tested with WordPress 3.9.2
 
 = 1.8 =
 Added Flickr, SlideShare and tumblr option
