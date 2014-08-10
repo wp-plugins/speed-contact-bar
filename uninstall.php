@@ -21,8 +21,21 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 * @since   1.0
 */
 // remove settings
-delete_option( 'speed-contact-bar-options' ); 
-// clean DB
-global $wpdb;
-$wpdb->query( "OPTIMIZE TABLE `" .$wpdb->options. "`" );
+if ( is_multisite() ) {
 
+	$sites = wp_get_sites();
+
+	if ( empty ( $sites ) ) return;
+
+	foreach ( $sites as $site ) {
+		// switch to next blog
+		switch_to_blog( $site[ 'blog_id' ] );
+		// remove settings
+		delete_option( 'speed-contact-bar-options' );
+	}
+	// restore the current blog, after calling switch_to_blog()
+	restore_current_blog();
+} else {
+	// remove settings
+	delete_option( 'speed-contact-bar-options' );
+}
