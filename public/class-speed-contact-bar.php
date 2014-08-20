@@ -22,7 +22,7 @@ class Speed_Contact_Bar {
 	 *
 	 * @var     string
 	 */
-	private $plugin_version = '1.9';
+	private $plugin_version = '1.9.1';
 
 	/**
 	 * Name of this plugin.
@@ -411,6 +411,7 @@ class Speed_Contact_Bar {
 			'icon_family'  => 'dark',
 			'content_alignment'  => 'center',
 			'show_headline'  => 1,
+			'open_new_window'  => 0,
 			'show_labels'  => 1,
 			'show_shadow'  => 1,
 			'headline'  => __( 'Contact to us', $this->plugin_slug ),
@@ -529,10 +530,14 @@ class Speed_Contact_Bar {
 			}
 
 			// the socia media data
+			$target = '';
+			if ( isset( $this->stored_settings[ 'open_new_window' ] ) && 1 == $this->stored_settings[ 'open_new_window' ] ) {
+				$target = ' target="_blank"';
+			}
 			$contact_list = array();
 			foreach ( $this->social_networks as $icon ) {
 				if ( isset( $this->stored_settings[ $icon ] ) && '' != $this->stored_settings[ $icon ] ) {
-					$contact_list[] = sprintf( '<li id="scb-%s"><a href="%s"><img src="%sassets/images/%s.svg" width="26" height="26" alt="%s" /></a></li>', $icon, esc_url( $this->stored_settings[ $icon ] ), $root_url, $icon, ucfirst( $icon ) );
+					$contact_list[] = sprintf( '<li id="scb-%s"><a href="%s"%s><img src="%sassets/images/%s.svg" width="26" height="26" alt="%s" /></a></li>', $icon, esc_url( $this->stored_settings[ $icon ] ), $target, $root_url, $icon, ucfirst( $icon ) );
 				}
 			}
 			if ( ! empty( $contact_list ) ) {

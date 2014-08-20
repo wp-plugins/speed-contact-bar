@@ -335,6 +335,11 @@ class Speed_Contact_Bar_Admin {
 						'title'   => __( 'Show headline', self::$plugin_slug ),
 						'desc'    => __( 'Activate to show the headline', self::$plugin_slug ),
 					),
+					'open_new_window' => array(
+						'type'    => 'checkbox',
+						'title'   => __( 'Open links in new windows', self::$plugin_slug ),
+						'desc'    => __( 'Activate to let the links load the target site in new windows or tabs', self::$plugin_slug ),
+					),
 					'headline' => array(
 						'type'    => 'textfield',
 						'title'   => __( 'Headline', self::$plugin_slug ),

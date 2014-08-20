@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: contact, contacts, email, e-mail, phone, telephone, cell phone, number, address, url, link, web, facebook, google plus, google+, g+, social media, responsive, linkedin, xing, flickr, slideshare, tumblr
 Requires at least: 3.5
 Tested up to: 3.9.2
-Stable tag: 1.9
+Stable tag: 1.9.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,15 +26,16 @@ There are some options you can set to let the contact bar fit to your needs. You
 
 1. your contact data,
 2. URLs to your social media pages and profiles and
-3. design options like colors.
+3. design options like colors
 
 = Configuration options in detail =
 
 You can show these three **personal contact data**:
 
-1. Phone number
-2. Cell phone number
-3. E-Mail address
+1. Headline, also used as call to action
+2. Phone number
+3. Cell phone number
+4. E-Mail address
 
 Up till now Speed Contact Bar supports links to these **social media platforms**:
 
@@ -61,6 +62,7 @@ And of course you can set the **design of the contact bar** to be suitable to th
 6. **Content alignment** within the bar
 7. Define a **headline** and whether to show it or not
 8. Show a slight **shadow under the bar** for a chic 3D effect
+9. Set whether the links should be load in **new windows** or not
 
 Do you miss some options? We will add it! Please write your request in the plugin's [support forum at wordpress.org](http://wordpress.org/support/plugin/speed-contact-bar). We will try to take a look and answer as soon as possible.
 
@@ -127,6 +129,10 @@ Please write your request in the plugin's [support forum at wordpress.org](http:
 
 == Changelog ==
 
+= 1.9.1 =
+* Added option for opening links in new windows
+* Updated *.pot file and german translation
+
 = 1.9 =
 * Improve uninstall routine
 * Tested successfully with WordPress 3.9.2
@@ -136,6 +142,7 @@ Please write your request in the plugin's [support forum at wordpress.org](http:
 * Added SlideShare option
 * Added tumblr option
 * Fixed undesired occurrence of the contact bar on admin error pages
+* Updated *.pot file and german translation
 
 = 1.5 =
 * Added LinkedIn option
@@ -180,6 +187,9 @@ First official release
 First release for just trying it
 
 == Upgrade Notice ==
+
+= 1.9.1 =
+Added option for opening links in new windows
 
 = 1.9 =
 Improved uninstall routine, tested with WordPress 3.9.2
