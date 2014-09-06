@@ -22,7 +22,7 @@ class Speed_Contact_Bar {
 	 *
 	 * @var     string
 	 */
-	private $plugin_version = '1.9.1';
+	private $plugin_version = '1.9.2';
 
 	/**
 	 * Name of this plugin.

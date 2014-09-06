@@ -292,10 +292,10 @@ class Speed_Contact_Bar_Admin {
 	public function add_action_links( $links ) {
 
 		return array_merge(
+			$links,
 			array(
 				'settings' => '<a href="' . admin_url( 'options-general.php?page=' . self::$plugin_slug ) . '">' . __( 'Settings' ) . '</a>'
-			),
-			$links
+			)
 		);
 
 	}

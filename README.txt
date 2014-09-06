@@ -3,8 +3,8 @@ Contributors: Hinjiriyo, allamoda07
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SBF76TCGTRNX2
 Tags: contact, contacts, email, e-mail, phone, telephone, cell phone, number, address, url, link, web, facebook, google plus, google+, g+, social media, responsive, linkedin, xing, flickr, slideshare, tumblr
 Requires at least: 3.5
-Tested up to: 3.9.2
-Stable tag: 1.9.1
+Tested up to: 4.0
+Stable tag: 1.9.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -129,6 +129,11 @@ Please write your request in the plugin's [support forum at wordpress.org](http:
 
 == Changelog ==
 
+= 1.9.2 =
+* Successfully tested with WordPress 4.0
+* Added icons for plugin search
+* Changed order of links for this plugin on plugin list
+
 = 1.9.1 =
 * Added option for opening links in new windows
 * Updated *.pot file and german translation
@@ -187,6 +192,9 @@ First official release
 First release for just trying it
 
 == Upgrade Notice ==
+
+= 1.9.2 =
+Successfully tested with WordPress 4.0, added icons for plugin search
 
 = 1.9.1 =
 Added option for opening links in new windows
