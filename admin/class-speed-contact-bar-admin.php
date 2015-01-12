@@ -249,7 +249,11 @@ class Speed_Contact_Bar_Admin {
 				print "\n";
 			}
 			foreach ( self::$social_networks as $name ) {
-				printf( ".form-table th label[for='%s'] { display: block; height: 85px; background: url('%spublic/assets/images/%s.svg') no-repeat scroll 0 2.5em transparent; background-size: 40px 40px; }", $name, $root_url, $name );
+				if ( 'imdb' == $name ) {
+					printf( ".form-table th label[for='%s'] { display: block; height: 85px; background: url('%spublic/assets/images/%s.png') no-repeat scroll 0 2.5em transparent; background-size: 85px 40px; }", $name, $root_url, $name );
+				} else {
+					printf( ".form-table th label[for='%s'] { display: block; height: 85px; background: url('%spublic/assets/images/%s.svg') no-repeat scroll 0 2.5em transparent; background-size: 40px 40px; }", $name, $root_url, $name );
+				}
 				print "\n";
 			}
 			print '</style>';
@@ -345,6 +349,12 @@ class Speed_Contact_Bar_Admin {
 						'title'   => __( 'Headline', self::$plugin_slug ),
 						'desc'    => __( 'Enter a short headline for the contact bar', self::$plugin_slug ),
 					),
+					'headline_tag' => array(
+						'type'    => 'selection',
+						'title'   => __( 'Headline HTML Tag', self::$plugin_slug ),
+						'desc'    => __( 'Select the HTML element for the headline without changing the headline style', self::$plugin_slug ),
+						'values'  => array( 'h1' => 'H1', 'h2' => 'H2', 'h3' => 'H3', 'h4' => 'H4', 'h5' => 'H5', 'h6' => 'H6', 'div' => 'DIV', 'p' => 'P' ),
+					),
 					'email' => array(
 						'type'    => 'email',
 						'title'   => __( 'E-Mail', self::$plugin_slug ),
@@ -410,6 +420,16 @@ class Speed_Contact_Bar_Admin {
 						'title'   => __( 'tumblr Blog URL', self::$plugin_slug ),
 						'desc'    => __( 'Example', self::$plugin_slug ) . ': http://blogname.tumblr.com/<br />'. __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
 					),
+					'vimeo' => array(
+						'type'    => 'url',
+						'title'   => __( 'Vimeo URL', self::$plugin_slug ),
+						'desc'    => __( 'Example', self::$plugin_slug ) . ': http://vimeo.com/name<br />'. __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
+					),
+					'imdb' => array(
+						'type'    => 'url',
+						'title'   => __( 'IMDb URL', self::$plugin_slug ),
+						'desc'    => __( 'Example', self::$plugin_slug ) . ': http://www.imdb.com/user/name<br />'. __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
+					),
 				),
 			),
 			'2nd_section' => array(
@@ -427,6 +447,18 @@ class Speed_Contact_Bar_Admin {
 						'desc'    => __( 'Select the alignment of the content within the bar', self::$plugin_slug ),
 						'values'  => array( 'left' => __( 'left-aligned', self::$plugin_slug ), 'center' => __( 'centered', self::$plugin_slug ), 'right' => __( 'right-aligned', self::$plugin_slug ) ),
 					),
+					'font_size' => array(
+						'type'    => 'selection',
+						'title'   => __( 'Font Size', self::$plugin_slug ),
+						'desc'    => __( 'Select the font size of the texts and links', self::$plugin_slug ),
+						'values'  => array( 10 => '10px', 11 => '11px', 12 => '12px', 13 => '13px', 14 => '14px', 15 => '15px', 16 => '16px', 17 => '17px', 18 => '18px', 19 => '19px', 20 => '20px', 21 => '21px', 22 => '22px', 23 => '23px', 24 => '24px',  ),
+					),
+					'icon_size' => array(
+						'type'    => 'selection',
+						'title'   => __( 'Icon Size', self::$plugin_slug ),
+						'desc'    => __( 'Select the size of the icons', self::$plugin_slug ),
+						'values'  => array( 20 => '20px', 22 => '22px', 24 => '24px', 26 => '26px', 28 => '28px', 30 => '30px', 32 => '32px', 34 => '34px', 36 => '36px', 38 => '38px', 40 => '40px', 42 => '42px', 44 => '44px', 46 => '46px', 48 => '48px',  ),
+					),
 					'bg_color' => array(
 						'type'    => 'colorpicker',
 						'title'   => __( 'Background Color', self::$plugin_slug ),
@@ -442,7 +474,7 @@ class Speed_Contact_Bar_Admin {
 						'title'   => __( 'Link Color', self::$plugin_slug ),
 						'desc'    => __( 'Select the link color', self::$plugin_slug ),
 					),
-					'icon_family' => array(
+					'icon_type' => array(
 						'type'    => 'selection',
 						'title'   => __( 'Icon Brightness', self::$plugin_slug ),
 						'desc'    => __( 'Select the brightness of the icons', self::$plugin_slug ),

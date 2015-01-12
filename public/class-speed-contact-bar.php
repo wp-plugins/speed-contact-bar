@@ -22,7 +22,7 @@ class Speed_Contact_Bar {
 	 *
 	 * @var     string
 	 */
-	private $plugin_version = '1.9.2';
+	private $plugin_version = '2.0';
 
 	/**
 	 * Name of this plugin.
@@ -78,15 +78,93 @@ class Speed_Contact_Bar {
 	private $stored_settings = array();
 
 	/**
-	 * Social networks
+	 * Allowed social networks
 	 *
 	 *
 	 * @since    1.5
 	 *
 	 * @var      array
 	 */
-	private $social_networks = array( 'facebook', 'googleplus', 'twitter', 'pinterest', 'youtube', 'linkedin', 'xing', 'flickr', 'slideshare', 'tumblr' );
+	private $valid_social_networks = array( 'facebook', 'googleplus', 'twitter', 'pinterest', 'youtube', 'linkedin', 'xing', 'flickr', 'slideshare', 'tumblr', 'vimeo', 'imdb' );
 
+	/**
+	 * Allowed headline HTML tags
+	 *
+	 *
+	 * @since    2.0
+	 *
+	 * @var      array
+	 */
+	private $valid_headline_tags = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div', 'p' );
+
+	/**
+	 * Allowed icon families
+	 *
+	 *
+	 * @since    2.0
+	 *
+	 * @var      array
+	 */
+	private $valid_icon_types =  array( 'bright', 'dark' );
+
+	/**
+	 * Allowed content alignments
+	 *
+	 *
+	 * @since    2.0
+	 *
+	 * @var      array
+	 */
+	private $valid_content_alignments =  array( 'left', 'center', 'right' );
+
+	/**
+	 * Allowed font sizes
+	 *
+	 *
+	 * @since    2.0
+	 *
+	 * @var      array
+	 */
+	private $valid_font_sizes =  array( 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 );
+
+	/**
+	 * Allowed icon sizes
+	 *
+	 *
+	 * @since    2.0
+	 *
+	 * @var      array
+	 */
+	private $valid_icon_sizes =  array( 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48 );
+
+	/**
+	 * Initial settings
+	 *
+	 *
+	 * @since    2.0
+	 *
+	 * @var      array
+	 */
+	private $default_settings = array(
+		'fixed' => 1,
+		'bg_color'  => '#dfdfdf',
+		'text_color'  => '#333333',
+		'link_color'  => '#0074A2',
+		'icon_type'  => 'dark',
+		'content_alignment'  => 'center',
+		'show_headline'  => 1,
+		'open_new_window'  => 0,
+		'show_labels'  => 1,
+		'show_shadow'  => 1,
+		'font_size'  => 15,
+		'icon_size'  => 30,
+		'headline_tag'  => 'h2',
+		'headline'  => 'Contact to us',
+		'email'  => 'info@yourdomain.com',
+		'phone'  => '',
+		'cellphone'  => '',
+		'contact form'  => '',
+	);
 	/**
 	 * Initialize the plugin by setting localization and loading public scripts
 	 * and styles.
@@ -112,7 +190,7 @@ class Speed_Contact_Bar {
 		
 		// get current or default settings
 		$this->stored_settings = $this->get_stored_settings();
-
+		
 		// hook on displaying a message after plugin activation
 		// if single activation via link or bulk activation
 		if ( isset( $_GET[ 'activate' ] ) or isset( $_GET[ 'activate-multi' ] ) ) {
@@ -176,7 +254,7 @@ class Speed_Contact_Bar {
 	 * @return    Social networks variable.
 	 */
 	public function get_social_networks() {
-		return $this->social_networks;
+		return $this->valid_social_networks;
 	}
 
 	/**
@@ -401,32 +479,13 @@ class Speed_Contact_Bar {
 			wp_die( __( 'You do not have sufficient permissions to manage options for this site.' ) );
 		}
 		
-		// define the default settings
+		// enhance the default settings
 		$domain_name = preg_replace( '/^www\./', '', $_SERVER[ 'SERVER_NAME' ] );
-		$default_settings = array(
-			'fixed' => 1,
-			'bg_color'  => '#dfdfdf',
-			'text_color'  => '#333333',
-			'link_color'  => '#0074A2',
-			'icon_family'  => 'dark',
-			'content_alignment'  => 'center',
-			'show_headline'  => 1,
-			'open_new_window'  => 0,
-			'show_labels'  => 1,
-			'show_shadow'  => 1,
-			'headline'  => __( 'Contact to us', $this->plugin_slug ),
-			'email'  => 'info@' . $domain_name,
-			'phone'  => '',
-			'cellphone'  => '',
-			'contact form'  => '',
-		);
-		// add social networks to array
-		foreach ( $this->social_networks as $name ) {
-			$default_settings[ $name ] = '';
-		}
+		$this->default_settings[ 'email' ] = 'info@' . $domain_name;
+		$this->default_settings[ 'headline' ] = __( 'Contact to us', $this->plugin_slug );
 
 		// store default values in the db as a single and serialized entry
-		add_option( $this->settings_db_slug, $default_settings );
+		update_option( $this->settings_db_slug, $this->default_settings );
 		
 		/** 
 		* to do: finish check
@@ -445,15 +504,20 @@ class Speed_Contact_Bar {
 	 */
 	public function get_stored_settings() {
 		// try to load current settings. If they are not in the DB return set default settings
-		$stored_settings = get_option( $this->settings_db_slug, array() );
-		// if empty array set and store default values
-		if ( empty( $stored_settings ) ) {
+		$settings = get_option( $this->settings_db_slug, array() );
+		// sanitize: if key is not available, use default
+		if ( is_array( $settings ) && ! empty( $settings ) ) {
+			foreach( $this->default_settings as $key => $default_value ) {
+				$settings[ $key ] = isset( $settings[ $key ] ) ? $settings[ $key ] : $default_value;
+			}
+		} else {
+			// set default settings
 			$this->set_default_settings();
 			// try to load current settings again. Now there should be the data
-			$stored_settings = get_option( $this->settings_db_slug );
+			$settings = get_option( $this->settings_db_slug );
 		}
 		
-		return $stored_settings; # todo: return $this->sanitize_options( $stored_settings );
+		return $settings;
 	}
 	
 	/**
@@ -490,54 +554,125 @@ class Speed_Contact_Bar {
 			// get current buffer content and clean buffer
 			$content = ob_get_clean(); 
 			// esc_url() should be used on all URLs, including those in the 'src' and 'href' attributes of an HTML element.
-			// the bar
+			// open the bar
 			$inject = '<div id="scb-wrapper"';
-			if ( 1 == $this->stored_settings[ 'fixed' ] ) { 
+
+			// fixation of the bar
+			if ( isset( $this->stored_settings[ 'fixed' ] ) && 1 == $this->stored_settings[ 'fixed' ] ) { 
 				$inject .= ' class="scb-fixed"'; 
 			}
 			$inject .= '>';
+
 			// the headline
-			if ( isset( $this->stored_settings[ 'headline' ] ) && '' != $this->stored_settings[ 'headline' ] ) {
-				$inject .= sprintf( '<h2>%s</h2>', esc_html( $this->stored_settings[ 'headline' ] ) );
+			$headline_tag = $this->default_settings[ 'headline_tag' ];
+			if ( isset( $this->stored_settings[ 'headline_tag' ] ) && in_array( $this->stored_settings[ 'headline_tag' ], $this->valid_headline_tags ) ) {
+				$headline_tag = $this->stored_settings[ 'headline_tag' ];
 			}
-			// the icon family
-			$icon_family = 'dark';
-			if ( isset( $this->stored_settings[ 'icon_family' ] ) && '' != $this->stored_settings[ 'icon_family' ] ) {
-				//if ( isset( $this->stored_settings[ 'show_labels' ] ) && 1 == $this->stored_settings[ 'show_labels' ] ) {}
-				$icon_family = sanitize_file_name( $this->stored_settings[ 'icon_family' ] );
+			if ( isset( $this->stored_settings[ 'headline' ] ) && '' != $this->stored_settings[ 'headline' ] ) {
+				$inject .= sprintf(
+					'<%s>%s</%s>',
+					$headline_tag,
+					esc_html( $this->stored_settings[ 'headline' ] ),
+					$headline_tag
+				);
+			}
+
+			// icon size
+			$icon_size = $this->default_settings[ 'icon_size' ];
+			if ( isset( $this->stored_settings[ 'icon_size' ] ) && in_array( $this->stored_settings[ 'icon_size' ], $this->valid_icon_sizes ) ) { 
+				$icon_size = $this->stored_settings[ 'icon_size' ];
+			}
+
+			// icon type
+			$icon_type = $this->default_settings[ 'icon_type' ];
+			if ( isset( $this->stored_settings[ 'icon_type' ] ) && in_array( $this->stored_settings[ 'icon_type' ], $this->valid_icon_types ) ) {
+				$icon_type = $this->stored_settings[ 'icon_type' ];
 			}
 
 			// the contact data
 			$contact_list = array();
 			$root_url = plugin_dir_url( __FILE__ );
 			if ( isset( $this->stored_settings[ 'phone' ] ) && '' != $this->stored_settings[ 'phone' ] ) {
-				$contact_list[] = sprintf( '<li id="scb-phone"><img src="%sassets/images/phone_%s.svg" width="26" height="26" alt="%s" />%s</li>', $root_url, $icon_family, __( 'Phone Number', $this->plugin_slug ), esc_html( $this->stored_settings[ 'phone' ] ) );
+				$phone_number = esc_html( $this->stored_settings[ 'phone' ] );
+				$contact_list[] = sprintf( 
+					'<li id="scb-phone"><a href="tel:%s"><img src="%sassets/images/phone_%s.svg" width="%d" height="%d" alt="%s" /><span> %s</span></a></li>',
+					$phone_number,
+					$root_url,
+					$icon_type,
+					$icon_size,
+					$icon_size,
+					__( 'Phone Number', $this->plugin_slug ),
+					$phone_number
+				);
 			}
 			if ( isset( $this->stored_settings[ 'cellphone' ] ) && '' != $this->stored_settings[ 'cellphone' ] ) {
-				$contact_list[] = sprintf( '<li id="scb-cellphone"><img src="%sassets/images/cellphone_%s.svg" width="26" height="26" alt="%s" />%s</li>', $root_url, $icon_family, __( 'Cell Phone Number', $this->plugin_slug ), esc_html( $this->stored_settings[ 'cellphone' ] ) );
+				$phone_number = esc_html( $this->stored_settings[ 'cellphone' ] );
+				$contact_list[] = sprintf(
+					'<li id="scb-cellphone"><a href="tel:%s"><img src="%sassets/images/cellphone_%s.svg" width="%d" height="%d" alt="%s" /><span> %s</span></a></li>',
+					$phone_number,
+					$root_url,
+					$icon_type,
+					$icon_size,
+					$icon_size,
+					__( 'Cell Phone Number', $this->plugin_slug ),
+					$phone_number
+				);
 			}
 			if ( isset( $this->stored_settings[ 'email' ] ) && '' != $this->stored_settings[ 'email' ] ) {
 				$safe_email = antispambot( esc_html( $this->stored_settings[ 'email' ] ) );
-				$contact_list[] = sprintf( '<li id="scb-email"><img src="%sassets/images/email_%s.svg" width="26" height="26" alt="%s" /> <a href="mailto:%s">%s</a></li>', $root_url, $icon_family, __( 'E-Mail', $this->plugin_slug ), $safe_email, $safe_email );
+				$contact_list[] = sprintf(
+					'<li id="scb-email"><a href="mailto:%s"><img src="%sassets/images/email_%s.svg" width="%d" height="%d" alt="%s" /><span> %s</span></a></li>',
+					$safe_email,
+					$root_url,
+					$icon_type,
+					$icon_size,
+					$icon_size,
+					__( 'E-Mail', $this->plugin_slug ),
+					$safe_email 
+				);
 			}
 			if ( ! empty( $contact_list ) ) {
 				// opens list
-				$inject .= '<ul class="elastic">';
+				$inject .= '<ul id="scb-directs">';
 				// write the contact data item
 				$inject .= implode( "", $contact_list );
 				// closes list
 				$inject .= '</ul>';
 			}
 
-			// the socia media data
+			// socia media icons
 			$target = '';
 			if ( isset( $this->stored_settings[ 'open_new_window' ] ) && 1 == $this->stored_settings[ 'open_new_window' ] ) {
 				$target = ' target="_blank"';
 			}
 			$contact_list = array();
-			foreach ( $this->social_networks as $icon ) {
-				if ( isset( $this->stored_settings[ $icon ] ) && '' != $this->stored_settings[ $icon ] ) {
-					$contact_list[] = sprintf( '<li id="scb-%s"><a href="%s"%s><img src="%sassets/images/%s.svg" width="26" height="26" alt="%s" /></a></li>', $icon, esc_url( $this->stored_settings[ $icon ] ), $target, $root_url, $icon, ucfirst( $icon ) );
+			foreach ( $this->valid_social_networks as $icon ) {
+				if ( 'imdb' == $icon && isset( $this->stored_settings[ $icon ] ) && '' != $this->stored_settings[ $icon ] ) {
+					$contact_list[] = sprintf( 
+						'<li id="scb-%s"><a href="%s"%s><img src="%sassets/images/%s.png" width="%d" height="%d" alt="%s" /></a></li>',
+						$icon,
+						esc_url( $this->stored_settings[ $icon ] ),
+						$target,
+						$root_url,
+						$icon,
+						$icon_size * 2,
+						$icon_size * 2,
+						ucfirst( $icon ) 
+					);
+				} else {
+					if ( isset( $this->stored_settings[ $icon ] ) && '' != $this->stored_settings[ $icon ] ) {
+						$contact_list[] = sprintf( 
+							'<li id="scb-%s"><a href="%s"%s><img src="%sassets/images/%s.svg" width="%d" height="%d" alt="%s" /></a></li>',
+							$icon,
+							esc_url( $this->stored_settings[ $icon ] ),
+							$target,
+							$root_url,
+							$icon,
+							$icon_size,
+							$icon_size,
+							ucfirst( $icon ) 
+						);
+					}
 				}
 			}
 			if ( ! empty( $contact_list ) ) {
@@ -549,13 +684,115 @@ class Speed_Contact_Bar {
 				$inject .= '</ul>';
 			}
 
-			// closes bar
+			// close bar
 			$inject .= '</div>';
+
 			// finds opening body element and add contact bar html code after it
 			$content = preg_replace('/<[bB][oO][dD][yY]([^>]*)>/',"<body$1>{$inject}", $content);
+
 			// display it
 			echo $content;
 		}
+	}
+
+	/**
+	 * Print the customized CSS block
+	 * 
+	 * @since    1.0
+	 */
+	public function display_bar_styles() {
+		$content = '<style media="screen" type="text/css">';
+		$content .= "\n";
+		
+		/* fixation of bar */
+		if ( isset( $this->stored_settings[ 'fixed' ] ) && 1 == $this->stored_settings[ 'fixed' ] ) { 
+			/*<style type="text/css">
+			html { margin-top: 32px !important; }
+			* html body { margin-top: 32px !important; }
+			@media screen and ( max-width: 782px ) {
+			html { margin-top: 46px !important; }
+			* html body { margin-top: 46px !important; }
+			}
+			</style>*/
+			$content .= '@media screen and (min-width: 640px) { body { padding-top: 2.5em !important; } }';
+			$content .= "\n";
+		}
+		
+		/* styles of the bar and headline */
+		$bar_styles = '';
+		$bg_color = $this->default_settings[ 'bg_color' ];
+		if ( isset( $this->stored_settings[ 'bg_color' ] ) && '' != $this->stored_settings[ 'bg_color' ] ) { 
+			$bg_color = esc_attr( $this->stored_settings[ 'bg_color' ] ); 
+		}
+		$bar_styles .= sprintf( ' background-color: %s;', $bg_color ); 
+
+		$text_color = $this->default_settings[ 'text_color' ];
+		if ( isset( $this->stored_settings[ 'text_color' ] ) && '' != $this->stored_settings[ 'text_color' ] ) { 
+			$text_color = esc_attr( $this->stored_settings[ 'text_color' ] );
+		}
+		$bar_styles .= sprintf( ' color: %s;', $text_color ); 
+		$headline_color = sprintf( ' color: %s;', $text_color ); 
+
+		$content_alignment = $this->default_settings[ 'content_alignment' ];
+		if ( isset( $this->stored_settings[ 'content_alignment' ] ) && in_array( $this->stored_settings[ 'content_alignment' ], $this->valid_content_alignments ) ) { 
+			$content_alignment = esc_attr( $this->stored_settings[ 'content_alignment' ] ); 
+		}
+		$bar_styles .= sprintf( ' text-align: %s;', $content_alignment ); 
+
+		if ( isset( $this->stored_settings[ 'show_shadow' ] ) && 1 == $this->stored_settings[ 'show_shadow' ] ) { 
+			$bar_styles .= ' box-shadow: 0 1px 6px 3px #ccc;'; 
+		}
+
+		if ( $bar_styles ) {
+			$content .= sprintf( '#scb-wrapper {%s } ', $bar_styles );
+			$content .= "\n";
+		}
+		
+		/* styles of headline */
+		$headline_tag = $this->default_settings[ 'headline_tag' ];
+		if ( isset( $this->stored_settings[ 'headline_tag' ] ) && in_array( $this->stored_settings[ 'headline_tag' ], $this->valid_headline_tags ) ) {
+			$headline_tag = $this->stored_settings[ 'headline_tag' ];
+		}
+		$content .= sprintf( '#scb-wrapper %s { display: inline; margin: 0 .5em; padding: 0; font: normal normal bold 15px/1 sans-serif; ', $headline_tag );
+		$content .= $headline_color;
+		$content .= ' }';
+		$content .= "\n";
+
+		/* hide headline in tablets and smartphones */
+		$content .= sprintf( '@media screen and (max-width: 768px) { #scb-wrapper %s { display: none; } }', $headline_tag );
+		$content .= "\n";
+
+		/* color of links */
+		$link_color = $this->default_settings[ 'link_color' ];
+		if ( isset( $this->stored_settings[ 'link_color' ] ) && '' != $this->stored_settings[ 'link_color' ] ) { 
+			$link_color = esc_attr( $this->stored_settings[ 'link_color' ] ); 
+		}
+		$content .= sprintf( '#scb-wrapper a { color: %s; } ', $link_color );
+		$content .= "\n";
+
+		/* size of text */
+		$font_size = $this->default_settings[ 'font_size' ];
+		if ( isset( $this->stored_settings[ 'font_size' ] ) && in_array( $this->stored_settings[ 'font_size' ], $this->valid_font_sizes ) ) { 
+			$font_size = $this->stored_settings[ 'font_size' ]; 
+		}
+		$content .= sprintf( '#scb-wrapper %s, #scb-wrapper ul, #scb-wrapper li, #scb-wrapper a { font-size: %dpx; } ', $headline_tag, $font_size );
+		$content .= "\n";
+
+		/* headline visibility */
+		if ( isset( $this->stored_settings[ 'show_headline' ] ) && 0 == $this->stored_settings[ 'show_headline' ] ) {
+			$content .= sprintf( '#scb-wrapper %s { display: inline; left: -32768px; margin: 0; padding: 0; position: absolute; top: 0; z-index: 1000; } ', $headline_tag );
+			$content .= "\n";
+		}
+		
+		/* close style block */
+		$content .= '</style>';
+		$content .= "\n";
+
+		/* add print style block */
+		$content .= '<style media="print" type="text/css">#scb-wrapper { display:none; }</style>';
+
+		/* print css */
+		echo $content;
 	}
 
 	/**
@@ -578,63 +815,6 @@ class Speed_Contact_Bar {
 	 */
 	private function is_login_page() {
 		return in_array( $GLOBALS['pagenow'], array( 'wp-login.php', 'wp-register.php', 'wp-signup.php' ) );
-	}
-
-	/**
-	 * Print the customized CSS block
-	 * 
-	 * @since    1.0
-	 */
-	public function display_bar_styles() {
-		$content = '<style media="screen" type="text/css">';
-		if ( 1 == $this->stored_settings[ 'fixed' ] ) { 
-			/*<style type="text/css">
-			html { margin-top: 32px !important; }
-			* html body { margin-top: 32px !important; }
-			@media screen and ( max-width: 782px ) {
-			html { margin-top: 46px !important; }
-			* html body { margin-top: 46px !important; }
-			}
-			</style>*/
-			$content .= '@media screen and (min-width: 640px) { body { padding-top: 2.5em !important; } }';
-		}
-		/* styles of the bar */
-		$bar_styles = '';
-		$headline_styles = '';
-		if ( isset( $this->stored_settings[ 'bg_color' ] ) && '' != $this->stored_settings[ 'bg_color' ] ) { 
-			$bar_styles .= sprintf( ' background-color: %s;', esc_attr( $this->stored_settings[ 'bg_color' ] ) ); 
-		}
-		if ( isset( $this->stored_settings[ 'text_color' ] ) && '' != $this->stored_settings[ 'text_color' ] ) { 
-			$color = esc_attr( $this->stored_settings[ 'text_color' ] );
-			$bar_styles 	 .= sprintf( ' color: %s;', $color ); 
-			$headline_styles .= sprintf( ' color: %s;', $color ); 
-		}
-		if ( isset( $this->stored_settings[ 'content_alignment' ] ) && '' != $this->stored_settings[ 'content_alignment' ] ) { 
-			$bar_styles .= sprintf( ' text-align: %s;', esc_attr( $this->stored_settings[ 'content_alignment' ] ) ); 
-		}
-		if ( isset( $this->stored_settings[ 'show_shadow' ] ) && '' != $this->stored_settings[ 'show_shadow' ] ) { 
-			$bar_styles .= ' box-shadow: 0 1px 6px 3px #CCCCCC;'; 
-		}
-		$link_styles = '';
-		if ( isset( $this->stored_settings[ 'link_color' ] ) && '' != $this->stored_settings[ 'link_color' ] ) { 
-			$link_styles .= sprintf( ' color: %s;', esc_attr( $this->stored_settings[ 'link_color' ] ) ); 
-		}
-		if ( $bar_styles ) {
-			$content .= sprintf( '#scb-wrapper {%s } ', $bar_styles );
-		}
-		if ( $headline_styles ) {
-			$content .= sprintf( '#scb-wrapper h2 {%s } ', $headline_styles );
-		}
-		if ( $link_styles ) {
-			$content .= sprintf( '#scb-wrapper a {%s } ', $link_styles );
-		}
-		/* styles of the content */
-		if ( isset( $this->stored_settings[ 'show_headline' ] ) && 0 == $this->stored_settings[ 'show_headline' ] ) {
-			$content .= '#scb-wrapper h2 { display: inline; left: -32768px; margin: 0; padding: 0; position: absolute; top: 0; z-index: 1000; } ';
-		}
-		$content .= '</style>';
-		$content .= '<style media="print" type="text/css">#scb-wrapper { display:none; }</style>';
-		echo $content;
 	}
 
 }

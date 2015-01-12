@@ -1,10 +1,10 @@
 === Speed Contact Bar ===
 Contributors: Hinjiriyo, allamoda07
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SBF76TCGTRNX2
-Tags: contact, contacts, email, e-mail, phone, telephone, cell phone, number, address, url, link, web, facebook, google plus, google+, g+, social media, responsive, linkedin, xing, flickr, slideshare, tumblr
+Tags: contact, contacts, email, e-mail, email, phone, telephone, cell phone, number, address, url, link, icons, web, facebook, google plus, google+, g+, social media, responsive, linkedin, xing, flickr, slideshare, tumblr, vimeo, imdb
 Requires at least: 3.5
 Tested up to: 4.1
-Stable tag: 1.9.3
+Stable tag: 2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -49,6 +49,8 @@ Up till now Speed Contact Bar supports links to these **social media platforms**
 8. Flickr
 9. SlideShare
 10. tumblr
+11. vimeo
+12. IMDb
 
 More social media plattforms will come in future.
 
@@ -60,9 +62,11 @@ And of course you can set the **design of the contact bar** to be suitable to th
 4. **Link color**
 5. **Lightness of icons**: Dark or bright icons
 6. **Content alignment** within the bar
-7. Define a **headline** and whether to show it or not
-8. Show a slight **shadow under the bar** for a chic 3D effect
-9. Set whether the links should be load in **new windows** or not
+7. **Font size**: Size of texts
+8. **Icon size**: Size of icons
+9. Define a **headline**, **headline HTML tag** and the **headline visibility**
+10. Show a slight **shadow under the bar** for a chic 3D effect
+11. Set whether the links should be load in **new windows** or not
 
 Do you miss some options? We will add it! Please write your request in the plugin's [support forum at wordpress.org](http://wordpress.org/support/plugin/speed-contact-bar). We will try to take a look and answer as soon as possible.
 
@@ -128,6 +132,17 @@ Please write your request in the plugin's [support forum at wordpress.org](http:
 2. The options page of the contact bar in the WordPress backend
 
 == Changelog ==
+
+= 2.0 =
+* Phone numbers are clickable to trigger phone calls
+* Added vimeo option
+* Added IMDb option
+* Added option to select the font size
+* Added option to select the icon size
+* Added option to select the headline HTML tag
+* Changed visibility of phone and cellphone in mobile design
+* Significant improved robustness in case of no or fake settings
+* Updated *.pot file and german translation
 
 = 1.9.3 =
 * Successfully tested with WordPress 4.1
@@ -195,6 +210,9 @@ First official release
 First release for just trying it
 
 == Upgrade Notice ==
+
+= 2.0 =
+Please set the new Speed Contact Bar settings: IMDb, vimeo, headline HTML tag selection, sizes of texts and icons. Phone numbers are clickable now
 
 = 1.9.3 =
 Successfully tested with WordPress 4.1
