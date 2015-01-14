@@ -328,6 +328,27 @@ class Speed_Contact_Bar_Admin {
 		$title = null;
 		$html = null;
 		
+		$font_sizes = array();
+		foreach( range( 8, 24 ) as $value ) {
+			$font_sizes[ $value ] = sprintf( '%dpx', $value );
+		}
+		
+		$icon_sizes = array();
+		foreach( range( 16, 48, 2 ) as $value ) {
+			$icon_sizes[ $value ] = sprintf( '%dpx', $value );
+		}
+		
+		$readjustments = array();
+		foreach( range( 25, 75, 5 ) as $value ) {
+			$readjustments[ $value ] = sprintf( '%dpx', $value );
+		}
+		
+		$padding_sizes = array();
+		foreach( range( 8, 32 ) as $value ) {
+			$padding_sizes[ $value ] = sprintf( '%dpx', $value );
+		}
+		
+
 		// define the form sections, order by appereance, with headlines, and options
 		self::$form_structure = array(
 			'1st_section' => array(
@@ -348,12 +369,6 @@ class Speed_Contact_Bar_Admin {
 						'type'    => 'textfield',
 						'title'   => __( 'Headline', self::$plugin_slug ),
 						'desc'    => __( 'Enter a short headline for the contact bar', self::$plugin_slug ),
-					),
-					'headline_tag' => array(
-						'type'    => 'selection',
-						'title'   => __( 'Headline HTML Tag', self::$plugin_slug ),
-						'desc'    => __( 'Select the HTML element for the headline without changing the headline style', self::$plugin_slug ),
-						'values'  => array( 'h1' => 'H1', 'h2' => 'H2', 'h3' => 'H3', 'h4' => 'H4', 'h5' => 'H5', 'h6' => 'H6', 'div' => 'DIV', 'p' => 'P' ),
 					),
 					'email' => array(
 						'type'    => 'email',
@@ -436,28 +451,59 @@ class Speed_Contact_Bar_Admin {
 				'headline' => __( 'Appeareance', self::$plugin_slug ),
 				'description' => __( 'Set the style of the contact bar.', self::$plugin_slug ),
 				'options' => array(
+					'headline_tag' => array(
+						'type'    => 'selection',
+						'title'   => __( 'Headline HTML Tag', self::$plugin_slug ),
+						'desc'    => __( 'Select the HTML element for the headline without changing the headline style', self::$plugin_slug ),
+						'values'  => array( 'h1' => 'H1', 'h2' => 'H2', 'h3' => 'H3', 'h4' => 'H4', 'h5' => 'H5', 'h6' => 'H6', 'div' => 'DIV', 'p' => 'P' ),
+						'default' => 'h2',
+					),
 					'fixed' => array(
 						'type'    => 'checkbox',
 						'title'   => __( 'Enable fixed position', self::$plugin_slug ),
-						'desc'    => __( 'Always on top', self::$plugin_slug ),
+						'desc'    => __( 'Display bar always on top (not available in mobile design)', self::$plugin_slug ),
+					),
+					'readjustment' => array(
+						'type'    => 'selection',
+						'title'   => __( 'Height readjustment for fixed position', self::$plugin_slug ),
+						'desc'    => __( 'Readjust the space between the bar and the page content (not in mobile design)', self::$plugin_slug ),
+						'values'  => $readjustments,
+						'default' => 30,
 					),
 					'content_alignment' => array(
 						'type'    => 'selection',
 						'title'   => __( 'Text Alignment', self::$plugin_slug ),
 						'desc'    => __( 'Select the alignment of the content within the bar', self::$plugin_slug ),
 						'values'  => array( 'left' => __( 'left-aligned', self::$plugin_slug ), 'center' => __( 'centered', self::$plugin_slug ), 'right' => __( 'right-aligned', self::$plugin_slug ) ),
+						'default' => 'center',
 					),
 					'font_size' => array(
 						'type'    => 'selection',
 						'title'   => __( 'Font Size', self::$plugin_slug ),
 						'desc'    => __( 'Select the font size of the texts and links', self::$plugin_slug ),
-						'values'  => array( 10 => '10px', 11 => '11px', 12 => '12px', 13 => '13px', 14 => '14px', 15 => '15px', 16 => '16px', 17 => '17px', 18 => '18px', 19 => '19px', 20 => '20px', 21 => '21px', 22 => '22px', 23 => '23px', 24 => '24px',  ),
+						'values'  => $font_sizes,
+						'default' => 15,
 					),
 					'icon_size' => array(
 						'type'    => 'selection',
 						'title'   => __( 'Icon Size', self::$plugin_slug ),
 						'desc'    => __( 'Select the size of the icons', self::$plugin_slug ),
-						'values'  => array( 20 => '20px', 22 => '22px', 24 => '24px', 26 => '26px', 28 => '28px', 30 => '30px', 32 => '32px', 34 => '34px', 36 => '36px', 38 => '38px', 40 => '40px', 42 => '42px', 44 => '44px', 46 => '46px', 48 => '48px',  ),
+						'values'  => $icon_sizes,
+						'default' => 30,
+					),
+					'vertical_padding' => array(
+						'type'    => 'selection',
+						'title'   => __( 'Vertical Padding', self::$plugin_slug ),
+						'desc'    => __( 'Select the space between content and upper and lower border of the bar', self::$plugin_slug ),
+						'values'  => $padding_sizes,
+						'default' => 15,
+					),
+					'horizontal_padding' => array(
+						'type'    => 'selection',
+						'title'   => __( 'Horizontal Padding', self::$plugin_slug ),
+						'desc'    => __( 'Select the space between content and left and right border of the bar', self::$plugin_slug ),
+						'values'  => $padding_sizes,
+						'default' => 15,
 					),
 					'bg_color' => array(
 						'type'    => 'colorpicker',
@@ -479,6 +525,7 @@ class Speed_Contact_Bar_Admin {
 						'title'   => __( 'Icon Brightness', self::$plugin_slug ),
 						'desc'    => __( 'Select the brightness of the icons', self::$plugin_slug ),
 						'values'  => array( 'bright' => __( 'bright', self::$plugin_slug ), 'dark' => __( 'dark', self::$plugin_slug ) ),
+						'default' => 'dark',
 					),
 					'show_shadow' => array(
 						'type'    => 'checkbox',
@@ -542,7 +589,7 @@ class Speed_Contact_Bar_Admin {
 						break;
 					case 'selection':
 						$title = $option_values[ 'title' ];
-						$stored_value = isset( self::$stored_settings[ $option_name ] ) ? esc_attr( self::$stored_settings[ $option_name ] ) : '';
+						$stored_value = isset( self::$stored_settings[ $option_name ] ) ? esc_attr( self::$stored_settings[ $option_name ] ) : $option_values[ 'default' ];
 						$html = sprintf( '<select id="%s" name="%s[%s]">', $option_name, self::$settings_db_slug, $option_name );
 						foreach ( $option_values[ 'values' ] as $value => $label ) {
 							$selected = $stored_value ? selected( $stored_value, $value, false ) : '';
