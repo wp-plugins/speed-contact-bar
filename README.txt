@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: contact, contacts, email, e-mail, email, phone, telephone, cell phone, number, address, url, link, icons, web, facebook, google plus, google+, g+, social media, responsive, linkedin, xing, flickr, slideshare, tumblr, vimeo, imdb
 Requires at least: 3.5
 Tested up to: 4.1
-Stable tag: 2.0
+Stable tag: 2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,17 +16,17 @@ Let your website visitors get in touch with you easily with permanent visible co
 
 Speed Contact Bar enables your visitors to get in contact with you quickly. The plugin shows a colored bar with your contact data and social media URLs on the top of every page of your website. 
 
-The social media icons are included already.
+The bar design is responsive and thus ready for smartphones and tablets. The social media icons are included already.
 
-The bar design is responsive and thus ready for smartphones and tablets.
+Each icon appears if you set its target URL in the option page. The phone icons and numbers are clickable to trigger a phone call. The e-mail is clickable to open a mail client.
 
 = What you can configure =
 
 There are some options you can set to let the contact bar fit to your needs. You can set 
 
-1. your contact data,
+1. your contact data
 2. URLs to your social media pages and profiles and
-3. design options like colors
+3. many design options like colors
 
 = Configuration options in detail =
 
@@ -56,17 +56,20 @@ More social media plattforms will come in future.
 
 And of course you can set the **design of the contact bar** to be suitable to the design of your website:
 
-1. The contact bar appears on top of every page. You can set whether it should **scroll** with the content or **stay fixed**
-2. **Background color**
-3. **Text color**
-4. **Link color**
-5. **Lightness of icons**: Dark or bright icons
-6. **Content alignment** within the bar
-7. **Font size**: Size of texts
-8. **Icon size**: Size of icons
-9. Define a **headline**, **headline HTML tag** and the **headline visibility**
-10. Show a slight **shadow under the bar** for a chic 3D effect
-11. Set whether the links should be load in **new windows** or not
+1. **Fixed on top or not**: The contact bar appears on top of every page. You can set whether it should **scroll** with the content or **stay fixed**
+2. **Horizontal padding** of the contact bar
+3. **Vertical padding** of the contact bar
+4. **Space between bar and page content** if the bar is fixed on top
+5. **Background color** of the contact bar
+6. **Text color**
+7. **Link color**
+8. **Lightness of icons**: Dark or bright icons
+9. **Content alignment** within the bar
+10. **Font size** of the texts and links
+11. **Icon size**
+12. **Headline text**, **headline HTML tag** and the **headline visibility**
+13. **Shadow under the bar** for a chic 3D effect
+14. **Link target** of all links to open a contact link in the same window or in a new window
 
 Do you miss some options? We will add it! Please write your request in the plugin's [support forum at wordpress.org](http://wordpress.org/support/plugin/speed-contact-bar). We will try to take a look and answer as soon as possible.
 
@@ -102,23 +105,26 @@ Do you miss some options? We will add it! Please write your request in the plugi
 
 = What does the plugin need to work fine? =
 
-Speed Contact bar requires a WordPress installation version equal or greater than 3.4.
+Speed Contact bar requires a WordPress installation version equal or higher than 3.5.
 
-= I am loggend in as administrator. Why do I not see the contact bar? =
+= I am logged in as administrator. Why do I not see the contact bar? =
 
-The most likely reason is the **WordPress Admin Bar fixed on top of the page**. In this case it overlaps the Speed Contact Bar. 
+The most likely reason is the **WordPress Admin Bar fixed on top of the page**. In this case it overlaps the Speed Contact Bar.
 
-**How to solve this problem?** Just call your website in another browser and do not log in with that browser as a WordPress administrator.
+You have two possibilities to see the bar:
 
-= I want to display this and that. How to add it? =
+1. Go to your user profile in the backend a deactivate the checkbox at "Show admin bar"
+2. Use another browser, as unlogged visitor
+
+= I want to display this and that. How can I add it? =
 
 Please write your request in the plugin's [support forum at wordpress.org](http://wordpress.org/support/plugin/speed-contact-bar). We will try to take a look and answer as soon as possible.
 
-= I want to switch of the contact bar for a while without losing all settings. How? =
+= I want to switch off the contact bar for a while without losing all settings. How? =
 
-Just deactivate the plugin. The contact bar does not appear and all your data keep stored. If you activate the plugin again you see the contact bar with the last stored settings.
+Just deactivate the plugin. The contact bar does not appear and all your data are kept stored. If you activate the plugin again you see the contact bar with the last stored settings.
 
-If you deactivate and delete the plugin on the plugins page all files and your settings will be deleted residue-free.
+If you deactivate and delete the plugin on the plugins page all files and settings of the contact bar will be deleted residue-free.
 
 = How can I get the contact bar in my language? =
 
@@ -132,6 +138,13 @@ Please write your request in the plugin's [support forum at wordpress.org](http:
 2. The options page of the contact bar in the WordPress backend
 
 == Changelog ==
+
+= 2.1 =
+* Added option to select the horizontal padding within the bar
+* Added option to select the vertical padding within the bar
+* Added option to select the space between the bar and the page content
+* Moved all contact bar CSS code into HTML code to circumvent removing the call of the CSS main file
+* Updated *.pot file and german translation
 
 = 2.0 =
 * Phone numbers are clickable to trigger phone calls
@@ -210,6 +223,9 @@ First official release
 First release for just trying it
 
 == Upgrade Notice ==
+
+= 2.1 =
+Added options, please reset the settings of the bar
 
 = 2.0 =
 Please set the new Speed Contact Bar settings: IMDb, vimeo, headline HTML tag selection, sizes of texts and icons. Phone numbers are clickable now

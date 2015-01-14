@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/plugins/plugin-name\n"
-"POT-Creation-Date: 2015-01-12 03:38+0100\n"
-"PO-Revision-Date: 2015-01-12 03:39+0100\n"
+"POT-Creation-Date: 2015-01-14 21:15+0100\n"
+"PO-Revision-Date: 2015-01-14 21:19+0100\n"
 "Last-Translator: Martin Stehle <m.stehle@gmx.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -24,62 +24,52 @@ msgid "Options"
 msgstr "Einstellmöglichkeiten"
 
 #: admin/class-speed-contact-bar-admin.php:301
-#: public/class-speed-contact-bar.php:705
+#: public/class-speed-contact-bar.php:875
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: admin/class-speed-contact-bar-admin.php:334
+#: admin/class-speed-contact-bar-admin.php:355
 msgid "Contact Data"
 msgstr "Kontaktdaten"
 
-#: admin/class-speed-contact-bar-admin.php:335
+#: admin/class-speed-contact-bar-admin.php:356
 msgid ""
 "Set the contact informations. To supress displaying a field leave it empty."
 msgstr ""
 "Trage die Kontaktangaben ein. Um ein Feld nicht anzuzeigen, lasse es leer."
 
-#: admin/class-speed-contact-bar-admin.php:339
+#: admin/class-speed-contact-bar-admin.php:360
 msgid "Show headline"
 msgstr "Zeige Überschrift"
 
-#: admin/class-speed-contact-bar-admin.php:340
+#: admin/class-speed-contact-bar-admin.php:361
 msgid "Activate to show the headline"
 msgstr "Aktivieren, um die Überschrift anzuzeigen"
 
-#: admin/class-speed-contact-bar-admin.php:344
+#: admin/class-speed-contact-bar-admin.php:365
 msgid "Open links in new windows"
 msgstr "Links in neuen Fenstern öffnen"
 
-#: admin/class-speed-contact-bar-admin.php:345
+#: admin/class-speed-contact-bar-admin.php:366
 msgid "Activate to let the links load the target site in new windows or tabs"
 msgstr ""
 "Aktivieren, um die Zieladressen der Links in neuen Fenstern bzw. Reitern zu "
 "laden"
 
-#: admin/class-speed-contact-bar-admin.php:349
+#: admin/class-speed-contact-bar-admin.php:370
 msgid "Headline"
 msgstr "Überschrift"
 
-#: admin/class-speed-contact-bar-admin.php:350
+#: admin/class-speed-contact-bar-admin.php:371
 msgid "Enter a short headline for the contact bar"
 msgstr "Gebe eine kurze Überschrift für die Kontaktleiste ein"
 
-#: admin/class-speed-contact-bar-admin.php:354
-msgid "Headline HTML Tag"
-msgstr "Überschriften-HTML-Element"
-
-#: admin/class-speed-contact-bar-admin.php:355
-msgid ""
-"Select the HTML element for the headline without changing the headline style"
-msgstr ""
-"Wähle das HTML-Element der Überschrift, ohne ihre Gestaltung zu beeinflussen"
-
-#: admin/class-speed-contact-bar-admin.php:360
-#: public/class-speed-contact-bar.php:630
+#: admin/class-speed-contact-bar-admin.php:375
+#: public/class-speed-contact-bar.php:679
 msgid "E-Mail"
 msgstr "E-Mailadresse"
 
-#: admin/class-speed-contact-bar-admin.php:361
+#: admin/class-speed-contact-bar-admin.php:376
 msgid ""
 "Enter a valid email address. If the email address is invalid it will not be "
 "used."
@@ -87,31 +77,28 @@ msgstr ""
 "Gebe eine gültige Mailadresse ein. Ist sie ungültig, wird sie nicht "
 "verwendet."
 
-#: admin/class-speed-contact-bar-admin.php:365
-#: public/class-speed-contact-bar.php:604
+#: admin/class-speed-contact-bar-admin.php:380
+#: public/class-speed-contact-bar.php:653
 msgid "Phone Number"
 msgstr "Telefonnummer"
 
-#: admin/class-speed-contact-bar-admin.php:366
+#: admin/class-speed-contact-bar-admin.php:381
 msgid "Enter your official contact phone number"
 msgstr "Gebe deine offizielle Kontakttelefonnummer ein"
 
-#: admin/class-speed-contact-bar-admin.php:370
-#: public/class-speed-contact-bar.php:617
+#: admin/class-speed-contact-bar-admin.php:385
+#: public/class-speed-contact-bar.php:666
 msgid "Cell Phone Number"
 msgstr "Mobiltelefon-Nummer"
 
-#: admin/class-speed-contact-bar-admin.php:371
+#: admin/class-speed-contact-bar-admin.php:386
 msgid "Enter your official contact cell phone number"
 msgstr "Gebe deine offizielle Kontaktmobilnummer ein"
 
-#: admin/class-speed-contact-bar-admin.php:375
+#: admin/class-speed-contact-bar-admin.php:390
 msgid "Facebook Fan Page URL"
 msgstr "Facebook-Seiten-URL"
 
-#: admin/class-speed-contact-bar-admin.php:376
-#: admin/class-speed-contact-bar-admin.php:381
-#: admin/class-speed-contact-bar-admin.php:386
 #: admin/class-speed-contact-bar-admin.php:391
 #: admin/class-speed-contact-bar-admin.php:396
 #: admin/class-speed-contact-bar-admin.php:401
@@ -121,12 +108,12 @@ msgstr "Facebook-Seiten-URL"
 #: admin/class-speed-contact-bar-admin.php:421
 #: admin/class-speed-contact-bar-admin.php:426
 #: admin/class-speed-contact-bar-admin.php:431
+#: admin/class-speed-contact-bar-admin.php:436
+#: admin/class-speed-contact-bar-admin.php:441
+#: admin/class-speed-contact-bar-admin.php:446
 msgid "Example"
 msgstr "Beispiel"
 
-#: admin/class-speed-contact-bar-admin.php:376
-#: admin/class-speed-contact-bar-admin.php:381
-#: admin/class-speed-contact-bar-admin.php:386
 #: admin/class-speed-contact-bar-admin.php:391
 #: admin/class-speed-contact-bar-admin.php:396
 #: admin/class-speed-contact-bar-admin.php:401
@@ -136,150 +123,195 @@ msgstr "Beispiel"
 #: admin/class-speed-contact-bar-admin.php:421
 #: admin/class-speed-contact-bar-admin.php:426
 #: admin/class-speed-contact-bar-admin.php:431
+#: admin/class-speed-contact-bar-admin.php:436
+#: admin/class-speed-contact-bar-admin.php:441
+#: admin/class-speed-contact-bar-admin.php:446
 msgid "Enter a valid URL. If the URL is invalid it will not be used."
 msgstr "Gebe eine gültige URL ein. Ist sie ungültig, wird sie nicht verwendet."
 
-#: admin/class-speed-contact-bar-admin.php:380
+#: admin/class-speed-contact-bar-admin.php:395
 msgid "Google Plus Page URL"
 msgstr "Google-Plus-Profil-URL"
 
-#: admin/class-speed-contact-bar-admin.php:385
+#: admin/class-speed-contact-bar-admin.php:400
 msgid "Twitter Profile URL"
 msgstr "Twitter-Profil-URL"
 
-#: admin/class-speed-contact-bar-admin.php:390
+#: admin/class-speed-contact-bar-admin.php:405
 msgid "Pinterest Page URL"
 msgstr "Pinterest-Seiten-URL"
 
-#: admin/class-speed-contact-bar-admin.php:395
+#: admin/class-speed-contact-bar-admin.php:410
 msgid "YouTube Channel/Video URL"
 msgstr "YouTube-Kanal/-Video-URL"
 
-#: admin/class-speed-contact-bar-admin.php:400
+#: admin/class-speed-contact-bar-admin.php:415
 msgid "LinkedIn Profile URL"
 msgstr "LinkedIn-Profil-URL"
 
-#: admin/class-speed-contact-bar-admin.php:405
+#: admin/class-speed-contact-bar-admin.php:420
 msgid "Xing Profile URL"
 msgstr "Xing-Profil-URL"
 
-#: admin/class-speed-contact-bar-admin.php:410
+#: admin/class-speed-contact-bar-admin.php:425
 msgid "Flickr Profile URL"
 msgstr "Flickr-Profil-URL"
 
-#: admin/class-speed-contact-bar-admin.php:415
+#: admin/class-speed-contact-bar-admin.php:430
 msgid "SlideShare Channel URL"
 msgstr "SlideShare-Kanal-URL"
 
-#: admin/class-speed-contact-bar-admin.php:420
+#: admin/class-speed-contact-bar-admin.php:435
 msgid "tumblr Blog URL"
 msgstr "tumblr-Blog-URL"
 
-#: admin/class-speed-contact-bar-admin.php:425
+#: admin/class-speed-contact-bar-admin.php:440
 msgid "Vimeo URL"
 msgstr "Vimeo-URL"
 
-#: admin/class-speed-contact-bar-admin.php:430
+#: admin/class-speed-contact-bar-admin.php:445
 msgid "IMDb URL"
 msgstr "IMDb-URL"
 
-#: admin/class-speed-contact-bar-admin.php:436
+#: admin/class-speed-contact-bar-admin.php:451
 msgid "Appeareance"
 msgstr "Darstellung"
 
-#: admin/class-speed-contact-bar-admin.php:437
+#: admin/class-speed-contact-bar-admin.php:452
 msgid "Set the style of the contact bar."
 msgstr "Stelle das Aussehen der Kontaktleiste ein."
 
-#: admin/class-speed-contact-bar-admin.php:441
+#: admin/class-speed-contact-bar-admin.php:456
+msgid "Headline HTML Tag"
+msgstr "Überschriften-HTML-Element"
+
+#: admin/class-speed-contact-bar-admin.php:457
+msgid ""
+"Select the HTML element for the headline without changing the headline style"
+msgstr ""
+"Wähle das HTML-Element der Überschrift, ohne ihre Gestaltung zu beeinflussen"
+
+#: admin/class-speed-contact-bar-admin.php:462
 msgid "Enable fixed position"
 msgstr "Leiste fixieren"
 
-#: admin/class-speed-contact-bar-admin.php:442
-msgid "Always on top"
-msgstr "Erscheint immer oben"
+#: admin/class-speed-contact-bar-admin.php:463
+msgid "Display bar always on top (not available in mobile design)"
+msgstr "Zeige Leiste immer oben (nicht vorhanden im Design für mobile Geräte)"
 
-#: admin/class-speed-contact-bar-admin.php:446
+#: admin/class-speed-contact-bar-admin.php:467
+msgid "Height readjustment for fixed position"
+msgstr "Nachregelung der Höhe bei fixierter Position"
+
+#: admin/class-speed-contact-bar-admin.php:468
+msgid ""
+"Readjust the space between the bar and the page content (not in mobile "
+"design)"
+msgstr ""
+"Stelle den Abstand zwischen der Leiste und dem Seiteninhalt ein (nicht im "
+"Design für mobile Geräte)"
+
+#: admin/class-speed-contact-bar-admin.php:473
 msgid "Text Alignment"
 msgstr "Textausrichtung"
 
-#: admin/class-speed-contact-bar-admin.php:447
+#: admin/class-speed-contact-bar-admin.php:474
 msgid "Select the alignment of the content within the bar"
 msgstr "Wähle die Ausrichtung des Inhalts innerhalb der Leiste aus"
 
-#: admin/class-speed-contact-bar-admin.php:448
+#: admin/class-speed-contact-bar-admin.php:475
 msgid "left-aligned"
 msgstr "linksbündig"
 
-#: admin/class-speed-contact-bar-admin.php:448
+#: admin/class-speed-contact-bar-admin.php:475
 msgid "centered"
 msgstr "zentriert"
 
-#: admin/class-speed-contact-bar-admin.php:448
+#: admin/class-speed-contact-bar-admin.php:475
 msgid "right-aligned"
 msgstr "rechtsbündig"
 
-#: admin/class-speed-contact-bar-admin.php:452
+#: admin/class-speed-contact-bar-admin.php:479
 msgid "Font Size"
 msgstr "Schriftgröße"
 
-#: admin/class-speed-contact-bar-admin.php:453
+#: admin/class-speed-contact-bar-admin.php:480
 msgid "Select the font size of the texts and links"
 msgstr "Stelle die Größe der Schrift und Links ein"
 
-#: admin/class-speed-contact-bar-admin.php:458
+#: admin/class-speed-contact-bar-admin.php:485
 msgid "Icon Size"
 msgstr "Größe der Icons"
 
-#: admin/class-speed-contact-bar-admin.php:459
+#: admin/class-speed-contact-bar-admin.php:486
 msgid "Select the size of the icons"
 msgstr "Stelle die Größe der Icons ein"
 
-#: admin/class-speed-contact-bar-admin.php:464
+#: admin/class-speed-contact-bar-admin.php:491
+msgid "Vertical Padding"
+msgstr "Vertikaler Abstand"
+
+#: admin/class-speed-contact-bar-admin.php:492
+msgid "Select the space between content and upper and lower border of the bar"
+msgstr ""
+"Stelle den Abstand zwischen Inhalt und der oberen und unteren Kante der "
+"Leiste ein"
+
+#: admin/class-speed-contact-bar-admin.php:497
+msgid "Horizontal Padding"
+msgstr "Horizontaler Abstand"
+
+#: admin/class-speed-contact-bar-admin.php:498
+msgid "Select the space between content and left and right border of the bar"
+msgstr ""
+"Stelle den Abstand zwischen Inhalt und der linken und rechten Kante der "
+"Leiste ein"
+
+#: admin/class-speed-contact-bar-admin.php:503
 msgid "Background Color"
 msgstr "Hintergrundfarbe"
 
-#: admin/class-speed-contact-bar-admin.php:465
+#: admin/class-speed-contact-bar-admin.php:504
 msgid "Select the background color"
 msgstr "Stelle die Hintergrundfarbe ein"
 
-#: admin/class-speed-contact-bar-admin.php:469
+#: admin/class-speed-contact-bar-admin.php:508
 msgid "Text Color"
 msgstr "Textfarbe"
 
-#: admin/class-speed-contact-bar-admin.php:470
+#: admin/class-speed-contact-bar-admin.php:509
 msgid "Select the text color"
 msgstr "Stelle die Textfarbe ein"
 
-#: admin/class-speed-contact-bar-admin.php:474
+#: admin/class-speed-contact-bar-admin.php:513
 msgid "Link Color"
 msgstr "Linkfarbe"
 
-#: admin/class-speed-contact-bar-admin.php:475
+#: admin/class-speed-contact-bar-admin.php:514
 msgid "Select the link color"
 msgstr "Stelle die Linkfarbe ein"
 
-#: admin/class-speed-contact-bar-admin.php:479
+#: admin/class-speed-contact-bar-admin.php:518
 msgid "Icon Brightness"
 msgstr "Helligkeit der Icons"
 
-#: admin/class-speed-contact-bar-admin.php:480
+#: admin/class-speed-contact-bar-admin.php:519
 msgid "Select the brightness of the icons"
 msgstr "Stelle die Helligkeit der Icons ein"
 
-#: admin/class-speed-contact-bar-admin.php:481
+#: admin/class-speed-contact-bar-admin.php:520
 msgid "bright"
 msgstr "hell"
 
-#: admin/class-speed-contact-bar-admin.php:481
+#: admin/class-speed-contact-bar-admin.php:520
 msgid "dark"
 msgstr "dunkel"
 
-#: admin/class-speed-contact-bar-admin.php:485
+#: admin/class-speed-contact-bar-admin.php:524
 msgid "Show shadow"
 msgstr "Schatten anzeigen"
 
-#: admin/class-speed-contact-bar-admin.php:486
+#: admin/class-speed-contact-bar-admin.php:525
 msgid "Activate to show a slight shadow under the bar"
 msgstr "Aktivieren, um einen kleinen Schatten unterhalb der Leiste anzuzeigen"
 
@@ -311,7 +343,7 @@ msgstr "Idee und Design von"
 msgid "Plugin development by"
 msgstr "Plugin-Entwicklung von"
 
-#: public/class-speed-contact-bar.php:303
+#: public/class-speed-contact-bar.php:352
 #, php-format
 msgid ""
 "The plugin requires WordPress version %s or higher. Therefore, WordPress did "
@@ -322,17 +354,17 @@ msgstr ""
 "es nicht aktiviert. Falls du dieses Plugin nutzen willst, aktualisiere die "
 "WordPress-Dateien auf die neueste Version."
 
-#: public/class-speed-contact-bar.php:479
+#: public/class-speed-contact-bar.php:528
 msgid "You do not have sufficient permissions to manage options for this site."
 msgstr ""
 "Du hast nicht die erforderlichen Rechte, Einstellungen auf dieser Seite "
 "vorzunehmen."
 
-#: public/class-speed-contact-bar.php:485
+#: public/class-speed-contact-bar.php:534
 msgid "Contact to us"
 msgstr "Kontakt zu uns"
 
-#: public/class-speed-contact-bar.php:706
+#: public/class-speed-contact-bar.php:876
 #, php-format
 msgid "Welcome to the plugin %s! You can configure it at %s."
 msgstr "Willkommen zum Plugin %s! Du kannst es unter %s konfigurieren."

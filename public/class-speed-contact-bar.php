@@ -22,7 +22,7 @@ class Speed_Contact_Bar {
 	 *
 	 * @var     string
 	 */
-	private $plugin_version = '2.0';
+	private $plugin_version = null;
 
 	/**
 	 * Name of this plugin.
@@ -32,7 +32,7 @@ class Speed_Contact_Bar {
 	 *
 	 * @var      string
 	 */
-	private $plugin_name = 'Speed Contact Bar';
+	private $plugin_name = null;
 
 	/**
 	 * Unique identifier for this plugin.
@@ -46,7 +46,7 @@ class Speed_Contact_Bar {
 	 *
 	 * @var      string
 	 */
-	private $plugin_slug = 'speed-contact-bar';
+	private $plugin_slug = null;
 
 	/**
 	 * Instance of this class.
@@ -65,7 +65,7 @@ class Speed_Contact_Bar {
 	 *
 	 * @var      string
 	 */
-	private $settings_db_slug = 'speed-contact-bar-options';
+	private $settings_db_slug = null;
 
 	/**
 	 * Stored settings in an array
@@ -75,7 +75,7 @@ class Speed_Contact_Bar {
 	 *
 	 * @var      array
 	 */
-	private $stored_settings = array();
+	private $stored_settings = null;
 
 	/**
 	 * Allowed social networks
@@ -85,7 +85,7 @@ class Speed_Contact_Bar {
 	 *
 	 * @var      array
 	 */
-	private $valid_social_networks = array( 'facebook', 'googleplus', 'twitter', 'pinterest', 'youtube', 'linkedin', 'xing', 'flickr', 'slideshare', 'tumblr', 'vimeo', 'imdb' );
+	private $valid_social_networks = null;
 
 	/**
 	 * Allowed headline HTML tags
@@ -95,7 +95,7 @@ class Speed_Contact_Bar {
 	 *
 	 * @var      array
 	 */
-	private $valid_headline_tags = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div', 'p' );
+	private $valid_headline_tags = null;
 
 	/**
 	 * Allowed icon families
@@ -105,7 +105,7 @@ class Speed_Contact_Bar {
 	 *
 	 * @var      array
 	 */
-	private $valid_icon_types =  array( 'bright', 'dark' );
+	private $valid_icon_types = null;
 
 	/**
 	 * Allowed content alignments
@@ -115,7 +115,7 @@ class Speed_Contact_Bar {
 	 *
 	 * @var      array
 	 */
-	private $valid_content_alignments =  array( 'left', 'center', 'right' );
+	private $valid_content_alignments = null;
 
 	/**
 	 * Allowed font sizes
@@ -125,7 +125,7 @@ class Speed_Contact_Bar {
 	 *
 	 * @var      array
 	 */
-	private $valid_font_sizes =  array( 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 );
+	private $valid_font_sizes = null;
 
 	/**
 	 * Allowed icon sizes
@@ -135,7 +135,37 @@ class Speed_Contact_Bar {
 	 *
 	 * @var      array
 	 */
-	private $valid_icon_sizes =  array( 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48 );
+	private $valid_icon_sizes = null;
+
+	/**
+	 * Allowed adjustment values
+	 *
+	 *
+	 * @since    2.1
+	 *
+	 * @var      array
+	 */
+	private $valid_readjustments = null;
+
+	/**
+	 * Allowed vertical paddings
+	 *
+	 *
+	 * @since    2.1
+	 *
+	 * @var      array
+	 */
+	private $valid_vertical_paddings = null;
+
+	/**
+	 * Allowed horizontal paddings
+	 *
+	 *
+	 * @since    2.1
+	 *
+	 * @var      array
+	 */
+	private $valid_horizontal_paddings = null;
 
 	/**
 	 * Initial settings
@@ -145,26 +175,7 @@ class Speed_Contact_Bar {
 	 *
 	 * @var      array
 	 */
-	private $default_settings = array(
-		'fixed' => 1,
-		'bg_color'  => '#dfdfdf',
-		'text_color'  => '#333333',
-		'link_color'  => '#0074A2',
-		'icon_type'  => 'dark',
-		'content_alignment'  => 'center',
-		'show_headline'  => 1,
-		'open_new_window'  => 0,
-		'show_labels'  => 1,
-		'show_shadow'  => 1,
-		'font_size'  => 15,
-		'icon_size'  => 30,
-		'headline_tag'  => 'h2',
-		'headline'  => 'Contact to us',
-		'email'  => 'info@yourdomain.com',
-		'phone'  => '',
-		'cellphone'  => '',
-		'contact form'  => '',
-	);
+	private $default_settings = null;
 	/**
 	 * Initialize the plugin by setting localization and loading public scripts
 	 * and styles.
@@ -180,14 +191,52 @@ class Speed_Contact_Bar {
 		add_action( 'wpmu_new_blog', array( $this, 'activate_new_site' ) );
 
 		// Load public-facing style sheet and JavaScript.
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
+		#add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
 		#add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		
 		// load contact bar near closing html body element with styles
 		add_filter( 'template_include', array( $this, 'activate_buffer' ), 1 );
 		add_filter( 'shutdown', array( $this, 'include_contact_bar' ), 0 );
 		add_action( 'wp_head', array( $this, 'display_bar_styles' ) );
-		
+
+		// set default values
+		$this->plugin_version = '2.1';
+		$this->plugin_name = 'Speed Contact Bar';
+		$this->plugin_slug = 'speed-contact-bar';
+		$this->settings_db_slug = 'speed-contact-bar-options';
+		$this->stored_settings = array();
+		$this->valid_social_networks = array( 'facebook', 'googleplus', 'twitter', 'pinterest', 'youtube', 'linkedin', 'xing', 'flickr', 'slideshare', 'tumblr', 'vimeo', 'imdb' );
+		$this->valid_headline_tags = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div', 'p' );
+		$this->valid_icon_types =  array( 'bright', 'dark' );
+		$this->valid_content_alignments =  array( 'left', 'center', 'right' );
+		$this->valid_font_sizes =  range( 8, 24 );
+		$this->valid_icon_sizes =  range( 16, 48, 2 );
+		$this->valid_readjustments =  range( 25, 75, 5 );
+		$this->valid_vertical_paddings =  range( 8, 32 );
+		$this->valid_horizontal_paddings =  range( 8, 32 );
+		$this->default_settings = array(
+			'fixed' => 1,
+			'bg_color'  => '#dfdfdf',
+			'text_color'  => '#333333',
+			'link_color'  => '#0074A2',
+			'icon_type'  => 'dark',
+			'content_alignment'  => 'center',
+			'show_headline'  => 1,
+			'open_new_window'  => 0,
+			'show_labels'  => 1,
+			'show_shadow'  => 1,
+			'font_size'  => 15,
+			'icon_size'  => 30,
+			'readjustment'  => 35,
+			'vertical_padding'  => 15,
+			'horizontal_padding'  => 15,
+			'headline_tag'  => 'h2',
+			'headline'  => 'Contact to us',
+			'email'  => 'info@yourdomain.com',
+			'phone'  => '',
+			'cellphone'  => '',
+			'contact form'  => '',
+		);
 		// get current or default settings
 		$this->stored_settings = $this->get_stored_settings();
 		
@@ -703,7 +752,14 @@ class Speed_Contact_Bar {
 	public function display_bar_styles() {
 		$content = '<style media="screen" type="text/css">';
 		$content .= "\n";
-		
+		$content .= '#scb-wrapper ul,#scb-wrapper li,#scb-wrapper a {display:inline;margin:0;padding:0;font-family:sans-serif;font-size:0.96em;line-height:1;} #scb-wrapper li {margin:0 .5em;} #scb-wrapper img {display:inline;vertical-align:middle;margin:0;padding:0;border:0 none;} #scb-wrapper #scb-email {padding-right:1em;}';
+		$content .= "\n";
+		$content .= '@media screen and (min-width:640px) {#scb-wrapper.scb-fixed {position:fixed;top:0;left:0;z-index:10000;width:100%;}}';
+		$content .= "\n";
+		$content .= '@media screen and (max-width:768px) {#scb-wrapper #scb-phone span,#scb-wrapper #scb-cellphone span,#scb-wrapper #scb-email  span {display:none;}}';
+		$content .= "\n";
+		$content .= '@media screen and (max-width:480px) {#scb-wrapper #scb-directs {margin-bottom:.5em;} #scb-wrapper ul {display:block;}}';
+		$content .= "\n";
 		/* fixation of bar */
 		if ( isset( $this->stored_settings[ 'fixed' ] ) && 1 == $this->stored_settings[ 'fixed' ] ) { 
 			/*<style type="text/css">
@@ -714,12 +770,28 @@ class Speed_Contact_Bar {
 			* html body { margin-top: 46px !important; }
 			}
 			</style>*/
-			$content .= '@media screen and (min-width: 640px) { body { padding-top: 2.5em !important; } }';
+			/* space between bar and page content */
+			$readjustment = $this->default_settings[ 'readjustment' ];
+			if ( isset( $this->stored_settings[ 'readjustment' ] ) && '' != $this->stored_settings[ 'readjustment' ] ) { 
+				$readjustment = esc_attr( $this->stored_settings[ 'readjustment' ] ); 
+			}
+			$content .= sprintf( '@media screen and (min-width: 640px) { body { padding-top: %dpx !important; } }', $readjustment );
 			$content .= "\n";
 		}
 		
 		/* styles of the bar and headline */
 		$bar_styles = '';
+
+		$vertical_padding = $this->default_settings[ 'vertical_padding' ];
+		if ( isset( $this->stored_settings[ 'vertical_padding' ] ) && in_array( $this->stored_settings[ 'vertical_padding' ], $this->valid_vertical_paddings ) ) { 
+			$vertical_padding = absint( $this->stored_settings[ 'vertical_padding' ] ); 
+		}
+		$horizontal_padding = $this->default_settings[ 'horizontal_padding' ];
+		if ( isset( $this->stored_settings[ 'horizontal_padding' ] ) && in_array( $this->stored_settings[ 'horizontal_padding' ], $this->valid_horizontal_paddings ) ) { 
+			$horizontal_padding = absint( $this->stored_settings[ 'horizontal_padding' ] ); 
+		}
+		$bar_styles .= sprintf( ' padding: %spx %spx;', $vertical_padding, $horizontal_padding ); 
+
 		$bg_color = $this->default_settings[ 'bg_color' ];
 		if ( isset( $this->stored_settings[ 'bg_color' ] ) && '' != $this->stored_settings[ 'bg_color' ] ) { 
 			$bg_color = esc_attr( $this->stored_settings[ 'bg_color' ] ); 
@@ -743,17 +815,15 @@ class Speed_Contact_Bar {
 			$bar_styles .= ' box-shadow: 0 1px 6px 3px #ccc;'; 
 		}
 
-		if ( $bar_styles ) {
-			$content .= sprintf( '#scb-wrapper {%s } ', $bar_styles );
-			$content .= "\n";
-		}
+		$content .= sprintf( '#scb-wrapper {%s } ', $bar_styles );
+		$content .= "\n";
 		
 		/* styles of headline */
 		$headline_tag = $this->default_settings[ 'headline_tag' ];
 		if ( isset( $this->stored_settings[ 'headline_tag' ] ) && in_array( $this->stored_settings[ 'headline_tag' ], $this->valid_headline_tags ) ) {
 			$headline_tag = $this->stored_settings[ 'headline_tag' ];
 		}
-		$content .= sprintf( '#scb-wrapper %s { display: inline; margin: 0 .5em; padding: 0; font: normal normal bold 15px/1 sans-serif; ', $headline_tag );
+		$content .= sprintf( '#scb-wrapper %s { display: inline; margin: 0; padding: 0; font: normal normal bold 15px/1 sans-serif; ', $headline_tag );
 		$content .= $headline_color;
 		$content .= ' }';
 		$content .= "\n";
