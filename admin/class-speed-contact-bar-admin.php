@@ -305,19 +305,6 @@ class Speed_Contact_Bar_Admin {
 	}
 
 	/**
-	 * NOTE:     Actions are points in the execution of a page or process
-	 *           lifecycle that WordPress fires.
-	 *
-	 *           Actions:    http://codex.wordpress.org/Plugin_API#Actions
-	 *           Reference:  http://codex.wordpress.org/Plugin_API/Action_Reference
-	 *
-	 * @since    1.0
-	 */
-	public function action_method_name() {
-		// @TODO: Define your action hook callback here
-	}
-
-	/**
 	* Define and register the options
 	* Run on admin_init()
 	*
@@ -444,6 +431,11 @@ class Speed_Contact_Bar_Admin {
 						'type'    => 'url',
 						'title'   => __( 'IMDb URL', self::$plugin_slug ),
 						'desc'    => __( 'Example', self::$plugin_slug ) . ': http://www.imdb.com/user/name<br />'. __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
+					),
+					'instagram' => array(
+						'type'    => 'url',
+						'title'   => __( 'Instagram URL', self::$plugin_slug ),
+						'desc'    => __( 'Example', self::$plugin_slug ) . ': http://instagram.com/name<br />'. __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
 					),
 				),
 			),

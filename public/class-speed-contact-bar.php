@@ -200,12 +200,12 @@ class Speed_Contact_Bar {
 		add_action( 'wp_head', array( $this, 'display_bar_styles' ) );
 
 		// set default values
-		$this->plugin_version = '2.1';
+		$this->plugin_version = '2.2';
 		$this->plugin_name = 'Speed Contact Bar';
 		$this->plugin_slug = 'speed-contact-bar';
 		$this->settings_db_slug = 'speed-contact-bar-options';
 		$this->stored_settings = array();
-		$this->valid_social_networks = array( 'facebook', 'googleplus', 'twitter', 'pinterest', 'youtube', 'linkedin', 'xing', 'flickr', 'slideshare', 'tumblr', 'vimeo', 'imdb' );
+		$this->valid_social_networks = array( 'facebook', 'googleplus', 'twitter', 'pinterest', 'youtube', 'linkedin', 'xing', 'flickr', 'slideshare', 'tumblr', 'vimeo', 'imdb', 'instagram' );
 		$this->valid_headline_tags = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div', 'p' );
 		$this->valid_icon_types =  array( 'bright', 'dark' );
 		$this->valid_content_alignments =  array( 'left', 'center', 'right' );
