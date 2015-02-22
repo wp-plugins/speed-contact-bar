@@ -1,10 +1,10 @@
 === Speed Contact Bar ===
 Contributors: Hinjiriyo, allamoda07
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SBF76TCGTRNX2
-Tags: contact, contacts, email, e-mail, email, phone, telephone, cell phone, number, address, url, link, icons, web, facebook, google plus, google+, g+, social media, responsive, linkedin, xing, flickr, slideshare, tumblr, vimeo, imdb
+Tags: contact, contacts, email, e-mail, email, phone, telephone, cell phone, number, address, url, link, icons, web, facebook, google plus, google+, g+, instagram, social media, responsive, linkedin, xing, flickr, slideshare, tumblr, vimeo, imdb
 Requires at least: 3.5
-Tested up to: 4.1
-Stable tag: 2.1
+Tested up to: 4.1.1
+Stable tag: 2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -19,6 +19,11 @@ Speed Contact Bar enables your visitors to get in contact with you quickly. The 
 The bar design is responsive and thus ready for smartphones and tablets. The social media icons are included already.
 
 Each icon appears if you set its target URL in the option page. The phone icons and numbers are clickable to trigger a phone call. The e-mail is clickable to open a mail client.
+
+= What users said =
+
+* **Number 22** in [22 Best Premium &amp; Free WordPress Notification Bars Plugin](http://www.frip.in/best-premium-free-wordpress-notification-bars/) by Himanshu on January 8, 2015
+* **Number 9** in [10 must-have plugins for your blog](http://www.universulanderei.ro/2014/05/23/10-must-have-plugins-for-your-blog/) by Andera on May 23, 2014
 
 = What you can configure =
 
@@ -37,20 +42,21 @@ You can show these three **personal contact data**:
 3. Cell phone number
 4. E-Mail address
 
-Up till now Speed Contact Bar supports links to these **social media platforms**:
+Up till now Speed Contact Bar supports links to these **social media platforms**, as ordered alphabetically:
 
 1. Facebook
-2. Google Plus
-3. Twitter
-4. Pinterest
-5. Youtube
+2. Flickr
+3. Google Plus
+4. IMDb
+5. Instagram
 6. LinkedIn
-7. Xing
-8. Flickr
-9. SlideShare
-10. tumblr
-11. vimeo
-12. IMDb
+7. Pinterest
+8. SlideShare
+9. Tumblr
+10. Twitter
+11. Vimeo
+12. Xing
+13. Youtube
 
 More social media plattforms will come in future.
 
@@ -139,6 +145,11 @@ Please write your request in the plugin's [support forum at wordpress.org](http:
 
 == Changelog ==
 
+= 2.2 =
+* Added Instagram option
+* Successfully tested with WordPress 4.1.1
+* Updated *.pot file and german translation
+
 = 2.1 =
 * Added option to select the horizontal padding within the bar
 * Added option to select the vertical padding within the bar
@@ -223,6 +234,9 @@ First official release
 First release for just trying it
 
 == Upgrade Notice ==
+
+= 2.2 =
+Added Instagram option, tested with WP 4.1.1
 
 = 2.1 =
 Added options, please reset the settings of the bar
