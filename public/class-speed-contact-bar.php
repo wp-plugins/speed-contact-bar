@@ -200,7 +200,7 @@ class Speed_Contact_Bar {
 		add_action( 'wp_head', array( $this, 'display_bar_styles' ) );
 
 		// set default values
-		$this->plugin_version = '2.2';
+		$this->plugin_version = '2.3';
 		$this->plugin_name = 'Speed Contact Bar';
 		$this->plugin_slug = 'speed-contact-bar';
 		$this->settings_db_slug = 'speed-contact-bar-options';
@@ -225,6 +225,7 @@ class Speed_Contact_Bar {
 			'open_new_window'  => 0,
 			'show_labels'  => 1,
 			'show_shadow'  => 1,
+			'show_texts'  => 0,
 			'font_size'  => 15,
 			'icon_size'  => 30,
 			'readjustment'  => 35,
@@ -461,9 +462,7 @@ class Speed_Contact_Bar {
 		global $wpdb;
 
 		// get an array of blog ids
-		$sql = "SELECT blog_id FROM $wpdb->blogs
-			WHERE archived = '0' AND spam = '0'
-			AND deleted = '0'";
+		$sql = "SELECT blog_id FROM $wpdb->blogs WHERE archived = '0' AND spam = '0' AND deleted = '0'";
 
 		return $wpdb->get_col( $sql );
 
@@ -643,9 +642,10 @@ class Speed_Contact_Bar {
 			$root_url = plugin_dir_url( __FILE__ );
 			if ( isset( $this->stored_settings[ 'phone' ] ) && '' != $this->stored_settings[ 'phone' ] ) {
 				$phone_number = esc_html( $this->stored_settings[ 'phone' ] );
+				$phone_number_escaped = $this->esc_phonenumber( $this->stored_settings[ 'phone' ] );
 				$contact_list[] = sprintf( 
-					'<li id="scb-phone"><a href="tel:%s"><img src="%sassets/images/phone_%s.svg" width="%d" height="%d" alt="%s" /><span> %s</span></a></li>',
-					$phone_number,
+					'<li id="scb-phone"><a href="tel:%s"><img src="%sassets/images/phone_%s.svg" width="%d" height="%d" alt="%s" />&nbsp;<span>%s</span></a></li>',
+					$phone_number_escaped,
 					$root_url,
 					$icon_type,
 					$icon_size,
@@ -656,9 +656,10 @@ class Speed_Contact_Bar {
 			}
 			if ( isset( $this->stored_settings[ 'cellphone' ] ) && '' != $this->stored_settings[ 'cellphone' ] ) {
 				$phone_number = esc_html( $this->stored_settings[ 'cellphone' ] );
+				$phone_number_escaped = $this->esc_phonenumber( $this->stored_settings[ 'cellphone' ] );
 				$contact_list[] = sprintf(
-					'<li id="scb-cellphone"><a href="tel:%s"><img src="%sassets/images/cellphone_%s.svg" width="%d" height="%d" alt="%s" /><span> %s</span></a></li>',
-					$phone_number,
+					'<li id="scb-cellphone"><a href="tel:%s"><img src="%sassets/images/cellphone_%s.svg" width="%d" height="%d" alt="%s" />&nbsp;<span>%s</span></a></li>',
+					$phone_number_escaped,
 					$root_url,
 					$icon_type,
 					$icon_size,
@@ -670,7 +671,7 @@ class Speed_Contact_Bar {
 			if ( isset( $this->stored_settings[ 'email' ] ) && '' != $this->stored_settings[ 'email' ] ) {
 				$safe_email = antispambot( esc_html( $this->stored_settings[ 'email' ] ) );
 				$contact_list[] = sprintf(
-					'<li id="scb-email"><a href="mailto:%s"><img src="%sassets/images/email_%s.svg" width="%d" height="%d" alt="%s" /><span> %s</span></a></li>',
+					'<li id="scb-email"><a href="mailto:%s"><img src="%sassets/images/email_%s.svg" width="%d" height="%d" alt="%s" />&nbsp;<span>%s</span></a></li>',
 					$safe_email,
 					$root_url,
 					$icon_type,
@@ -753,10 +754,18 @@ class Speed_Contact_Bar {
 		$content = '<style media="screen" type="text/css">';
 		$content .= "\n";
 		$content .= '#scb-wrapper ul,#scb-wrapper li,#scb-wrapper a {display:inline;margin:0;padding:0;font-family:sans-serif;font-size:0.96em;line-height:1;} #scb-wrapper li {margin:0 .5em;} #scb-wrapper img {display:inline;vertical-align:middle;margin:0;padding:0;border:0 none;} #scb-wrapper #scb-email {padding-right:1em;}';
+		$content .= '#scb-wrapper li a span {white-space:nowrap;}';
 		$content .= "\n";
 		$content .= '@media screen and (min-width:640px) {#scb-wrapper.scb-fixed {position:fixed;top:0;left:0;z-index:10000;width:100%;}}';
 		$content .= "\n";
-		$content .= '@media screen and (max-width:768px) {#scb-wrapper #scb-phone span,#scb-wrapper #scb-cellphone span,#scb-wrapper #scb-email  span {display:none;}}';
+		// if checked show email address and phone numbers in small displays
+		if ( isset( $this->stored_settings[ 'show_texts' ] ) && 1 == $this->stored_settings[ 'show_texts' ] ) { 
+			// show them without inline breaks and one below the other
+			$content .= '@media screen and (max-width:480px) {#scb-wrapper #scb-directs li {margin-bottom:.5em;display:block;} #scb-wrapper ul {display:block;}} #scb-wrapper #scb-directs a {white-space:nowrap;}';
+		} else {
+			// hide them, show icon only
+			$content .= '@media screen and (max-width:768px) {#scb-wrapper #scb-phone span,#scb-wrapper #scb-cellphone span,#scb-wrapper #scb-email span {display:none;}}';
+		}
 		$content .= "\n";
 		$content .= '@media screen and (max-width:480px) {#scb-wrapper #scb-directs {margin-bottom:.5em;} #scb-wrapper ul {display:block;}}';
 		$content .= "\n";
@@ -885,6 +894,51 @@ class Speed_Contact_Bar {
 	 */
 	private function is_login_page() {
 		return in_array( $GLOBALS['pagenow'], array( 'wp-login.php', 'wp-register.php', 'wp-signup.php' ) );
+	}
+
+	/**
+	 * Returns whether user is on the login page
+	 * 
+	 * @since    2.3
+	 */
+	private function esc_phonenumber ( $tel ) {
+		
+		// only strings
+		if ( ! is_string( $tel ) ) {
+			return '';
+		}
+
+		// remove invalid chars
+		$tel = preg_replace( '/[^0-9a-z+]/i', '', $tel );
+		
+		// remove plus sign within the number, only keep it at the start
+		$tel_first_sign = substr( $tel, 0, 1 );
+		$tel_substr = substr( $tel, 1 );
+		$tel_substr = preg_replace( '/[+]/', '', $tel_substr );
+		$tel = $tel_first_sign . $tel_substr;
+
+		// convert vanity numbers
+		if ( preg_match( '/[a-z]/i', $tel ) ) {
+			#$tel = preg_replace( '/ /', '0', $tel );
+			$tel = preg_replace( '/[abc]/i', '2', $tel );
+			$tel = preg_replace( '/[def]/i', '3', $tel );
+			$tel = preg_replace( '/[ghi]/i', '4', $tel );
+			$tel = preg_replace( '/[jkl]/i', '5', $tel );
+			$tel = preg_replace( '/[mno]/i', '6', $tel );
+			$tel = preg_replace( '/[pqrs]/i', '7', $tel );
+			$tel = preg_replace( '/[tuv]/i', '8', $tel );
+			$tel = preg_replace( '/[wxyz]/i', '9', $tel );
+		}
+
+		// E.164: maximum number of digits: 15
+		$tel = substr( $tel, 0, 15 );
+		
+		// change country area sign
+		$tel = preg_replace( '|^[+]|i', '00', $tel );
+
+		// return sanitized phone number
+		return $tel;
+		
 	}
 
 }

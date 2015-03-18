@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: contact, contacts, email, e-mail, email, phone, telephone, cell phone, number, address, url, link, icons, web, facebook, google plus, google+, g+, instagram, social media, responsive, linkedin, xing, flickr, slideshare, tumblr, vimeo, imdb
 Requires at least: 3.5
 Tested up to: 4.1.1
-Stable tag: 2.2
+Stable tag: 2.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -76,6 +76,7 @@ And of course you can set the **design of the contact bar** to be suitable to th
 12. **Headline text**, **headline HTML tag** and the **headline visibility**
 13. **Shadow under the bar** for a chic 3D effect
 14. **Link target** of all links to open a contact link in the same window or in a new window
+15. **Show contact data on small displays** instead of showing icons only
 
 Do you miss some options? We will add it! Please write your request in the plugin's [support forum at wordpress.org](http://wordpress.org/support/plugin/speed-contact-bar). We will try to take a look and answer as soon as possible.
 
@@ -144,6 +145,12 @@ Please write your request in the plugin's [support forum at wordpress.org](http:
 2. The options page of the contact bar in the WordPress backend
 
 == Changelog ==
+
+= 2.3 =
+* Added option to keep phone numbers and mailaddress displayed in small screens
+* Added function sanitizing phone numbers to make visual representations callable technically
+* Enhanced description at phone numbers on the options page
+* Updated *.pot file and german translation
 
 = 2.2 =
 * Added Instagram option
@@ -234,6 +241,9 @@ First official release
 First release for just trying it
 
 == Upgrade Notice ==
+
+= 2.3 =
+Added option to keep phone numbers and mailaddress displayed in small screens
 
 = 2.2 =
 Added Instagram option, tested with WP 4.1.1
