@@ -365,12 +365,12 @@ class Speed_Contact_Bar_Admin {
 					'phone' => array(
 						'type'    => 'textfield',
 						'title'   => __( 'Phone Number', self::$plugin_slug ),
-						'desc'    => __( 'Enter your official contact phone number', self::$plugin_slug ),
+						'desc'    => __( 'Enter your official contact phone number. Since web pages can be accessed worldwide the phone number should include the international dialing prefix of your country like +49 for Germany, making the number useable from any location.', self::$plugin_slug ),
 					),
 					'cellphone' => array(
 						'type'    => 'textfield',
 						'title'   => __( 'Cell Phone Number', self::$plugin_slug ),
-						'desc'    => __( 'Enter your official contact cell phone number', self::$plugin_slug ),
+						'desc'    => __( 'Enter your official contact cell phone number, including the international dialing prefix of your country', self::$plugin_slug ),
 					),
 					'facebook' => array(
 						'type'    => 'url',
@@ -443,6 +443,11 @@ class Speed_Contact_Bar_Admin {
 				'headline' => __( 'Appeareance', self::$plugin_slug ),
 				'description' => __( 'Set the style of the contact bar.', self::$plugin_slug ),
 				'options' => array(
+					'show_texts' => array(
+						'type'    => 'checkbox',
+						'title'   => __( 'Show texts on small displays', self::$plugin_slug ),
+						'desc'    => __( 'Activate to keep the phone numbers and mail address displayed in small displays', self::$plugin_slug ),
+					),
 					'headline_tag' => array(
 						'type'    => 'selection',
 						'title'   => __( 'Headline HTML Tag', self::$plugin_slug ),
