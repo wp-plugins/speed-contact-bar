@@ -76,6 +76,7 @@ And of course you can set the **design of the contact bar** to be suitable to th
 12. **Headline text**, **headline HTML tag** and the **headline visibility**
 13. **Shadow under the bar** for a chic 3D effect
 14. **Link target** of all links to open a contact link in the same window or in a new window
+15. **Show contact data on small displays** instead of showing icons only
 
 Do you miss some options? We will add it! Please write your request in the plugin's [support forum at wordpress.org](http://wordpress.org/support/plugin/speed-contact-bar). We will try to take a look and answer as soon as possible.
 
