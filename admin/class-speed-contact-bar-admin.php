@@ -502,6 +502,11 @@ class Speed_Contact_Bar_Admin {
 						'values'  => $padding_sizes,
 						'default' => 15,
 					),
+					'bg_transparent' => array(
+						'type'    => 'checkbox',
+						'title'   => __( 'Transparent background', self::$plugin_slug ),
+						'desc'    => __( 'Activate to ignore the background color and to show a transparent bar', self::$plugin_slug ),
+					),
 					'bg_color' => array(
 						'type'    => 'colorpicker',
 						'title'   => __( 'Background Color', self::$plugin_slug ),
