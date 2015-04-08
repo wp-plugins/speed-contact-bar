@@ -4,9 +4,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/plugins/plugin-name\n"
-"POT-Creation-Date: 2015-03-18 15:35+0100\n"
-"PO-Revision-Date: 2015-03-18 15:38+0100\n"
-"Language-Team: m.stehle@gmx.de\n"
+"POT-Creation-Date: 2015-04-09 00:04+0100\n"
+"PO-Revision-Date: 2015-04-09 00:05+0100\n"
+"Last-Translator: Martin Stehle <m.stehle@gmx.de>\n"
+"Language-Team: \n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -22,7 +24,7 @@ msgid "Options"
 msgstr ""
 
 #: admin/class-speed-contact-bar-admin.php:301
-#: public/class-speed-contact-bar.php:884
+#: public/class-speed-contact-bar.php:889
 msgid "Settings"
 msgstr ""
 
@@ -59,7 +61,7 @@ msgid "Enter a short headline for the contact bar"
 msgstr ""
 
 #: admin/class-speed-contact-bar-admin.php:362
-#: public/class-speed-contact-bar.php:680
+#: public/class-speed-contact-bar.php:681
 msgid "E-Mail"
 msgstr ""
 
@@ -68,7 +70,7 @@ msgid "Enter a valid email address. If the email address is invalid it will not 
 msgstr ""
 
 #: admin/class-speed-contact-bar-admin.php:367
-#: public/class-speed-contact-bar.php:653
+#: public/class-speed-contact-bar.php:654
 msgid "Phone Number"
 msgstr ""
 
@@ -77,7 +79,7 @@ msgid "Enter your official contact phone number. Since web pages can be accessed
 msgstr ""
 
 #: admin/class-speed-contact-bar-admin.php:372
-#: public/class-speed-contact-bar.php:667
+#: public/class-speed-contact-bar.php:668
 msgid "Cell Phone Number"
 msgstr ""
 
@@ -262,50 +264,58 @@ msgid "Select the space between content and left and right border of the bar"
 msgstr ""
 
 #: admin/class-speed-contact-bar-admin.php:507
-msgid "Background Color"
+msgid "Transparent background"
 msgstr ""
 
 #: admin/class-speed-contact-bar-admin.php:508
-msgid "Select the background color"
+msgid "Activate to ignore the background color and to show a transparent bar"
 msgstr ""
 
 #: admin/class-speed-contact-bar-admin.php:512
-msgid "Text Color"
+msgid "Background Color"
 msgstr ""
 
 #: admin/class-speed-contact-bar-admin.php:513
-msgid "Select the text color"
+msgid "Select the background color"
 msgstr ""
 
 #: admin/class-speed-contact-bar-admin.php:517
-msgid "Link Color"
+msgid "Text Color"
 msgstr ""
 
 #: admin/class-speed-contact-bar-admin.php:518
-msgid "Select the link color"
+msgid "Select the text color"
 msgstr ""
 
 #: admin/class-speed-contact-bar-admin.php:522
-msgid "Icon Brightness"
+msgid "Link Color"
 msgstr ""
 
 #: admin/class-speed-contact-bar-admin.php:523
+msgid "Select the link color"
+msgstr ""
+
+#: admin/class-speed-contact-bar-admin.php:527
+msgid "Icon Brightness"
+msgstr ""
+
+#: admin/class-speed-contact-bar-admin.php:528
 msgid "Select the brightness of the icons"
 msgstr ""
 
-#: admin/class-speed-contact-bar-admin.php:524
+#: admin/class-speed-contact-bar-admin.php:529
 msgid "bright"
 msgstr ""
 
-#: admin/class-speed-contact-bar-admin.php:524
+#: admin/class-speed-contact-bar-admin.php:529
 msgid "dark"
 msgstr ""
 
-#: admin/class-speed-contact-bar-admin.php:529
+#: admin/class-speed-contact-bar-admin.php:534
 msgid "Show shadow"
 msgstr ""
 
-#: admin/class-speed-contact-bar-admin.php:530
+#: admin/class-speed-contact-bar-admin.php:535
 msgid "Activate to show a slight shadow under the bar"
 msgstr ""
 
@@ -337,23 +347,20 @@ msgstr ""
 msgid "Plugin development by"
 msgstr ""
 
-#: public/class-speed-contact-bar.php:353
+#: public/class-speed-contact-bar.php:354
 #, php-format
 msgid "The plugin requires WordPress version %s or higher. Therefore, WordPress did not activate it. If you want to use this plugin update the Wordpress files to the latest version."
 msgstr ""
 
-#: public/class-speed-contact-bar.php:527
+#: public/class-speed-contact-bar.php:528
 msgid "You do not have sufficient permissions to manage options for this site."
 msgstr ""
 
-#: public/class-speed-contact-bar.php:533
+#: public/class-speed-contact-bar.php:534
 msgid "Contact to us"
 msgstr ""
 
-#: public/class-speed-contact-bar.php:885
+#: public/class-speed-contact-bar.php:890
 #, php-format
 msgid "Welcome to the plugin %s! You can configure it at %s."
 msgstr ""
-
-#~ msgid "Enter your official contact phone number"
-#~ msgstr ""

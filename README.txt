@@ -1,10 +1,10 @@
 === Speed Contact Bar ===
 Contributors: Hinjiriyo, allamoda07
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SBF76TCGTRNX2
-Tags: contact, contacts, email, e-mail, email, phone, telephone, cell phone, number, address, url, link, icons, web, facebook, google plus, google+, g+, instagram, social media, responsive, linkedin, xing, flickr, slideshare, tumblr, vimeo, imdb
+Tags: contact, contacts, email, e-mail, email, phone, telephone, cell phone, number, address, url, link, icons, web, facebook, google plus, google+, g+, instagram, social media, responsive, linkedin, xing, flickr, slideshare, tumblr, vimeo, imdb, transparent
 Requires at least: 3.5
 Tested up to: 4.1.1
-Stable tag: 2.3
+Stable tag: 2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -146,6 +146,10 @@ Please write your request in the plugin's [support forum at wordpress.org](http:
 
 == Changelog ==
 
+= 2.4 =
+* Added option for a transparent bar
+* Updated *.pot file and german translation
+
 = 2.3 =
 * Added option to keep phone numbers and mailaddress displayed in small screens
 * Added function sanitizing phone numbers to make visual representations callable technically
@@ -241,6 +245,9 @@ First official release
 First release for just trying it
 
 == Upgrade Notice ==
+
+= 2.4 =
+Added option for a transparent bar
 
 = 2.3 =
 Added option to keep phone numbers and mailaddress displayed in small screens

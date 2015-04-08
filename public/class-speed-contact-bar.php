@@ -200,7 +200,7 @@ class Speed_Contact_Bar {
 		add_action( 'wp_head', array( $this, 'display_bar_styles' ) );
 
 		// set default values
-		$this->plugin_version = '2.3';
+		$this->plugin_version = '2.4';
 		$this->plugin_name = 'Speed Contact Bar';
 		$this->plugin_slug = 'speed-contact-bar';
 		$this->settings_db_slug = 'speed-contact-bar-options';
@@ -216,6 +216,7 @@ class Speed_Contact_Bar {
 		$this->valid_horizontal_paddings =  range( 8, 32 );
 		$this->default_settings = array(
 			'fixed' => 1,
+			'bg_transparent'  => 0,
 			'bg_color'  => '#dfdfdf',
 			'text_color'  => '#333333',
 			'link_color'  => '#0074A2',
@@ -801,11 +802,15 @@ class Speed_Contact_Bar {
 		}
 		$bar_styles .= sprintf( ' padding: %spx %spx;', $vertical_padding, $horizontal_padding ); 
 
-		$bg_color = $this->default_settings[ 'bg_color' ];
-		if ( isset( $this->stored_settings[ 'bg_color' ] ) && '' != $this->stored_settings[ 'bg_color' ] ) { 
-			$bg_color = esc_attr( $this->stored_settings[ 'bg_color' ] ); 
+		if ( isset( $this->stored_settings[ 'bg_transparent' ] ) && 1 == $this->stored_settings[ 'bg_transparent' ] ) { 
+			$bar_styles .= ' background-color: transparent;'; 
+		} else {
+			$bg_color = $this->default_settings[ 'bg_color' ];
+			if ( isset( $this->stored_settings[ 'bg_color' ] ) && '' != $this->stored_settings[ 'bg_color' ] ) { 
+				$bg_color = esc_attr( $this->stored_settings[ 'bg_color' ] ); 
+			}
+			$bar_styles .= sprintf( ' background-color: %s;', $bg_color ); 
 		}
-		$bar_styles .= sprintf( ' background-color: %s;', $bg_color ); 
 
 		$text_color = $this->default_settings[ 'text_color' ];
 		if ( isset( $this->stored_settings[ 'text_color' ] ) && '' != $this->stored_settings[ 'text_color' ] ) { 
