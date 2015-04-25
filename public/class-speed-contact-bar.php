@@ -200,12 +200,12 @@ class Speed_Contact_Bar {
 		add_action( 'wp_head', array( $this, 'display_bar_styles' ) );
 
 		// set default values
-		$this->plugin_version = '2.4';
+		$this->plugin_version = '2.5';
 		$this->plugin_name = 'Speed Contact Bar';
 		$this->plugin_slug = 'speed-contact-bar';
 		$this->settings_db_slug = 'speed-contact-bar-options';
 		$this->stored_settings = array();
-		$this->valid_social_networks = array( 'facebook', 'googleplus', 'twitter', 'pinterest', 'youtube', 'linkedin', 'xing', 'flickr', 'slideshare', 'tumblr', 'vimeo', 'imdb', 'instagram' );
+		$this->valid_social_networks = array( 'facebook', 'googleplus', 'twitter', 'pinterest', 'youtube', 'linkedin', 'xing', 'flickr', 'slideshare', 'tumblr', 'vimeo', 'imdb', 'instagram', 'yelp' );
 		$this->valid_headline_tags = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div', 'p' );
 		$this->valid_icon_types =  array( 'bright', 'dark' );
 		$this->valid_content_alignments =  array( 'left', 'center', 'right' );
@@ -697,8 +697,9 @@ class Speed_Contact_Bar {
 				$target = ' target="_blank"';
 			}
 			$contact_list = array();
+			$pngs = array( 'imdb', 'yelp' ); // PNG image file names
 			foreach ( $this->valid_social_networks as $icon ) {
-				if ( 'imdb' == $icon && isset( $this->stored_settings[ $icon ] ) && '' != $this->stored_settings[ $icon ] ) {
+				if ( in_array( $icon, $pngs ) && isset( $this->stored_settings[ $icon ] ) && '' != $this->stored_settings[ $icon ] ) {
 					$contact_list[] = sprintf( 
 						'<li id="scb-%s"><a href="%s"%s><img src="%sassets/images/%s.png" width="%d" height="%d" alt="%s" /></a></li>',
 						$icon,

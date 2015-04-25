@@ -1,10 +1,10 @@
 === Speed Contact Bar ===
 Contributors: Hinjiriyo, allamoda07
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SBF76TCGTRNX2
-Tags: contact, contacts, email, e-mail, email, phone, telephone, cell phone, number, address, url, link, icons, web, facebook, google plus, google+, g+, instagram, social media, responsive, linkedin, xing, flickr, slideshare, tumblr, vimeo, imdb, transparent
+Tags: contact, contacts, email, e-mail, email, phone, telephone, cell phone, number, address, url, link, icons, web, facebook, google plus, google+, g+, instagram, social media, responsive, linkedin, xing, flickr, slideshare, tumblr, vimeo, imdb, transparent,yelp
 Requires at least: 3.5
-Tested up to: 4.1.1
-Stable tag: 2.4
+Tested up to: 4.2
+Stable tag: 2.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,6 +22,7 @@ Each icon appears if you set its target URL in the option page. The phone icons 
 
 = What users said =
 
+* **It's one of my favorites, and easily one of the best for social buttons.** in [WordPress.org Support Forum](https://wordpress.org/support/topic/adding-yelp) by aleos97 on April 25, 2015
 * **Number 22** in [22 Best Premium &amp; Free WordPress Notification Bars Plugin](http://www.frip.in/best-premium-free-wordpress-notification-bars/) by Himanshu on January 8, 2015
 * **Number 9** in [10 must-have plugins for your blog](http://www.universulanderei.ro/2014/05/23/10-must-have-plugins-for-your-blog/) by Andera on May 23, 2014
 
@@ -56,6 +57,7 @@ Up till now Speed Contact Bar supports links to these **social media platforms**
 10. Twitter
 11. Vimeo
 12. Xing
+12. Yelp
 13. Youtube
 
 More social media plattforms will come in future.
@@ -66,7 +68,7 @@ And of course you can set the **design of the contact bar** to be suitable to th
 2. **Horizontal padding** of the contact bar
 3. **Vertical padding** of the contact bar
 4. **Space between bar and page content** if the bar is fixed on top
-5. **Background color** of the contact bar
+5. **Background color** of the contact bar or a **transparent bar**
 6. **Text color**
 7. **Link color**
 8. **Lightness of icons**: Dark or bright icons
@@ -145,6 +147,11 @@ Please write your request in the plugin's [support forum at wordpress.org](http:
 2. The options page of the contact bar in the WordPress backend
 
 == Changelog ==
+
+= 2.5 =
+* Added Yelp option
+* Tested successfully with WP 4.2
+* Updated *.pot file and german translation
 
 = 2.4 =
 * Added option for a transparent bar
@@ -245,6 +252,9 @@ First official release
 First release for just trying it
 
 == Upgrade Notice ==
+
+= 2.5 =
+Added Yelp option, tested successfully with WP 4.2
 
 = 2.4 =
 Added option for a transparent bar

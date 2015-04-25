@@ -242,6 +242,7 @@ class Speed_Contact_Bar_Admin {
 		$screen = get_current_screen();
 		if ( self::$plugin_screen_hook_suffix == $screen->id ) {
 			$root_url = plugin_dir_url( dirname( __FILE__ ) );
+			$pngs = array( 'imdb', 'yelp' ); // PNG image file namens
 			print '<style type="text/css">';
 			print "\n";
 			foreach ( array( 'phone', 'cellphone', 'email' ) as $name ) {
@@ -249,7 +250,7 @@ class Speed_Contact_Bar_Admin {
 				print "\n";
 			}
 			foreach ( self::$social_networks as $name ) {
-				if ( 'imdb' == $name ) {
+				if ( in_array( $name, $pngs ) ) {
 					printf( ".form-table th label[for='%s'] { display: block; height: 85px; background: url('%spublic/assets/images/%s.png') no-repeat scroll 0 2.5em transparent; background-size: 85px 40px; }", $name, $root_url, $name );
 				} else {
 					printf( ".form-table th label[for='%s'] { display: block; height: 85px; background: url('%spublic/assets/images/%s.svg') no-repeat scroll 0 2.5em transparent; background-size: 40px 40px; }", $name, $root_url, $name );
@@ -374,68 +375,73 @@ class Speed_Contact_Bar_Admin {
 					),
 					'facebook' => array(
 						'type'    => 'url',
-						'title'   => __( 'Facebook Fan Page URL', self::$plugin_slug ),
+						'title'   => __( 'Your URL on', self::$plugin_slug ) . ' Facebook',
 						'desc'    => __( 'Example', self::$plugin_slug ) . ': http://www.facebook.com/name<br />'. __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
 					),
 					'googleplus' => array(
 						'type'    => 'url',
-						'title'   => __( 'Google Plus Page URL', self::$plugin_slug ),
+						'title'   => __( 'Your URL on', self::$plugin_slug ) . ' Google Plus',
 						'desc'    => __( 'Example', self::$plugin_slug ) . ': https://plus.google.com/name<br />'. __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
 					),
 					'twitter' => array(
 						'type'    => 'url',
-						'title'   => __( 'Twitter Profile URL', self::$plugin_slug ),
+						'title'   => __( 'Your URL on', self::$plugin_slug ) . ' Twitter',
 						'desc'    => __( 'Example', self::$plugin_slug ) . ': http://www.twitter.com/username<br />'. __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
 					),
 					'pinterest' => array(
 						'type'    => 'url',
-						'title'   => __( 'Pinterest Page URL', self::$plugin_slug ),
+						'title'   => __( 'Your URL on', self::$plugin_slug ) . ' Pinterest',
 						'desc'    => __( 'Example', self::$plugin_slug ) . ': http://www.pinterest.com/username<br />'. __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
 					),
 					'youtube' => array(
 						'type'    => 'url',
-						'title'   => __( 'YouTube Channel/Video URL', self::$plugin_slug ),
+						'title'   => __( 'Your URL on', self::$plugin_slug ) . ' YouTube',
 						'desc'    => __( 'Example', self::$plugin_slug ) . ': http://www.youtube.com/username<br />'. __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
 					),
 					'linkedin' => array(
 						'type'    => 'url',
-						'title'   => __( 'LinkedIn Profile URL', self::$plugin_slug ),
+						'title'   => __( 'Your URL on', self::$plugin_slug ) . ' LinkedIn',
 						'desc'    => __( 'Example', self::$plugin_slug ) . ': http://www.linkedin.com/in/username<br />'. __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
 					),
 					'xing' => array(
 						'type'    => 'url',
-						'title'   => __( 'Xing Profile URL', self::$plugin_slug ),
+						'title'   => __( 'Your URL on', self::$plugin_slug ) . ' Xing',
 						'desc'    => __( 'Example', self::$plugin_slug ) . ': http://www.xing.com/profile/username<br />'. __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
 					),
 					'flickr' => array(
 						'type'    => 'url',
-						'title'   => __( 'Flickr Profile URL', self::$plugin_slug ),
+						'title'   => __( 'Your URL on', self::$plugin_slug ) . ' Flickr',
 						'desc'    => __( 'Example', self::$plugin_slug ) . ': https://www.flickr.com/people/user-id/<br />'. __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
 					),
 					'slideshare' => array(
 						'type'    => 'url',
-						'title'   => __( 'SlideShare Channel URL', self::$plugin_slug ),
+						'title'   => __( 'Your URL on', self::$plugin_slug ) . ' SlideShare',
 						'desc'    => __( 'Example', self::$plugin_slug ) . ': http://www.slideshare.net/channelname<br />'. __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
 					),
 					'tumblr' => array(
 						'type'    => 'url',
-						'title'   => __( 'tumblr Blog URL', self::$plugin_slug ),
+						'title'   => __( 'Your URL on', self::$plugin_slug ) . ' tumblr',
 						'desc'    => __( 'Example', self::$plugin_slug ) . ': http://blogname.tumblr.com/<br />'. __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
 					),
 					'vimeo' => array(
 						'type'    => 'url',
-						'title'   => __( 'Vimeo URL', self::$plugin_slug ),
+						'title'   => __( 'Your URL on', self::$plugin_slug ) . ' Vimeo',
 						'desc'    => __( 'Example', self::$plugin_slug ) . ': http://vimeo.com/name<br />'. __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
 					),
 					'imdb' => array(
 						'type'    => 'url',
-						'title'   => __( 'IMDb URL', self::$plugin_slug ),
+						'title'   => __( 'Your URL on', self::$plugin_slug ) . ' IMDb',
 						'desc'    => __( 'Example', self::$plugin_slug ) . ': http://www.imdb.com/user/name<br />'. __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
 					),
 					'instagram' => array(
 						'type'    => 'url',
-						'title'   => __( 'Instagram URL', self::$plugin_slug ),
+						'title'   => __( 'Your URL on', self::$plugin_slug ) . ' Instagram',
 						'desc'    => __( 'Example', self::$plugin_slug ) . ': http://instagram.com/name<br />'. __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
+					),
+					'yelp' => array(
+						'type'    => 'url',
+						'title'   => __( 'Your URL on', self::$plugin_slug ) . ' Yelp',
+						'desc'    => __( 'Example', self::$plugin_slug ) . ': http://www.yelp.com/biz/name<br />'. __( 'Enter a valid URL. If the URL is invalid it will not be used.', self::$plugin_slug ),
 					),
 				),
 			),
