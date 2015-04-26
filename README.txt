@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: contact, contacts, email, e-mail, email, phone, telephone, cell phone, number, address, url, link, icons, web, facebook, google plus, google+, g+, instagram, social media, responsive, linkedin, xing, flickr, slideshare, tumblr, vimeo, imdb, transparent,yelp
 Requires at least: 3.5
 Tested up to: 4.2
-Stable tag: 2.5
+Stable tag: 2.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,7 +22,7 @@ Each icon appears if you set its target URL in the option page. The phone icons 
 
 = What users said =
 
-* **It's one of my favorites, and easily one of the best for social buttons.** in [WordPress.org Support Forum](https://wordpress.org/support/topic/adding-yelp) by aleos97 on April 25, 2015
+* **"It's one of my favorites, and easily one of the best for social buttons."** in [WordPress.org Support Forum](https://wordpress.org/support/topic/adding-yelp) by aleos97 on April 25, 2015
 * **Number 22** in [22 Best Premium &amp; Free WordPress Notification Bars Plugin](http://www.frip.in/best-premium-free-wordpress-notification-bars/) by Himanshu on January 8, 2015
 * **Number 9** in [10 must-have plugins for your blog](http://www.universulanderei.ro/2014/05/23/10-must-have-plugins-for-your-blog/) by Andera on May 23, 2014
 
@@ -148,6 +148,9 @@ Please write your request in the plugin's [support forum at wordpress.org](http:
 
 == Changelog ==
 
+= 2.5.1 =
+* Fixed wrong aspect ratios for the IMDb and Yelp icons
+
 = 2.5 =
 * Added Yelp option
 * Tested successfully with WP 4.2
@@ -252,6 +255,9 @@ First official release
 First release for just trying it
 
 == Upgrade Notice ==
+
+= 2.5.1 =
+Fixed wrong aspect ratios for the IMDb and Yelp icons
 
 = 2.5 =
 Added Yelp option, tested successfully with WP 4.2

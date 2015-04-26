@@ -200,7 +200,7 @@ class Speed_Contact_Bar {
 		add_action( 'wp_head', array( $this, 'display_bar_styles' ) );
 
 		// set default values
-		$this->plugin_version = '2.5';
+		$this->plugin_version = '2.5.1';
 		$this->plugin_name = 'Speed Contact Bar';
 		$this->plugin_slug = 'speed-contact-bar';
 		$this->settings_db_slug = 'speed-contact-bar-options';
@@ -697,9 +697,12 @@ class Speed_Contact_Bar {
 				$target = ' target="_blank"';
 			}
 			$contact_list = array();
-			$pngs = array( 'imdb', 'yelp' ); // PNG image file names
+			$pngs = array( 
+				'imdb' => 2.115, 
+				'yelp' => 1.888,
+			); // PNG image file names with aspect ratios (width / height)
 			foreach ( $this->valid_social_networks as $icon ) {
-				if ( in_array( $icon, $pngs ) && isset( $this->stored_settings[ $icon ] ) && '' != $this->stored_settings[ $icon ] ) {
+				if ( in_array( $icon, array_keys( $pngs ) ) && isset( $this->stored_settings[ $icon ] ) && '' != $this->stored_settings[ $icon ] ) {
 					$contact_list[] = sprintf( 
 						'<li id="scb-%s"><a href="%s"%s><img src="%sassets/images/%s.png" width="%d" height="%d" alt="%s" /></a></li>',
 						$icon,
@@ -707,8 +710,8 @@ class Speed_Contact_Bar {
 						$target,
 						$root_url,
 						$icon,
-						$icon_size * 2,
-						$icon_size * 2,
+						intval( round( $pngs[ $icon ] * $icon_size ) ),
+						$icon_size,
 						ucfirst( $icon ) 
 					);
 				} else {
