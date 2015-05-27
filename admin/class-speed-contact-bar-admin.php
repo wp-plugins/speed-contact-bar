@@ -348,6 +348,11 @@ class Speed_Contact_Bar_Admin {
 						'title'   => __( 'Show headline', self::$plugin_slug ),
 						'desc'    => __( 'Activate to show the headline', self::$plugin_slug ),
 					),
+					'keep_headline' => array(
+						'type'    => 'checkbox',
+						'title'   => __( 'Keep headline in mobile devices', self::$plugin_slug ),
+						'desc'    => __( 'Activate to keep displaying the headline in tablets and smartphones, else it will be hidden', self::$plugin_slug ),
+					),
 					'open_new_window' => array(
 						'type'    => 'checkbox',
 						'title'   => __( 'Open links in new windows', self::$plugin_slug ),

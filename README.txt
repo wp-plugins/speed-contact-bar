@@ -3,8 +3,8 @@ Contributors: Hinjiriyo, allamoda07
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SBF76TCGTRNX2
 Tags: contact, contacts, email, e-mail, email, phone, telephone, cell phone, number, address, url, link, icons, web, facebook, google plus, google+, g+, instagram, social media, responsive, linkedin, xing, flickr, slideshare, tumblr, vimeo, imdb, transparent,yelp
 Requires at least: 3.5
-Tested up to: 4.2
-Stable tag: 2.5.1
+Tested up to: 4.2.2
+Stable tag: 2.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -148,6 +148,11 @@ Please write your request in the plugin's [support forum at wordpress.org](http:
 
 == Changelog ==
 
+= 2.6 =
+* Added option to keep the headline in mobile devices
+* Tested successfully with WP 4.2.2
+* Updated *.pot file and german translation
+
 = 2.5.1 =
 * Fixed wrong aspect ratios for the IMDb and Yelp icons
 
@@ -255,6 +260,9 @@ First official release
 First release for just trying it
 
 == Upgrade Notice ==
+
+= 2.6 =
+Added option for the headline in mobile devices, tested successfully with WP 4.2.2
 
 = 2.5.1 =
 Fixed wrong aspect ratios for the IMDb and Yelp icons

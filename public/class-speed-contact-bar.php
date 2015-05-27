@@ -200,7 +200,7 @@ class Speed_Contact_Bar {
 		add_action( 'wp_head', array( $this, 'display_bar_styles' ) );
 
 		// set default values
-		$this->plugin_version = '2.5.1';
+		$this->plugin_version = '2.6';
 		$this->plugin_name = 'Speed Contact Bar';
 		$this->plugin_slug = 'speed-contact-bar';
 		$this->settings_db_slug = 'speed-contact-bar-options';
@@ -223,6 +223,7 @@ class Speed_Contact_Bar {
 			'icon_type'  => 'dark',
 			'content_alignment'  => 'center',
 			'show_headline'  => 1,
+			'keep_headline'  => 0,
 			'open_new_window'  => 0,
 			'show_labels'  => 1,
 			'show_shadow'  => 1,
@@ -846,9 +847,12 @@ class Speed_Contact_Bar {
 		$content .= ' }';
 		$content .= "\n";
 
-		/* hide headline in tablets and smartphones */
-		$content .= sprintf( '@media screen and (max-width: 768px) { #scb-wrapper %s { display: none; } }', $headline_tag );
-		$content .= "\n";
+		/* hide headline in tablets and smartphones if desired */
+		if ( isset( $this->stored_settings[ 'keep_headline' ] ) && 0 == $this->stored_settings[ 'keep_headline' ] ) {
+			$content .= sprintf( '@media screen and (max-width: 768px) { #scb-wrapper %s { display: none; } }', $headline_tag );
+			$content .= "\n";
+		}
+		
 
 		/* color of links */
 		$link_color = $this->default_settings[ 'link_color' ];
@@ -866,7 +870,7 @@ class Speed_Contact_Bar {
 		$content .= sprintf( '#scb-wrapper %s, #scb-wrapper ul, #scb-wrapper li, #scb-wrapper a { font-size: %dpx; } ', $headline_tag, $font_size );
 		$content .= "\n";
 
-		/* headline visibility */
+		/* hide headline if desired */
 		if ( isset( $this->stored_settings[ 'show_headline' ] ) && 0 == $this->stored_settings[ 'show_headline' ] ) {
 			$content .= sprintf( '#scb-wrapper %s { display: inline; left: -32768px; margin: 0; padding: 0; position: absolute; top: 0; z-index: 1000; } ', $headline_tag );
 			$content .= "\n";
