@@ -1,10 +1,10 @@
 === Speed Contact Bar ===
 Contributors: Hinjiriyo, allamoda07
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SBF76TCGTRNX2
-Tags: contact, contacts, email, e-mail, email, phone, telephone, cell phone, number, address, url, link, icons, web, facebook, google plus, google+, g+, instagram, social media, responsive, linkedin, xing, flickr, slideshare, tumblr, vimeo, imdb, transparent,yelp
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TPCX6FVZ5NSJ6
+Tags: address, bottom, cell phone, contact, contacts, e-mail, email, facebook, flickr, g+, google plus, google+, icons, imdb, instagram, link, linkedin, number, phone, pinterest, position, responsive, slideshare, social media, telephone, top, transparent, tumblr, twitter, url, vimeo, web, xing, yelp, youtube
 Requires at least: 3.5
 Tested up to: 4.2.2
-Stable tag: 2.6
+Stable tag: 3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,9 +22,12 @@ Each icon appears if you set its target URL in the option page. The phone icons 
 
 = What users said =
 
+* **Number 8** in [Top 9 WordPress Free Contact Forms](http://www.thenightmarketer.com/wordpress/top-9-wordpress-free-contact-forms/) by The Night Marketer on May 29, 2015
+* **"Great plugin to add contact info to the top bar."** in [WordPress.org Reviews](https://wordpress.org/support/view/plugin-reviews/speed-contact-bar) by mnbehrens on May 27, 2015
+* **Number 23** in [24 Best Free & Premium WordPress Notification Bars Plugin 2015](http://www.frip.in/best-premium-free-wordpress-notification-bars/) by Himanshu on May 8, 2015
+* **"Absolutely fantastic. Was exactly what I was looking for and looks brilliant on my website."** in [WordPress.org Reviews](https://wordpress.org/support/view/plugin-reviews/speed-contact-bar) by tydem00 on April 15, 2015
 * **"It's one of my favorites, and easily one of the best for social buttons."** in [WordPress.org Support Forum](https://wordpress.org/support/topic/adding-yelp) by aleos97 on April 25, 2015
-* **Number 22** in [22 Best Premium &amp; Free WordPress Notification Bars Plugin](http://www.frip.in/best-premium-free-wordpress-notification-bars/) by Himanshu on January 8, 2015
-* **Number 9** in [10 must-have plugins for your blog](http://www.universulanderei.ro/2014/05/23/10-must-have-plugins-for-your-blog/) by Andera on May 23, 2014
+* **"Easy Peasy Lemon Squeezy!"** in [WordPress.org Reviews](https://wordpress.org/support/view/plugin-reviews/speed-contact-bar) by Beefy on February 10, 2015
 
 = What you can configure =
 
@@ -64,21 +67,25 @@ More social media plattforms will come in future.
 
 And of course you can set the **design of the contact bar** to be suitable to the design of your website:
 
-1. **Fixed on top or not**: The contact bar appears on top of every page. You can set whether it should **scroll** with the content or **stay fixed**
-2. **Horizontal padding** of the contact bar
-3. **Vertical padding** of the contact bar
-4. **Space between bar and page content** if the bar is fixed on top
-5. **Background color** of the contact bar or a **transparent bar**
-6. **Text color**
-7. **Link color**
-8. **Lightness of icons**: Dark or bright icons
-9. **Content alignment** within the bar
-10. **Font size** of the texts and links
-11. **Icon size**
-12. **Headline text**, **headline HTML tag** and the **headline visibility**
-13. **Shadow under the bar** for a chic 3D effect
-14. **Link target** of all links to open a contact link in the same window or in a new window
-15. **Show contact data on small displays** instead of showing icons only
+1. **Position of the bar**: You can place the bar at the **top** or **bottom** on every page
+2. **Fixed position**: You can set whether it should **scroll** with the content or **stay fixed**
+3. **Horizontal padding** of the contact bar
+4. **Vertical padding** of the contact bar
+5. **Space between bar and page content** if the bar is fixed
+6. **Background color** of the contact bar or a **transparent bar**
+7. **Text color**
+8. **Link color**
+9. **Lightness of icons**: You can select between **dark** or **bright** icons
+10. **Content alignment** within the bar
+11. **Font size** of the texts and links
+12. **Icon size**
+13. **Headline visibility**: switch the headline on or off
+14. **Headline text**
+15. **Headline HTML tag**
+16. **Headline URL** to make the headline a link
+17. **Shadow under or above the bar** for a chic 3D effect
+18. **Link target** of all links to open a contact link in the same window or in a new window
+19. **Show contact data on small displays** instead of showing icons only
 
 Do you miss some options? We will add it! Please write your request in the plugin's [support forum at wordpress.org](http://wordpress.org/support/plugin/speed-contact-bar). We will try to take a look and answer as soon as possible.
 
@@ -111,6 +118,12 @@ Do you miss some options? We will add it! Please write your request in the plugi
 
 
 == Frequently Asked Questions ==
+
+= Could there be any conflicts with my theme? =
+
+In most theme the Speed Contact Bar works fine with many themes. Only if the theme comes with an own fixed top bar there can be a source of design conflicts with a fixed Speed Contact Bar.
+
+In that case you can try to set the position of the Speed Contact Bar at the bottom of every page. That will avoid the conflict.
 
 = What does the plugin need to work fine? =
 
@@ -147,6 +160,15 @@ Please write your request in the plugin's [support forum at wordpress.org](http:
 2. The options page of the contact bar in the WordPress backend
 
 == Changelog ==
+
+= 3.0 =
+* Added Position option: place the bar at the top or at the bottom on every page
+* Added Headline URL option: The headline can become a link with a given URL
+* Added donation button to make it easier for you to contribute the plugin
+* Moved some headline options to the 'Appereance' section
+* Cleared up options page: More structure and new order of the options
+* Updated screenshot of Options Page
+* Updated *.pot file and german translation
 
 = 2.6 =
 * Added option to keep the headline in mobile devices
@@ -260,6 +282,9 @@ First official release
 First release for just trying it
 
 == Upgrade Notice ==
+
+= 3.0 =
+Added and reordered options
 
 = 2.6 =
 Added option for the headline in mobile devices, tested successfully with WP 4.2.2

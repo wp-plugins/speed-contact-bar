@@ -340,28 +340,18 @@ class Speed_Contact_Bar_Admin {
 		// define the form sections, order by appereance, with headlines, and options
 		self::$form_structure = array(
 			'1st_section' => array(
-				'headline' => __( 'Contact Data', self::$plugin_slug ),
+				'headline' => __( 'Your Contact Data', self::$plugin_slug ),
 				'description' => __( 'Set the contact informations. To supress displaying a field leave it empty.', self::$plugin_slug ),
 				'options' => array(
-					'show_headline' => array(
-						'type'    => 'checkbox',
-						'title'   => __( 'Show headline', self::$plugin_slug ),
-						'desc'    => __( 'Activate to show the headline', self::$plugin_slug ),
-					),
-					'keep_headline' => array(
-						'type'    => 'checkbox',
-						'title'   => __( 'Keep headline in mobile devices', self::$plugin_slug ),
-						'desc'    => __( 'Activate to keep displaying the headline in tablets and smartphones, else it will be hidden', self::$plugin_slug ),
-					),
-					'open_new_window' => array(
-						'type'    => 'checkbox',
-						'title'   => __( 'Open links in new windows', self::$plugin_slug ),
-						'desc'    => __( 'Activate to let the links load the target site in new windows or tabs', self::$plugin_slug ),
-					),
 					'headline' => array(
 						'type'    => 'textfield',
 						'title'   => __( 'Headline', self::$plugin_slug ),
 						'desc'    => __( 'Enter a short headline for the contact bar', self::$plugin_slug ),
+					),
+					'headline_url' => array(
+						'type'    => 'url',
+						'title'   => __( 'URL of the headline', self::$plugin_slug ),
+						'desc'    => __( 'Enter a web address and the headline becomes a link. The address must start with http:// or https://', self::$plugin_slug ) ,
 					),
 					'email' => array(
 						'type'    => 'email',
@@ -451,52 +441,26 @@ class Speed_Contact_Bar_Admin {
 				),
 			),
 			'2nd_section' => array(
-				'headline' => __( 'Appeareance', self::$plugin_slug ),
-				'description' => __( 'Set the style of the contact bar.', self::$plugin_slug ),
+				'headline' => __( 'Appeareance of the contact bar', self::$plugin_slug ),
+				'description' => __( 'Set the graphical properties of the contact bar.', self::$plugin_slug ),
 				'options' => array(
-					'show_texts' => array(
-						'type'    => 'checkbox',
-						'title'   => __( 'Show texts on small displays', self::$plugin_slug ),
-						'desc'    => __( 'Activate to keep the phone numbers and mail address displayed in small displays', self::$plugin_slug ),
-					),
-					'headline_tag' => array(
+					'position' => array(
 						'type'    => 'selection',
-						'title'   => __( 'Headline HTML Tag', self::$plugin_slug ),
-						'desc'    => __( 'Select the HTML element for the headline without changing the headline style', self::$plugin_slug ),
-						'values'  => array( 'h1' => 'H1', 'h2' => 'H2', 'h3' => 'H3', 'h4' => 'H4', 'h5' => 'H5', 'h6' => 'H6', 'div' => 'DIV', 'p' => 'P' ),
-						'default' => 'h2',
+						'title'   => __( 'Position of the bar', self::$plugin_slug ),
+						'desc'    => __( 'Select the position of the bar on every page', self::$plugin_slug ),
+						'values'  => array( 'top' => __( 'at the top', self::$plugin_slug ), 'bottom' => __( 'at the bottom', self::$plugin_slug ) ),
+						'default' => 'top',
 					),
 					'fixed' => array(
 						'type'    => 'checkbox',
 						'title'   => __( 'Enable fixed position', self::$plugin_slug ),
-						'desc'    => __( 'Display bar always on top (not available in mobile design)', self::$plugin_slug ),
+						'desc'    => __( 'Display bar always visible (not available in mobile design)', self::$plugin_slug ),
 					),
 					'readjustment' => array(
 						'type'    => 'selection',
 						'title'   => __( 'Height readjustment for fixed position', self::$plugin_slug ),
 						'desc'    => __( 'Readjust the space between the bar and the page content (not in mobile design)', self::$plugin_slug ),
 						'values'  => $readjustments,
-						'default' => 30,
-					),
-					'content_alignment' => array(
-						'type'    => 'selection',
-						'title'   => __( 'Text Alignment', self::$plugin_slug ),
-						'desc'    => __( 'Select the alignment of the content within the bar', self::$plugin_slug ),
-						'values'  => array( 'left' => __( 'left-aligned', self::$plugin_slug ), 'center' => __( 'centered', self::$plugin_slug ), 'right' => __( 'right-aligned', self::$plugin_slug ) ),
-						'default' => 'center',
-					),
-					'font_size' => array(
-						'type'    => 'selection',
-						'title'   => __( 'Font Size', self::$plugin_slug ),
-						'desc'    => __( 'Select the font size of the texts and links', self::$plugin_slug ),
-						'values'  => $font_sizes,
-						'default' => 15,
-					),
-					'icon_size' => array(
-						'type'    => 'selection',
-						'title'   => __( 'Icon Size', self::$plugin_slug ),
-						'desc'    => __( 'Select the size of the icons', self::$plugin_slug ),
-						'values'  => $icon_sizes,
 						'default' => 30,
 					),
 					'vertical_padding' => array(
@@ -523,6 +487,59 @@ class Speed_Contact_Bar_Admin {
 						'title'   => __( 'Background Color', self::$plugin_slug ),
 						'desc'    => __( 'Select the background color', self::$plugin_slug ),
 					),
+					'show_shadow' => array(
+						'type'    => 'checkbox',
+						'title'   => __( 'Show shadow', self::$plugin_slug ),
+						'desc'    => __( 'Activate to show a slight shadow under or above the bar depending on the position of the bar', self::$plugin_slug ),
+					),
+				),
+			),
+			'3rd_section' => array(
+				'headline' => __( 'Appeareance of the headline', self::$plugin_slug ),
+				'description' => __( 'Set the graphical properties of the headline.', self::$plugin_slug ),
+				'options' => array(
+					'show_headline' => array(
+						'type'    => 'checkbox',
+						'title'   => __( 'Show headline', self::$plugin_slug ),
+						'desc'    => __( 'Activate to show the headline', self::$plugin_slug ),
+					),
+					'keep_headline' => array(
+						'type'    => 'checkbox',
+						'title'   => __( 'Keep headline in mobile devices', self::$plugin_slug ),
+						'desc'    => __( 'Activate to keep displaying the headline in tablets and smartphones, else it will be hidden', self::$plugin_slug ),
+					),
+					'headline_tag' => array(
+						'type'    => 'selection',
+						'title'   => __( 'Headline HTML Tag', self::$plugin_slug ),
+						'desc'    => __( 'Select the HTML element for the headline without changing the headline style', self::$plugin_slug ),
+						'values'  => array( 'h1' => 'H1', 'h2' => 'H2', 'h3' => 'H3', 'h4' => 'H4', 'h5' => 'H5', 'h6' => 'H6', 'div' => 'DIV', 'p' => 'P' ),
+						'default' => 'h2',
+					),
+				),
+			),
+			'4th_section' => array(
+				'headline' => __( 'Appeareance of texts and links', self::$plugin_slug ),
+				'description' => __( 'Set the graphical properties of the texts and links in the contact bar.', self::$plugin_slug ),
+				'options' => array(
+					'show_texts' => array(
+						'type'    => 'checkbox',
+						'title'   => __( 'Show texts on small displays', self::$plugin_slug ),
+						'desc'    => __( 'Activate to keep the phone numbers and mail address displayed in small displays', self::$plugin_slug ),
+					),
+					'content_alignment' => array(
+						'type'    => 'selection',
+						'title'   => __( 'Text Alignment', self::$plugin_slug ),
+						'desc'    => __( 'Select the alignment of the content within the bar', self::$plugin_slug ),
+						'values'  => array( 'left' => __( 'left-aligned', self::$plugin_slug ), 'center' => __( 'centered', self::$plugin_slug ), 'right' => __( 'right-aligned', self::$plugin_slug ) ),
+						'default' => 'center',
+					),
+					'font_size' => array(
+						'type'    => 'selection',
+						'title'   => __( 'Font Size', self::$plugin_slug ),
+						'desc'    => __( 'Select the font size of the texts and links', self::$plugin_slug ),
+						'values'  => $font_sizes,
+						'default' => 15,
+					),
 					'text_color' => array(
 						'type'    => 'colorpicker',
 						'title'   => __( 'Text Color', self::$plugin_slug ),
@@ -533,6 +550,24 @@ class Speed_Contact_Bar_Admin {
 						'title'   => __( 'Link Color', self::$plugin_slug ),
 						'desc'    => __( 'Select the link color', self::$plugin_slug ),
 					),
+					'open_new_window' => array(
+						'type'    => 'checkbox',
+						'title'   => __( 'Open links in new windows', self::$plugin_slug ),
+						'desc'    => __( 'Activate to let the links load the target site in new windows or tabs', self::$plugin_slug ),
+					),
+				),
+			),
+			'5th_section' => array(
+				'headline' => __( 'Appeareance of the icons', self::$plugin_slug ),
+				'description' => __( 'Set the graphical properties of the icons in the contact bar.', self::$plugin_slug ),
+				'options' => array(
+					'icon_size' => array(
+						'type'    => 'selection',
+						'title'   => __( 'Icon Size', self::$plugin_slug ),
+						'desc'    => __( 'Select the size of the icons', self::$plugin_slug ),
+						'values'  => $icon_sizes,
+						'default' => 30,
+					),
 					'icon_type' => array(
 						'type'    => 'selection',
 						'title'   => __( 'Icon Brightness', self::$plugin_slug ),
@@ -540,15 +575,8 @@ class Speed_Contact_Bar_Admin {
 						'values'  => array( 'bright' => __( 'bright', self::$plugin_slug ), 'dark' => __( 'dark', self::$plugin_slug ) ),
 						'default' => 'dark',
 					),
-					'show_shadow' => array(
-						'type'    => 'checkbox',
-						'title'   => __( 'Show shadow', self::$plugin_slug ),
-						'desc'    => __( 'Activate to show a slight shadow under the bar', self::$plugin_slug ),
-					),
 				),
 			),
-			#'3rd_section' => array(
-			#),
 		);
 		// build form with sections and options
 		foreach ( self::$form_structure as $section_key => $section_values ) {
@@ -751,10 +779,28 @@ class Speed_Contact_Bar_Admin {
 	/**
 	* Print the explanation for section 3
 	*
-	* @since   1.0
+	* @since   3.0
 	*/
 	public static function print_section_3rd_section () {
 		printf( "<p>%s</p>\n", self::$form_structure[ '3rd_section' ][ 'description' ] );
+	}
+	
+	/**
+	* Print the explanation for section 4
+	*
+	* @since   3.0
+	*/
+	public static function print_section_4th_section () {
+		printf( "<p>%s</p>\n", self::$form_structure[ '4th_section' ][ 'description' ] );
+	}
+	
+	/**
+	* Print the explanation for section 5
+	*
+	* @since   3.0
+	*/
+	public static function print_section_5th_section () {
+		printf( "<p>%s</p>\n", self::$form_structure[ '5th_section' ][ 'description' ] );
 	}
 	
 }
