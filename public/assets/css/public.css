@@ -26,15 +26,6 @@
 	padding-right: 1em;
 }
 
-@media screen and (min-width: 640px) {
-	#scb-wrapper.scb-fixed {
-		position: fixed;
-		top: 0;
-		left: 0;
-		z-index: 2147483647; /* highest possible value on 32-bit systems */
-		width: 100%;
-	}
-}
 @media screen and (max-width: 768px) {
 	#scb-wrapper #scb-phone span,
 	#scb-wrapper #scb-cellphone span,

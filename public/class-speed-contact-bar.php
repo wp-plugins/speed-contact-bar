@@ -148,6 +148,26 @@ class Speed_Contact_Bar {
 	private $valid_icon_sizes = null;
 
 	/**
+	 * Selected icon size
+	 *
+	 *
+	 * @since    3.0.1
+	 *
+	 * @var      integer
+	 */
+	private $current_icon_size = null;
+
+	/**
+	 * Selected icon type
+	 *
+	 *
+	 * @since    3.0.1
+	 *
+	 * @var      string
+	 */
+	private $current_icon_type = null;
+
+	/**
 	 * Allowed adjustment values
 	 *
 	 *
@@ -186,6 +206,37 @@ class Speed_Contact_Bar {
 	 * @var      array
 	 */
 	private $default_settings = null;
+
+	/**
+	 * Plugin root URL
+	 *
+	 *
+	 * @since    3.0.1
+	 *
+	 * @var      string
+	 */
+	private $plugin_root_url = null;
+
+	/**
+	 * Target of links
+	 *
+	 *
+	 * @since    3.0.1
+	 *
+	 * @var      string
+	 */
+	private $link_target = null;
+
+	/**
+	 * Image file names with aspect ratios of the icons
+	 *
+	 *
+	 * @since    3.0.1
+	 *
+	 * @var      array
+	 */
+	private $alt_aspect_ratios = null;
+
 	/**
 	 * Initialize the plugin by setting localization and loading public scripts
 	 * and styles.
@@ -210,7 +261,7 @@ class Speed_Contact_Bar {
 		add_action( 'wp_head', array( $this, 'display_bar_styles' ) );
 
 		// set default values
-		$this->plugin_version = '3.0';
+		$this->plugin_version = '3.0.1';
 		$this->plugin_name = 'Speed Contact Bar';
 		$this->plugin_slug = 'speed-contact-bar';
 		$this->settings_db_slug = 'speed-contact-bar-options';
@@ -220,8 +271,8 @@ class Speed_Contact_Bar {
 		$this->valid_headline_tags = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div', 'p' );
 		$this->valid_icon_types =  array( 'bright', 'dark' );
 		$this->valid_content_alignments =  array( 'left', 'center', 'right' );
-		$this->valid_font_sizes =  range( 8, 24 );
-		$this->valid_icon_sizes =  range( 16, 48, 2 );
+		$this->valid_font_sizes =  range( 4, 24 );
+		$this->valid_icon_sizes =  range( 10, 48, 2 );
 		$this->valid_readjustments =  range( 25, 75, 5 );
 		$this->valid_vertical_paddings =  range( 8, 32 );
 		$this->valid_horizontal_paddings =  range( 8, 32 );
@@ -253,9 +304,36 @@ class Speed_Contact_Bar {
 			'text_color'  => '#333333',
 			'vertical_padding'  => 15,
 		);
+		// PNG image file names with aspect ratios (width / height)
+		$this->alt_aspect_ratios = array( 
+			'imdb' => 2.115, 
+			'yelp' => 1.888,
+		);
+
 		// get current or default settings
 		$this->stored_settings = $this->get_stored_settings();
 		
+		// icon size
+		$this->current_icon_size = $this->default_settings[ 'icon_size' ];
+		if ( isset( $this->stored_settings[ 'icon_size' ] ) && in_array( $this->stored_settings[ 'icon_size' ], $this->valid_icon_sizes ) ) { 
+			$this->current_icon_size = $this->stored_settings[ 'icon_size' ];
+		}
+
+		// icon type
+		$this->current_icon_type = $this->default_settings[ 'icon_type' ];
+		if ( isset( $this->stored_settings[ 'icon_type' ] ) && in_array( $this->stored_settings[ 'icon_type' ], $this->valid_icon_types ) ) {
+			$this->current_icon_type = $this->stored_settings[ 'icon_type' ];
+		}
+
+		// URL of the plugin's folder
+		$this->plugin_root_url = plugin_dir_url( __FILE__ );
+		
+		// target of the links
+		$this->link_target = '';
+		if ( isset( $this->stored_settings[ 'open_new_window' ] ) && 1 == $this->stored_settings[ 'open_new_window' ] ) {
+			$this->link_target = ' target="_blank"';
+		}
+
 		// hook on displaying a message after plugin activation
 		// if single activation via link or bulk activation
 		if ( isset( $_GET[ 'activate' ] ) or isset( $_GET[ 'activate-multi' ] ) ) {
@@ -626,12 +704,6 @@ class Speed_Contact_Bar {
 			}
 			$inject .= '>';
 
-			// target of the links
-			$target = '';
-			if ( isset( $this->stored_settings[ 'open_new_window' ] ) && 1 == $this->stored_settings[ 'open_new_window' ] ) {
-				$target = ' target="_blank"';
-			}
-
 			// the headline
 			$headline_tag = $this->default_settings[ 'headline_tag' ];
 			if ( isset( $this->stored_settings[ 'headline_tag' ] ) && in_array( $this->stored_settings[ 'headline_tag' ], $this->valid_headline_tags ) ) {
@@ -644,7 +716,7 @@ class Speed_Contact_Bar {
 						'<%s><a href="%s"%s>%s</a></%s>',
 						$headline_tag,
 						esc_url( $this->stored_settings[ 'headline_url' ] ),
-						$target,
+						$this->link_target,
 						esc_html( $this->stored_settings[ 'headline' ] ),
 						$headline_tag
 					);
@@ -659,31 +731,18 @@ class Speed_Contact_Bar {
 				}
 			}
 
-			// icon size
-			$icon_size = $this->default_settings[ 'icon_size' ];
-			if ( isset( $this->stored_settings[ 'icon_size' ] ) && in_array( $this->stored_settings[ 'icon_size' ], $this->valid_icon_sizes ) ) { 
-				$icon_size = $this->stored_settings[ 'icon_size' ];
-			}
-
-			// icon type
-			$icon_type = $this->default_settings[ 'icon_type' ];
-			if ( isset( $this->stored_settings[ 'icon_type' ] ) && in_array( $this->stored_settings[ 'icon_type' ], $this->valid_icon_types ) ) {
-				$icon_type = $this->stored_settings[ 'icon_type' ];
-			}
-
 			// the contact data
 			$contact_list = array();
-			$root_url = plugin_dir_url( __FILE__ );
 			if ( isset( $this->stored_settings[ 'phone' ] ) && '' != $this->stored_settings[ 'phone' ] ) {
 				$phone_number = esc_html( $this->stored_settings[ 'phone' ] );
 				$phone_number_escaped = $this->esc_phonenumber( $this->stored_settings[ 'phone' ] );
 				$contact_list[] = sprintf( 
 					'<li id="scb-phone"><a href="tel:%s"><img src="%sassets/images/phone_%s.svg" width="%d" height="%d" alt="%s" />&nbsp;<span>%s</span></a></li>',
 					$phone_number_escaped,
-					$root_url,
-					$icon_type,
-					$icon_size,
-					$icon_size,
+					$this->plugin_root_url,
+					$this->current_icon_type,
+					$this->current_icon_size,
+					$this->current_icon_size,
 					__( 'Phone Number', $this->plugin_slug ),
 					$phone_number
 				);
@@ -694,10 +753,10 @@ class Speed_Contact_Bar {
 				$contact_list[] = sprintf(
 					'<li id="scb-cellphone"><a href="tel:%s"><img src="%sassets/images/cellphone_%s.svg" width="%d" height="%d" alt="%s" />&nbsp;<span>%s</span></a></li>',
 					$phone_number_escaped,
-					$root_url,
-					$icon_type,
-					$icon_size,
-					$icon_size,
+					$this->plugin_root_url,
+					$this->current_icon_type,
+					$this->current_icon_size,
+					$this->current_icon_size,
 					__( 'Cell Phone Number', $this->plugin_slug ),
 					$phone_number
 				);
@@ -707,10 +766,10 @@ class Speed_Contact_Bar {
 				$contact_list[] = sprintf(
 					'<li id="scb-email"><a href="mailto:%s"><img src="%sassets/images/email_%s.svg" width="%d" height="%d" alt="%s" />&nbsp;<span>%s</span></a></li>',
 					$safe_email,
-					$root_url,
-					$icon_type,
-					$icon_size,
-					$icon_size,
+					$this->plugin_root_url,
+					$this->current_icon_type,
+					$this->current_icon_size,
+					$this->current_icon_size,
 					__( 'E-Mail', $this->plugin_slug ),
 					$safe_email 
 				);
@@ -726,21 +785,18 @@ class Speed_Contact_Bar {
 
 			// socia media icons
 			$contact_list = array();
-			$pngs = array( 
-				'imdb' => 2.115, 
-				'yelp' => 1.888,
-			); // PNG image file names with aspect ratios (width / height)
+			// build the list
 			foreach ( $this->valid_social_networks as $icon ) {
-				if ( in_array( $icon, array_keys( $pngs ) ) && isset( $this->stored_settings[ $icon ] ) && '' != $this->stored_settings[ $icon ] ) {
+				if ( in_array( $icon, array_keys( $this->alt_aspect_ratios ) ) && isset( $this->stored_settings[ $icon ] ) && '' != $this->stored_settings[ $icon ] ) {
 					$contact_list[] = sprintf( 
 						'<li id="scb-%s"><a href="%s"%s><img src="%sassets/images/%s.png" width="%d" height="%d" alt="%s" /></a></li>',
 						$icon,
 						esc_url( $this->stored_settings[ $icon ] ),
-						$target,
-						$root_url,
+						$this->link_target,
+						$this->plugin_root_url,
 						$icon,
-						intval( round( $pngs[ $icon ] * $icon_size ) ),
-						$icon_size,
+						intval( round( $this->alt_aspect_ratios[ $icon ] * $this->current_icon_size ) ),
+						$this->current_icon_size,
 						ucfirst( $icon ) 
 					);
 				} else {
@@ -749,11 +805,11 @@ class Speed_Contact_Bar {
 							'<li id="scb-%s"><a href="%s"%s><img src="%sassets/images/%s.svg" width="%d" height="%d" alt="%s" /></a></li>',
 							$icon,
 							esc_url( $this->stored_settings[ $icon ] ),
-							$target,
-							$root_url,
+							$this->link_target,
+							$this->plugin_root_url,
 							$icon,
-							$icon_size,
-							$icon_size,
+							$this->current_icon_size,
+							$this->current_icon_size,
 							ucfirst( $icon ) 
 						);
 					}
@@ -804,18 +860,25 @@ class Speed_Contact_Bar {
 		// start bar styles
 		$content = '<style media="screen" type="text/css">';
 		$content .= "\n";
-		$content .= '#scb-wrapper ul,#scb-wrapper li,#scb-wrapper a {display:inline;margin:0;padding:0;font-family:sans-serif;font-size:0.96em;line-height:1;} #scb-wrapper li {margin:0 .5em;} #scb-wrapper img {display:inline;vertical-align:middle;margin:0;padding:0;border:0 none;} #scb-wrapper #scb-email {padding-right:1em;}';
-		$content .= '#scb-wrapper li a span {white-space:nowrap;}';
+		$content .= '#scb-wrapper ul,#scb-wrapper li,#scb-wrapper a, #scb-wrapper a span {display:inline;margin:0;padding:0;font-family:sans-serif;font-size:0.96em;line-height:1;}';
+		$content .= ' #scb-wrapper li {margin:0 .5em;}';
+		$content .= ' #scb-wrapper img {display:inline;vertical-align:middle;margin:0;padding:0;border:0 none;}';
+		$content .= ' #scb-wrapper #scb-email {padding-right:1em;}';
+		$content .= ' #scb-wrapper li a span {white-space:nowrap;}';
 		$content .= "\n";
 		$content .= '@media screen and (min-width:640px) {#scb-wrapper.scb-fixed {position:fixed;';
 		$content .= $position;
-		$content .= ':0;left:0;z-index:10000;width:100%;}}';
+		$content .= ':0;left:0;z-index:2147483647;width:100%;}}';
 		$content .= "\n";
 		
 		// if checked show email address and phone numbers in small displays
 		if ( isset( $this->stored_settings[ 'show_texts' ] ) && 1 == $this->stored_settings[ 'show_texts' ] ) { 
 			// show them without inline breaks and one below the other
-			$content .= '@media screen and (max-width:480px) {#scb-wrapper #scb-directs li {margin-bottom:.5em;display:block;} #scb-wrapper ul {display:block;}} #scb-wrapper #scb-directs a {white-space:nowrap;}';
+			$content .= '@media screen and (max-width:480px) {';
+			$content .= '#scb-wrapper #scb-directs li {margin-bottom:.5em;display:block;}';
+			$content .= ' #scb-wrapper ul {display:block;}';
+			$content .= '}';
+			$content .= ' #scb-wrapper #scb-directs a {white-space:nowrap;}';
 		} else {
 			// hide them, show icon only
 			$content .= '@media screen and (max-width:768px) {#scb-wrapper #scb-phone span,#scb-wrapper #scb-cellphone span,#scb-wrapper #scb-email span {display:none;}}';
@@ -912,7 +975,7 @@ class Speed_Contact_Bar {
 		if ( isset( $this->stored_settings[ 'font_size' ] ) && in_array( $this->stored_settings[ 'font_size' ], $this->valid_font_sizes ) ) { 
 			$font_size = $this->stored_settings[ 'font_size' ]; 
 		}
-		$content .= sprintf( '#scb-wrapper %s, #scb-wrapper ul, #scb-wrapper li, #scb-wrapper a { font-size: %dpx; } ', $headline_tag, $font_size );
+		$content .= sprintf( '#scb-wrapper %s, #scb-wrapper ul, #scb-wrapper li, #scb-wrapper a, #scb-wrapper a span { font-size: %dpx; } ', $headline_tag, $font_size );
 		$content .= "\n";
 
 		/* hide headline if desired */
@@ -939,7 +1002,7 @@ class Speed_Contact_Bar {
 	 */
 	public function display_activation_message () {
 		$url  = esc_url( admin_url( sprintf( 'options-general.php?page=%s', 'speed-contact-bar' ) ) );
-		$link = sprintf( '<a href="%s">%s =&gt; %s</a>', $url, __( 'Settings' ), $this->plugin_name );
+		$link = sprintf( '<a href="%s">%s &rsaquo; %s</a>', $url, __( 'Settings' ), $this->plugin_name );
 		$msg  = sprintf( __( 'Welcome to the plugin %s! You can configure it at %s.', 'speed-contact-bar' ), $this->plugin_name, $link );
 		$html = sprintf( '<div class="updated"><p>%s</p></div>', $msg );
 		print $html;

@@ -317,12 +317,12 @@ class Speed_Contact_Bar_Admin {
 		$html = null;
 		
 		$font_sizes = array();
-		foreach( range( 8, 24 ) as $value ) {
+		foreach( range( 4, 24 ) as $value ) {
 			$font_sizes[ $value ] = sprintf( '%dpx', $value );
 		}
 		
 		$icon_sizes = array();
-		foreach( range( 16, 48, 2 ) as $value ) {
+		foreach( range( 10, 48, 2 ) as $value ) {
 			$icon_sizes[ $value ] = sprintf( '%dpx', $value );
 		}
 		
