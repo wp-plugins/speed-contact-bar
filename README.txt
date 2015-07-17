@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: address, bottom, cell phone, contact, contacts, e-mail, email, facebook, flickr, g+, google plus, google+, icons, imdb, instagram, link, linkedin, number, phone, pinterest, position, responsive, slideshare, social media, telephone, top, transparent, tumblr, twitter, url, vimeo, web, xing, yelp, youtube
 Requires at least: 3.5
 Tested up to: 4.2.2
-Stable tag: 3.0
+Stable tag: 3.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -121,7 +121,7 @@ Do you miss some options? We will add it! Please write your request in the plugi
 
 = Could there be any conflicts with my theme? =
 
-In most theme the Speed Contact Bar works fine with many themes. Only if the theme comes with an own fixed top bar there can be a source of design conflicts with a fixed Speed Contact Bar.
+In most themes the Speed Contact Bar works fine without any conflicts. Only if the theme comes with an own fixed top bar there can be a source of design conflicts with a fixed Speed Contact Bar.
 
 In that case you can try to set the position of the Speed Contact Bar at the bottom of every page. That will avoid the conflict.
 
@@ -160,6 +160,12 @@ Please write your request in the plugin's [support forum at wordpress.org](http:
 2. The options page of the contact bar in the WordPress backend
 
 == Changelog ==
+
+= 3.0.1 =
+* Fixed font size of links for some themes
+* Changed minimum font size from 8px to 4px
+* Changed minimum icon size from 16px to 10px
+* Some refactoring
 
 = 3.0 =
 * Added Position option: place the bar at the top or at the bottom on every page
@@ -282,6 +288,9 @@ First official release
 First release for just trying it
 
 == Upgrade Notice ==
+
+= 3.0.1 =
+Fixed font size of links, refactoring
 
 = 3.0 =
 Added and reordered options
