@@ -327,12 +327,12 @@ class Speed_Contact_Bar_Admin {
 		}
 		
 		$readjustments = array();
-		foreach( range( 25, 75, 5 ) as $value ) {
+		foreach( range( 0, 75 ) as $value ) {
 			$readjustments[ $value ] = sprintf( '%dpx', $value );
 		}
 		
 		$padding_sizes = array();
-		foreach( range( 8, 32 ) as $value ) {
+		foreach( range( 0, 32 ) as $value ) {
 			$padding_sizes[ $value ] = sprintf( '%dpx', $value );
 		}
 		

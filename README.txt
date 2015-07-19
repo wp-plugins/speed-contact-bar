@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: address, bottom, cell phone, contact, contacts, e-mail, email, facebook, flickr, g+, google plus, google+, icons, imdb, instagram, link, linkedin, number, phone, pinterest, position, responsive, slideshare, social media, telephone, top, transparent, tumblr, twitter, url, vimeo, web, xing, yelp, youtube
 Requires at least: 3.5
 Tested up to: 4.2.2
-Stable tag: 3.0.1
+Stable tag: 4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,6 +45,7 @@ You can show these three **personal contact data**:
 2. Phone number
 3. Cell phone number
 4. E-Mail address
+5. any further content you wish by using the filter hook `speed-contact-bar-data`
 
 Up till now Speed Contact Bar supports links to these **social media platforms**, as ordered alphabetically:
 
@@ -62,6 +63,7 @@ Up till now Speed Contact Bar supports links to these **social media platforms**
 12. Xing
 12. Yelp
 13. Youtube
+14. any further content you wish by using the filter hook `speed-contact-bar-icons`
 
 More social media plattforms will come in future.
 
@@ -86,8 +88,11 @@ And of course you can set the **design of the contact bar** to be suitable to th
 17. **Shadow under or above the bar** for a chic 3D effect
 18. **Link target** of all links to open a contact link in the same window or in a new window
 19. **Show contact data on small displays** instead of showing icons only
+20. any further style you wish by using the filter hook `speed-contact-bar-style`
 
 Do you miss some options? We will add it! Please write your request in the plugin's [support forum at wordpress.org](http://wordpress.org/support/plugin/speed-contact-bar). We will try to take a look and answer as soon as possible.
+
+See [Other Notes](https://wordpress.org/plugins/speed-contact-bar/other_notes/) for examples using hooks.
 
 == Installation ==
 
@@ -116,6 +121,88 @@ Do you miss some options? We will add it! Please write your request in the plugi
 4. Activate the plugin in the Plugin dashboard
 5. Configure the plugin with the options page at "Settings" =&gt; "Speed Contact Bar".
 
+== Other Notes ==
+= Using hooks =
+Repeatedly users ask for special things to be included in the contact bar. Of course, if you know how to code with PHP, HTML and CSS you can change the plugin's code and insert whatever you want. But changing the plugin's code is not a good idea. Every upgrade of the plugin will delete your inserted code.
+
+But there is a solution: hooks in WordPress. You can change the content and design of the contact bar with your own functions. And you can be sure that they will not be overwritten by future plugin's upgrade when you place your function in the `functions.php`of your theme or in a self-written plugin.
+
+Use the hooks:
+
+1. `speed_contact_bar_data` for alterting the personal contact informations list
+2. `speed_contact_bar_icons` for alterting the social media icons list
+3. `speed_contact_bar_style` for alterting the style of the contact bar
+
+You can place the code in your `functions.php` of your theme or in your own plugin. Lets look at the following examples.
+
+= Add an item to the personal contact informations list =
+The example adds a list item with the content 'Hello World' as the first item and returns the extended list.
+
+`// describe what the function should do
+// passed parameter: n array of personal contact data as list items
+function change_speed_contact_bar_data ( $list_items ) {
+
+	// add an item as first item in the list via array_unshift()
+	// the content has to be surrounded by the LI element
+	array_unshift( $list_items, '<li>Hello World</li>' );
+
+	// return changed list
+	return $list_items;
+
+}
+// let the function work
+add_filter( 'speed_contact_bar_data', 'change_speed_contact_bar_data' );`
+
+= Add an item to the icons list =
+The following example does two things:
+
+1. it appends a list item with the content 'Foo Bar' at the end of the list,
+2. and it inserts a list item with a standard WordPress search form at a desired position in the list.
+
+At the end the functions returns the extended list.
+
+`// describe what the function should do
+// passed parameter: an array of social media icons as list items
+function change_speed_contact_bar_icons ( $list_items ) {
+
+	// add an item as last item in the list, via $array[]
+	$list_items[] = '<li>Foo Bar</li>';
+
+	// add an item at any position in the list via array_splice()
+	// way of thinking: if x-th element then use x - 1 to determine the second parameter value
+	// here: search form as 4th element, so parameter value is 4 - 1 = 3
+	// you can find more tipps for array_splice() at http://php.net/manual/en/function.array-splice.php
+	// the content has to be surrounded by the LI element
+	// notice the LI element extended by an ID attribute to have an exact selector for CSS
+	array_splice( $list_items, 3, 0, '<li id="spc-search-form">' . get_search_form( false ) . '</li>' );
+
+	// return changed list
+	return $list_items;
+	
+}
+// let the function work
+add_filter( 'speed_contact_bar_icons', 'change_speed_contact_bar_icons' );`
+
+= Add style sheets for the search box =
+The example appends some Cascading Style Sheets code for the search form inserted by the previous function.
+
+`// describe what the function should do
+// passed parameter: a string of CSS
+function change_speed_contact_bar_style ( $css_code ) {
+	
+	// add style for search form, append it to existing code with '.='
+	// the content has to be surrounded by the STYLE element
+	$css_code .= "<style type='text/css'>\n";
+	$css_code .= "#spc-search-form form { display: inline; }\n";
+	$css_code .= "#spc-search-form input { width: 7em; }\n";
+	$css_code .= "</style>\n";
+
+	// return changed CSS
+	return $css_code;
+	
+}
+// let the function work
+add_filter( 'speed_contact_bar_style', 'change_speed_contact_bar_style' );`
 
 == Frequently Asked Questions ==
 
@@ -140,7 +227,9 @@ You have two possibilities to see the bar:
 
 = I want to display this and that. How can I add it? =
 
-Please write your request in the plugin's [support forum at wordpress.org](http://wordpress.org/support/plugin/speed-contact-bar). We will try to take a look and answer as soon as possible.
+If you are a developer please read 'Other Notes'. You will find a documentation about the hooks of the Speed Contact Bar. That way you can easily insert your own content into the bar.
+
+If you do not know how to use PHP please write your request in the plugin's [support forum at wordpress.org](http://wordpress.org/support/plugin/speed-contact-bar). We will try to take a look and answer as soon as possible.
 
 = I want to switch off the contact bar for a while without losing all settings. How? =
 
@@ -160,6 +249,13 @@ Please write your request in the plugin's [support forum at wordpress.org](http:
 2. The options page of the contact bar in the WordPress backend
 
 == Changelog ==
+
+= 4.0 =
+* Introducing hooks to filter the lists and styles of the contact bar with your own functions:
+* Added filter hook `speed_contact_bar_data`
+* Added filter hook `speed_contact_bar_icons`
+* Added filter hook `speed_contact_bar_style`
+* Augmented ranges of readjustment and padding pulldowns in the options page
 
 = 3.0.1 =
 * Fixed font size of links for some themes
@@ -288,6 +384,9 @@ First official release
 First release for just trying it
 
 == Upgrade Notice ==
+
+= 4.0 =
+Introduced hooks, augmented ranges for padding and readjusment
 
 = 3.0.1 =
 Fixed font size of links, refactoring
