@@ -261,7 +261,7 @@ class Speed_Contact_Bar {
 		add_action( 'wp_head', array( $this, 'display_bar_styles' ) );
 
 		// set default values
-		$this->plugin_version = '3.0.1';
+		$this->plugin_version = '4.0';
 		$this->plugin_name = 'Speed Contact Bar';
 		$this->plugin_slug = 'speed-contact-bar';
 		$this->settings_db_slug = 'speed-contact-bar-options';
@@ -273,9 +273,9 @@ class Speed_Contact_Bar {
 		$this->valid_content_alignments =  array( 'left', 'center', 'right' );
 		$this->valid_font_sizes =  range( 4, 24 );
 		$this->valid_icon_sizes =  range( 10, 48, 2 );
-		$this->valid_readjustments =  range( 25, 75, 5 );
-		$this->valid_vertical_paddings =  range( 8, 32 );
-		$this->valid_horizontal_paddings =  range( 8, 32 );
+		$this->valid_readjustments =  range( 0, 75 );
+		$this->valid_vertical_paddings =  range( 0, 32 );
+		$this->valid_horizontal_paddings =  range( 0, 32 );
 		$this->default_settings = array(
 			'bg_color'  => '#dfdfdf',
 			'bg_transparent'  => 0,
@@ -774,6 +774,17 @@ class Speed_Contact_Bar {
 					$safe_email 
 				);
 			}
+			
+			/**
+			 * Filter the personal contact informations in the contact bar as list items.
+			 *
+			 * @since 4.0
+			 *
+			 * @param array $contact_list An array of personal contact data as list items
+			 */
+			$contact_list = apply_filters( 'speed_contact_bar_data', $contact_list );
+			
+			// build the list
 			if ( ! empty( $contact_list ) ) {
 				// opens list
 				$inject .= '<ul id="scb-directs">';
@@ -784,11 +795,11 @@ class Speed_Contact_Bar {
 			}
 
 			// socia media icons
-			$contact_list = array();
+			$icons_list = array();
 			// build the list
 			foreach ( $this->valid_social_networks as $icon ) {
 				if ( in_array( $icon, array_keys( $this->alt_aspect_ratios ) ) && isset( $this->stored_settings[ $icon ] ) && '' != $this->stored_settings[ $icon ] ) {
-					$contact_list[] = sprintf( 
+					$icons_list[] = sprintf( 
 						'<li id="scb-%s"><a href="%s"%s><img src="%sassets/images/%s.png" width="%d" height="%d" alt="%s" /></a></li>',
 						$icon,
 						esc_url( $this->stored_settings[ $icon ] ),
@@ -801,7 +812,7 @@ class Speed_Contact_Bar {
 					);
 				} else {
 					if ( isset( $this->stored_settings[ $icon ] ) && '' != $this->stored_settings[ $icon ] ) {
-						$contact_list[] = sprintf( 
+						$icons_list[] = sprintf( 
 							'<li id="scb-%s"><a href="%s"%s><img src="%sassets/images/%s.svg" width="%d" height="%d" alt="%s" /></a></li>',
 							$icon,
 							esc_url( $this->stored_settings[ $icon ] ),
@@ -815,11 +826,22 @@ class Speed_Contact_Bar {
 					}
 				}
 			}
-			if ( ! empty( $contact_list ) ) {
+
+			/**
+			 * Filter the icons of the contact bar as list items.
+			 *
+			 * @since 4.0
+			 *
+			 * @param array $icons_list An array of social media icons as list items
+			 */
+			$icons_list = apply_filters( 'speed_contact_bar_icons', $icons_list );
+			
+			// build the list
+			if ( ! empty( $icons_list ) ) {
 				// opens list
 				$inject .= '<ul>';
 				// write the contact data item
-				$inject .= implode( "", $contact_list );
+				$inject .= implode( "", $icons_list );
 				// closes list
 				$inject .= '</ul>';
 			}
@@ -858,7 +880,7 @@ class Speed_Contact_Bar {
 		}
 		
 		// start bar styles
-		$content = '<style media="screen" type="text/css">';
+		$content  = '<style media="screen" type="text/css">';
 		$content .= "\n";
 		$content .= '#scb-wrapper ul,#scb-wrapper li,#scb-wrapper a, #scb-wrapper a span {display:inline;margin:0;padding:0;font-family:sans-serif;font-size:0.96em;line-height:1;}';
 		$content .= ' #scb-wrapper li {margin:0 .5em;}';
@@ -887,7 +909,7 @@ class Speed_Contact_Bar {
 		$content .= '@media screen and (max-width:480px) {#scb-wrapper #scb-directs {margin-bottom:.5em;} #scb-wrapper ul {display:block;}}';
 		$content .= "\n";
 		
-		/* fixation of bar */
+		// fixation of bar
 		if ( isset( $this->stored_settings[ 'fixed' ] ) && 1 == $this->stored_settings[ 'fixed' ] ) { 
 			/* space between bar and page content */
 			$readjustment = $this->default_settings[ 'readjustment' ];
@@ -898,7 +920,7 @@ class Speed_Contact_Bar {
 			$content .= "\n";
 		}
 		
-		/* styles of the bar and headline */
+		// styles of the bar and headline
 		$bar_styles = '';
 
 		$vertical_padding = $this->default_settings[ 'vertical_padding' ];
@@ -945,7 +967,7 @@ class Speed_Contact_Bar {
 		$content .= sprintf( '#scb-wrapper {%s } ', $bar_styles );
 		$content .= "\n";
 		
-		/* styles of headline */
+		// styles of headline
 		$headline_tag = $this->default_settings[ 'headline_tag' ];
 		if ( isset( $this->stored_settings[ 'headline_tag' ] ) && in_array( $this->stored_settings[ 'headline_tag' ], $this->valid_headline_tags ) ) {
 			$headline_tag = $this->stored_settings[ 'headline_tag' ];
@@ -955,14 +977,14 @@ class Speed_Contact_Bar {
 		$content .= ' }';
 		$content .= "\n";
 
-		/* hide headline in tablets and smartphones if desired */
+		// hide headline in tablets and smartphones if desired
 		if ( isset( $this->stored_settings[ 'keep_headline' ] ) && 0 == $this->stored_settings[ 'keep_headline' ] ) {
 			$content .= sprintf( '@media screen and (max-width: 768px) { #scb-wrapper %s { display: none; } }', $headline_tag );
 			$content .= "\n";
 		}
 		
 
-		/* color of links */
+		// color of links
 		$link_color = $this->default_settings[ 'link_color' ];
 		if ( isset( $this->stored_settings[ 'link_color' ] ) && '' != $this->stored_settings[ 'link_color' ] ) { 
 			$link_color = esc_attr( $this->stored_settings[ 'link_color' ] ); 
@@ -970,7 +992,7 @@ class Speed_Contact_Bar {
 		$content .= sprintf( '#scb-wrapper a { color: %s; } ', $link_color );
 		$content .= "\n";
 
-		/* size of text */
+		// size of text
 		$font_size = $this->default_settings[ 'font_size' ];
 		if ( isset( $this->stored_settings[ 'font_size' ] ) && in_array( $this->stored_settings[ 'font_size' ], $this->valid_font_sizes ) ) { 
 			$font_size = $this->stored_settings[ 'font_size' ]; 
@@ -978,19 +1000,28 @@ class Speed_Contact_Bar {
 		$content .= sprintf( '#scb-wrapper %s, #scb-wrapper ul, #scb-wrapper li, #scb-wrapper a, #scb-wrapper a span { font-size: %dpx; } ', $headline_tag, $font_size );
 		$content .= "\n";
 
-		/* hide headline if desired */
+		// hide headline if desired
 		if ( isset( $this->stored_settings[ 'show_headline' ] ) && 0 == $this->stored_settings[ 'show_headline' ] ) {
 			$content .= sprintf( '#scb-wrapper %s { display: inline; left: -32768px; margin: 0; padding: 0; position: absolute; top: 0; z-index: 1000; } ', $headline_tag );
 			$content .= "\n";
 		}
 		
-		/* close style block */
+		// close style block
 		$content .= '</style>';
 		$content .= "\n";
 
-		/* add print style block */
+		// add print style block
 		$content .= '<style media="print" type="text/css">#scb-wrapper { display:none; }</style>';
 
+		/**
+		 * Filter the style sheet of the contact bar as string.
+		 *
+		 * @since 4.0
+		 *
+		 * @param string $content A string of CSS code
+		 */
+		$content = apply_filters( 'speed_contact_bar_style', $content );
+		
 		/* print css */
 		echo $content;
 	}
@@ -1055,7 +1086,7 @@ class Speed_Contact_Bar {
 		$tel = substr( $tel, 0, 15 );
 		
 		// change country area sign
-		$tel = preg_replace( '|^[+]|i', '00', $tel );
+		$tel = preg_replace( '|^[+]|', '00', $tel );
 
 		// return sanitized phone number
 		return $tel;
