@@ -137,7 +137,7 @@ Use the hooks:
 
 You can place the code in your `functions.php` of your theme or in your own plugin. Lets look at the following examples.
 
-= Add an item to the personal contact informations list =
+= Add an item to the personal contact information list =
 The following function does two things:
 
 1. it adds a list item with the content 'Hello World' as the first item 
@@ -146,7 +146,7 @@ The following function does two things:
 At the end the function returns the changed list.
 
 `// describe what the function should do
-// passed parameter: n array of personal contact data as list items
+// passed parameter: an array of personal contact data as list items
 function change_speed_contact_bar_data ( $list_items ) {
 
 	// add an item as first item in the list via array_unshift()
@@ -168,7 +168,7 @@ function change_speed_contact_bar_data ( $list_items ) {
 // let the function work
 add_filter( 'speed_contact_bar_data', 'change_speed_contact_bar_data' );`
 
-= Add an item to the icons list =
+= Add an item to the icon list =
 The following function does two things:
 
 1. it appends a list item with the content 'Foo Bar' at the end of the list,
@@ -185,12 +185,21 @@ function change_speed_contact_bar_icons ( $list_items ) {
 	$list_items[] = '<li>Foo Bar</li>';
 
 	// add an item at any position in the list via array_splice()
-	// way of thinking: if x-th element then use x - 1 to determine the second parameter value
-	// here: search form as 4th element, so parameter value is 4 - 1 = 3
-	// you can find more tipps for array_splice() at http://php.net/manual/en/function.array-splice.php
+	// way of thinking: the new item should be the x-th element:
+	// so the second parameter value is x - 1
+	// if 4th element then parameter value is 4 - 1 = 3.
+	// you can find more tipps for array_splice() at 
+	// http://php.net/manual/en/function.array-splice.php
 	// the content has to be surrounded by the LI element
-	// notice the LI element extended by an ID attribute to have an exact selector for CSS
-	array_splice( $list_items, 3, 0, '<li id="spc-search-form">' . get_search_form( false ) . '</li>' );
+	// notice: the LI element is extended by an ID attribute to have 
+	// an exact selector for CSS
+	array_splice(
+		$list_items, // array to change
+		3, // array index where to insert the new item
+		0, // number of items to replace
+		// content of new item:
+		'<li id="spc-search-form">' . get_search_form( false ) . '</li>' 
+	);
 
 	// return changed list
 	return $list_items;
