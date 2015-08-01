@@ -3,7 +3,7 @@ Contributors: Hinjiriyo, allamoda07
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TPCX6FVZ5NSJ6
 Tags: address, bottom, cell phone, contact, contacts, e-mail, email, facebook, flickr, g+, google plus, google+, icons, imdb, instagram, link, linkedin, number, phone, pinterest, position, responsive, slideshare, social media, telephone, top, transparent, tumblr, twitter, url, vimeo, web, xing, yelp, youtube
 Requires at least: 3.5
-Tested up to: 4.2.2
+Tested up to: 4.2.3
 Stable tag: 4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -122,21 +122,28 @@ See [Other Notes](https://wordpress.org/plugins/speed-contact-bar/other_notes/) 
 5. Configure the plugin with the options page at "Settings" =&gt; "Speed Contact Bar".
 
 == Other Notes ==
-= Using hooks =
-Repeatedly users ask for special things to be included in the contact bar. Of course, if you know how to code with PHP, HTML and CSS you can change the plugin's code and insert whatever you want. But changing the plugin's code is not a good idea. Every upgrade of the plugin will delete your inserted code.
+= Add and re-order list entries by using hooks =
+Repeatedly users ask for special things to be included in the contact bar. Of course, if you know how to code with PHP, HTML and CSS you can change the plugin's code and insert whatever you want.
 
-But there is a solution: hooks in WordPress. You can change the content and design of the contact bar with your own functions. And you can be sure that they will not be overwritten by future plugin's upgrade when you place your function in the `functions.php`of your theme or in a self-written plugin.
+But changing the plugin's code is not a good idea. Every upgrade of the plugin will delete your inserted code.
+
+Luckily there is a solution: hooks offered by this plugin. You can change the content and design of the contact bar with your own functions. And you can be sure that they will not be overwritten by future plugin's upgrade when you place your function in the `functions.php` of your theme or in a self-written plugin.
 
 Use the hooks:
 
-1. `speed_contact_bar_data` for alterting the personal contact informations list
-2. `speed_contact_bar_icons` for alterting the social media icons list
-3. `speed_contact_bar_style` for alterting the style of the contact bar
+1. `speed_contact_bar_data` for altering the personal contact informations list
+2. `speed_contact_bar_icons` for altering the social media icons list
+3. `speed_contact_bar_style` for altering the style of the contact bar
 
 You can place the code in your `functions.php` of your theme or in your own plugin. Lets look at the following examples.
 
 = Add an item to the personal contact informations list =
-The example adds a list item with the content 'Hello World' as the first item and returns the extended list.
+The following function does two things:
+
+1. it adds a list item with the content 'Hello World' as the first item 
+2. and it changes the order of the list items.
+
+At the end the function returns the changed list.
 
 `// describe what the function should do
 // passed parameter: n array of personal contact data as list items
@@ -146,26 +153,35 @@ function change_speed_contact_bar_data ( $list_items ) {
 	// the content has to be surrounded by the LI element
 	array_unshift( $list_items, '<li>Hello World</li>' );
 
+	// re-order the list items
+	$new_ordered_items = array(
+		$list_items[ 2 ],
+		$list_items[ 3 ],
+		$list_items[ 0 ],
+		$list_items[ 1 ],
+	);
+	
 	// return changed list
-	return $list_items;
+	return $new_ordered_items;
 
 }
 // let the function work
 add_filter( 'speed_contact_bar_data', 'change_speed_contact_bar_data' );`
 
 = Add an item to the icons list =
-The following example does two things:
+The following function does two things:
 
 1. it appends a list item with the content 'Foo Bar' at the end of the list,
 2. and it inserts a list item with a standard WordPress search form at a desired position in the list.
 
-At the end the functions returns the extended list.
+At the end the function returns the changed list.
 
 `// describe what the function should do
 // passed parameter: an array of social media icons as list items
 function change_speed_contact_bar_icons ( $list_items ) {
 
 	// add an item as last item in the list, via $array[]
+	// the content has to be surrounded by the LI element
 	$list_items[] = '<li>Foo Bar</li>';
 
 	// add an item at any position in the list via array_splice()
@@ -184,7 +200,9 @@ function change_speed_contact_bar_icons ( $list_items ) {
 add_filter( 'speed_contact_bar_icons', 'change_speed_contact_bar_icons' );`
 
 = Add style sheets for the search box =
-The example appends some Cascading Style Sheets code for the search form inserted by the previous function.
+The following function appends some Cascading Style Sheets code for the search form inserted by the previous function.
+
+At the end the function returns the changed CSS code.
 
 `// describe what the function should do
 // passed parameter: a string of CSS
