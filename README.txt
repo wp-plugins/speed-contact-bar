@@ -3,8 +3,8 @@ Contributors: Hinjiriyo, allamoda07
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TPCX6FVZ5NSJ6
 Tags: address, bottom, cell phone, contact, contacts, e-mail, email, facebook, flickr, g+, google plus, google+, icons, imdb, instagram, link, linkedin, number, phone, pinterest, position, responsive, slideshare, social media, telephone, top, transparent, tumblr, twitter, url, vimeo, web, xing, yelp, youtube
 Requires at least: 3.5
-Tested up to: 4.2.3
-Stable tag: 4.0
+Tested up to: 4.2.4
+Stable tag: 4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -277,6 +277,13 @@ Please write your request in the plugin's [support forum at wordpress.org](http:
 
 == Changelog ==
 
+= 4.1 =
+* Added option to hide bar in mobile devices
+* Fixed icon size for some themes
+* Tested successfully with WP 4.2.4
+* Updated screenshot of Options Page
+* Updated *.pot file and german translation
+
 = 4.0 =
 * Introducing hooks to filter the lists and styles of the contact bar with your own functions:
 * Added filter hook `speed_contact_bar_data`
@@ -411,6 +418,9 @@ First official release
 First release for just trying it
 
 == Upgrade Notice ==
+
+= 4.1 =
+Added option to hide bar in mobile devices, fixed icon size for some themes, tested with WP 4.2.4
 
 = 4.0 =
 Introduced hooks, augmented ranges for padding and readjusment

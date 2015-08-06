@@ -269,9 +269,10 @@ class Speed_Contact_Bar_Admin {
 	 */
 	public function add_plugin_admin_menu() {
 
+		$text = 'Settings';
 		// Add a settings page for this plugin to the Settings menu.
 		self::$plugin_screen_hook_suffix = add_options_page(
-			sprintf( '%s %s', self::$plugin_name, __( 'Options', self::$plugin_slug ) ),
+			sprintf( '%s %s', self::$plugin_name, __( $text ) ),
 			self::$plugin_name,
 			'manage_options',
 			self::$plugin_slug,
@@ -296,10 +297,11 @@ class Speed_Contact_Bar_Admin {
 	 */
 	public function add_action_links( $links ) {
 
+		$text = 'Settings';
 		return array_merge(
 			$links,
 			array(
-				'settings' => '<a href="' . admin_url( 'options-general.php?page=' . self::$plugin_slug ) . '">' . __( 'Settings' ) . '</a>'
+				'settings' => '<a href="' . admin_url( 'options-general.php?page=' . self::$plugin_slug ) . '">' . __( $text ) . '</a>'
 			)
 		);
 
@@ -444,6 +446,13 @@ class Speed_Contact_Bar_Admin {
 				'headline' => __( 'Appeareance of the contact bar', self::$plugin_slug ),
 				'description' => __( 'Set the graphical properties of the contact bar.', self::$plugin_slug ),
 				'options' => array(
+					'max_viewport_width' => array(
+						'type'    => 'selection',
+						'title'   => __( 'Maximal viewport width to hide the bar', self::$plugin_slug ),
+						'desc'    => __( 'Select the maximal viewport width for hiding the bar. 480px and below = hide in smartphones; 1024px and below = probably tablets.', self::$plugin_slug ),
+						'values'  => array( 'never' => __( 'never hide', self::$plugin_slug ), '320px' => __( '320px', self::$plugin_slug ), '480px' => __( '480px', self::$plugin_slug ), '640px' => __( '640px', self::$plugin_slug ), '768px' => __( '768px', self::$plugin_slug ), '1024px' => __( '1024px', self::$plugin_slug ) ),
+						'default' => 'top',
+					),
 					'position' => array(
 						'type'    => 'selection',
 						'title'   => __( 'Position of the bar', self::$plugin_slug ),
