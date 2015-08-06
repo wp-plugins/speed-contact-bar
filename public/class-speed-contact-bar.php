@@ -238,6 +238,16 @@ class Speed_Contact_Bar {
 	private $alt_aspect_ratios = null;
 
 	/**
+	 * Allowed maximal widths
+	 *
+	 *
+	 * @since    4.1
+	 *
+	 * @var      array
+	 */
+	private $valid_max_viewport_widths = null;
+
+	/**
 	 * Initialize the plugin by setting localization and loading public scripts
 	 * and styles.
 	 *
@@ -261,7 +271,7 @@ class Speed_Contact_Bar {
 		add_action( 'wp_head', array( $this, 'display_bar_styles' ) );
 
 		// set default values
-		$this->plugin_version = '4.0';
+		$this->plugin_version = '4.1';
 		$this->plugin_name = 'Speed Contact Bar';
 		$this->plugin_slug = 'speed-contact-bar';
 		$this->settings_db_slug = 'speed-contact-bar-options';
@@ -276,33 +286,35 @@ class Speed_Contact_Bar {
 		$this->valid_readjustments =  range( 0, 75 );
 		$this->valid_vertical_paddings =  range( 0, 32 );
 		$this->valid_horizontal_paddings =  range( 0, 32 );
+		$this->valid_max_viewport_widths =  array( 'never', '320px', '480px', '640px', '768px', '1024px' );
 		$this->default_settings = array(
-			'bg_color'  => '#dfdfdf',
-			'bg_transparent'  => 0,
-			'cellphone'  => '',
-			'contact form'  => '',
-			'content_alignment'  => 'center',
-			'email'  => 'info@yourdomain.com',
-			'fixed' => 1,
-			'font_size'  => 15,
-			'headline'  => 'Contact to us',
-			'headline_tag'  => 'h2',
-			'headline_url'  => '',
-			'horizontal_padding'  => 15,
-			'icon_size'  => 30,
-			'icon_type'  => 'dark',
-			'keep_headline'  => 0,
-			'link_color'  => '#0074A2',
-			'open_new_window'  => 0,
-			'phone'  => '',
-			'position'  => 'top',
-			'readjustment'  => 35,
-			'show_headline'  => 1,
-			'show_labels'  => 1,
-			'show_shadow'  => 1,
-			'show_texts'  => 0,
-			'text_color'  => '#333333',
-			'vertical_padding'  => 15,
+			'bg_color'				=> '#dfdfdf',
+			'bg_transparent'		=> 0,
+			'cellphone'				=> '',
+			'contact form'			=> '',
+			'content_alignment'		=> $this->valid_content_alignments[ 1 ], // center
+			'email'					=> 'info@yourdomain.com',
+			'fixed'					=> 1,
+			'font_size'				=> 15,
+			'headline'				=> 'Contact to us',
+			'headline_tag'			=> $this->valid_headline_tags[ 1 ], // h2
+			'headline_url'			=> '',
+			'horizontal_padding'	=> 15,
+			'icon_size'				=> 30,
+			'icon_type'				=> $this->valid_icon_types[ 1 ], // dark
+			'keep_headline'			=> 0,
+			'link_color'			=> '#0074A2',
+			'max_viewport_width'	=> $this->valid_max_viewport_widths[ 0 ], // never
+			'open_new_window'		=> 0,
+			'phone'					=> '',
+			'position'				=> $this->valid_positions[ 0 ], // top
+			'readjustment'			=> 35,
+			'show_headline'			=> 1,
+			'show_labels'			=> 1,
+			'show_shadow'			=> 1,
+			'show_texts'			=> 0,
+			'text_color'			=> '#333333',
+			'vertical_padding'		=> 15,
 		);
 		// PNG image file names with aspect ratios (width / height)
 		$this->alt_aspect_ratios = array( 
@@ -315,13 +327,13 @@ class Speed_Contact_Bar {
 		
 		// icon size
 		$this->current_icon_size = $this->default_settings[ 'icon_size' ];
-		if ( isset( $this->stored_settings[ 'icon_size' ] ) && in_array( $this->stored_settings[ 'icon_size' ], $this->valid_icon_sizes ) ) { 
+		if ( isset( $this->stored_settings[ 'icon_size' ] ) and in_array( $this->stored_settings[ 'icon_size' ], $this->valid_icon_sizes ) ) { 
 			$this->current_icon_size = $this->stored_settings[ 'icon_size' ];
 		}
 
 		// icon type
 		$this->current_icon_type = $this->default_settings[ 'icon_type' ];
-		if ( isset( $this->stored_settings[ 'icon_type' ] ) && in_array( $this->stored_settings[ 'icon_type' ], $this->valid_icon_types ) ) {
+		if ( isset( $this->stored_settings[ 'icon_type' ] ) and in_array( $this->stored_settings[ 'icon_type' ], $this->valid_icon_types ) ) {
 			$this->current_icon_type = $this->stored_settings[ 'icon_type' ];
 		}
 
@@ -330,7 +342,7 @@ class Speed_Contact_Bar {
 		
 		// target of the links
 		$this->link_target = '';
-		if ( isset( $this->stored_settings[ 'open_new_window' ] ) && 1 == $this->stored_settings[ 'open_new_window' ] ) {
+		if ( isset( $this->stored_settings[ 'open_new_window' ] ) and 1 == $this->stored_settings[ 'open_new_window' ] ) {
 			$this->link_target = ' target="_blank"';
 		}
 
@@ -458,7 +470,7 @@ class Speed_Contact_Bar {
 			);
 		}
 
-		if ( function_exists( 'is_multisite' ) && is_multisite() ) {
+		if ( function_exists( 'is_multisite' ) and is_multisite() ) {
 
 			if ( $network_wide  ) {
 
@@ -495,7 +507,7 @@ class Speed_Contact_Bar {
 	 */
 	public static function deactivate( $network_wide ) {
 
-		if ( function_exists( 'is_multisite' ) && is_multisite() ) {
+		if ( function_exists( 'is_multisite' ) and is_multisite() ) {
 
 			if ( $network_wide ) {
 
@@ -647,7 +659,7 @@ class Speed_Contact_Bar {
 		// try to load current settings. If they are not in the DB return set default settings
 		$settings = get_option( $this->settings_db_slug, array() );
 		// sanitize: if key is not available, use default
-		if ( is_array( $settings ) && ! empty( $settings ) ) {
+		if ( is_array( $settings ) and ! empty( $settings ) ) {
 			foreach( $this->default_settings as $key => $default_value ) {
 				$settings[ $key ] = isset( $settings[ $key ] ) ? $settings[ $key ] : $default_value;
 			}
@@ -699,18 +711,18 @@ class Speed_Contact_Bar {
 			$inject = '<div id="scb-wrapper"';
 
 			// fixation of the bar
-			if ( isset( $this->stored_settings[ 'fixed' ] ) && 1 == $this->stored_settings[ 'fixed' ] ) { 
+			if ( isset( $this->stored_settings[ 'fixed' ] ) and 1 == $this->stored_settings[ 'fixed' ] ) { 
 				$inject .= ' class="scb-fixed"'; 
 			}
 			$inject .= '>';
 
 			// the headline
 			$headline_tag = $this->default_settings[ 'headline_tag' ];
-			if ( isset( $this->stored_settings[ 'headline_tag' ] ) && in_array( $this->stored_settings[ 'headline_tag' ], $this->valid_headline_tags ) ) {
+			if ( isset( $this->stored_settings[ 'headline_tag' ] ) and in_array( $this->stored_settings[ 'headline_tag' ], $this->valid_headline_tags ) ) {
 				$headline_tag = $this->stored_settings[ 'headline_tag' ];
 			}
-			if ( isset( $this->stored_settings[ 'headline' ] ) && '' != $this->stored_settings[ 'headline' ] ) {
-				if ( isset( $this->stored_settings[ 'headline_url' ] ) && '' != $this->stored_settings[ 'headline_url' ] ) {
+			if ( isset( $this->stored_settings[ 'headline' ] ) and '' != $this->stored_settings[ 'headline' ] ) {
+				if ( isset( $this->stored_settings[ 'headline_url' ] ) and '' != $this->stored_settings[ 'headline_url' ] ) {
 					// headline as link
 					$inject .= sprintf(
 						'<%s><a href="%s"%s>%s</a></%s>',
@@ -733,7 +745,7 @@ class Speed_Contact_Bar {
 
 			// the contact data
 			$contact_list = array();
-			if ( isset( $this->stored_settings[ 'phone' ] ) && '' != $this->stored_settings[ 'phone' ] ) {
+			if ( isset( $this->stored_settings[ 'phone' ] ) and '' != $this->stored_settings[ 'phone' ] ) {
 				$phone_number = esc_html( $this->stored_settings[ 'phone' ] );
 				$phone_number_escaped = $this->esc_phonenumber( $this->stored_settings[ 'phone' ] );
 				$contact_list[] = sprintf( 
@@ -747,7 +759,7 @@ class Speed_Contact_Bar {
 					$phone_number
 				);
 			}
-			if ( isset( $this->stored_settings[ 'cellphone' ] ) && '' != $this->stored_settings[ 'cellphone' ] ) {
+			if ( isset( $this->stored_settings[ 'cellphone' ] ) and '' != $this->stored_settings[ 'cellphone' ] ) {
 				$phone_number = esc_html( $this->stored_settings[ 'cellphone' ] );
 				$phone_number_escaped = $this->esc_phonenumber( $this->stored_settings[ 'cellphone' ] );
 				$contact_list[] = sprintf(
@@ -761,7 +773,7 @@ class Speed_Contact_Bar {
 					$phone_number
 				);
 			}
-			if ( isset( $this->stored_settings[ 'email' ] ) && '' != $this->stored_settings[ 'email' ] ) {
+			if ( isset( $this->stored_settings[ 'email' ] ) and '' != $this->stored_settings[ 'email' ] ) {
 				$safe_email = antispambot( esc_html( $this->stored_settings[ 'email' ] ) );
 				$contact_list[] = sprintf(
 					'<li id="scb-email"><a href="mailto:%s"><img src="%sassets/images/email_%s.svg" width="%d" height="%d" alt="%s" />&nbsp;<span>%s</span></a></li>',
@@ -798,7 +810,7 @@ class Speed_Contact_Bar {
 			$icons_list = array();
 			// build the list
 			foreach ( $this->valid_social_networks as $icon ) {
-				if ( in_array( $icon, array_keys( $this->alt_aspect_ratios ) ) && isset( $this->stored_settings[ $icon ] ) && '' != $this->stored_settings[ $icon ] ) {
+				if ( in_array( $icon, array_keys( $this->alt_aspect_ratios ) ) and isset( $this->stored_settings[ $icon ] ) and '' != $this->stored_settings[ $icon ] ) {
 					$icons_list[] = sprintf( 
 						'<li id="scb-%s"><a href="%s"%s><img src="%sassets/images/%s.png" width="%d" height="%d" alt="%s" /></a></li>',
 						$icon,
@@ -811,7 +823,7 @@ class Speed_Contact_Bar {
 						ucfirst( $icon ) 
 					);
 				} else {
-					if ( isset( $this->stored_settings[ $icon ] ) && '' != $this->stored_settings[ $icon ] ) {
+					if ( isset( $this->stored_settings[ $icon ] ) and '' != $this->stored_settings[ $icon ] ) {
 						$icons_list[] = sprintf( 
 							'<li id="scb-%s"><a href="%s"%s><img src="%sassets/images/%s.svg" width="%d" height="%d" alt="%s" /></a></li>',
 							$icon,
@@ -851,7 +863,7 @@ class Speed_Contact_Bar {
 
 			// the position of the bar
 			$position = $this->default_settings[ 'position' ];
-			if ( isset( $this->stored_settings[ 'position' ] ) && in_array( $this->stored_settings[ 'position' ], $this->valid_positions ) ) {
+			if ( isset( $this->stored_settings[ 'position' ] ) and in_array( $this->stored_settings[ 'position' ], $this->valid_positions ) ) {
 				$position = $this->stored_settings[ 'position' ];
 			}
 			if ( 'bottom' == $position ) {
@@ -875,7 +887,7 @@ class Speed_Contact_Bar {
 	public function display_bar_styles() {
 		// the position of the bar
 		$position = $this->default_settings[ 'position' ];
-		if ( isset( $this->stored_settings[ 'position' ] ) && in_array( $this->stored_settings[ 'position' ], $this->valid_positions ) ) {
+		if ( isset( $this->stored_settings[ 'position' ] ) and in_array( $this->stored_settings[ 'position' ], $this->valid_positions ) ) {
 			$position = $this->stored_settings[ 'position' ];
 		}
 		
@@ -884,7 +896,11 @@ class Speed_Contact_Bar {
 		$content .= "\n";
 		$content .= '#scb-wrapper ul,#scb-wrapper li,#scb-wrapper a, #scb-wrapper a span {display:inline;margin:0;padding:0;font-family:sans-serif;font-size:0.96em;line-height:1;}';
 		$content .= ' #scb-wrapper li {margin:0 .5em;}';
-		$content .= ' #scb-wrapper img {display:inline;vertical-align:middle;margin:0;padding:0;border:0 none;}';
+		$content .= ' #scb-wrapper img {display:inline;vertical-align:middle;margin:0;padding:0;border:0 none;width:';
+		$content .= $this->current_icon_size;
+		$content .= 'px;height:';
+		$content .= $this->current_icon_size;
+		$content .= 'px;}';
 		$content .= ' #scb-wrapper #scb-email {padding-right:1em;}';
 		$content .= ' #scb-wrapper li a span {white-space:nowrap;}';
 		$content .= "\n";
@@ -893,8 +909,14 @@ class Speed_Contact_Bar {
 		$content .= ':0;left:0;z-index:2147483647;width:100%;}}';
 		$content .= "\n";
 		
+		// visibility of bar in small displays
+		if ( isset( $this->stored_settings[ 'max_viewport_width' ] ) and in_array( $this->stored_settings[ 'max_viewport_width' ], $this->valid_max_viewport_widths ) and 'never' != $this->stored_settings[ 'max_viewport_width' ] ) { 
+			$content .= sprintf( '@media screen and (max-width:%s) {#scb-wrapper {display:none;}}', $this->stored_settings[ 'max_viewport_width' ] );
+			$content .= "\n";
+		}
+
 		// if checked show email address and phone numbers in small displays
-		if ( isset( $this->stored_settings[ 'show_texts' ] ) && 1 == $this->stored_settings[ 'show_texts' ] ) { 
+		if ( isset( $this->stored_settings[ 'show_texts' ] ) and 1 == $this->stored_settings[ 'show_texts' ] ) { 
 			// show them without inline breaks and one below the other
 			$content .= '@media screen and (max-width:480px) {';
 			$content .= '#scb-wrapper #scb-directs li {margin-bottom:.5em;display:block;}';
@@ -910,11 +932,11 @@ class Speed_Contact_Bar {
 		$content .= "\n";
 		
 		// fixation of bar
-		if ( isset( $this->stored_settings[ 'fixed' ] ) && 1 == $this->stored_settings[ 'fixed' ] ) { 
+		if ( isset( $this->stored_settings[ 'fixed' ] ) and 1 == $this->stored_settings[ 'fixed' ] ) { 
 			/* space between bar and page content */
 			$readjustment = $this->default_settings[ 'readjustment' ];
-			if ( isset( $this->stored_settings[ 'readjustment' ] ) && '' != $this->stored_settings[ 'readjustment' ] ) { 
-				$readjustment = esc_attr( $this->stored_settings[ 'readjustment' ] ); 
+			if ( isset( $this->stored_settings[ 'readjustment' ] ) and in_array( $this->stored_settings[ 'readjustment' ], $this->valid_readjustments ) ) { 
+				$readjustment = $this->stored_settings[ 'readjustment' ];
 			}
 			$content .= sprintf( '@media screen and (min-width: 640px) { body { padding-%s: %dpx !important; } }', $position, $readjustment );
 			$content .= "\n";
@@ -924,40 +946,40 @@ class Speed_Contact_Bar {
 		$bar_styles = '';
 
 		$vertical_padding = $this->default_settings[ 'vertical_padding' ];
-		if ( isset( $this->stored_settings[ 'vertical_padding' ] ) && in_array( $this->stored_settings[ 'vertical_padding' ], $this->valid_vertical_paddings ) ) { 
+		if ( isset( $this->stored_settings[ 'vertical_padding' ] ) and in_array( $this->stored_settings[ 'vertical_padding' ], $this->valid_vertical_paddings ) ) { 
 			$vertical_padding = absint( $this->stored_settings[ 'vertical_padding' ] ); 
 		}
 		$horizontal_padding = $this->default_settings[ 'horizontal_padding' ];
-		if ( isset( $this->stored_settings[ 'horizontal_padding' ] ) && in_array( $this->stored_settings[ 'horizontal_padding' ], $this->valid_horizontal_paddings ) ) { 
+		if ( isset( $this->stored_settings[ 'horizontal_padding' ] ) and in_array( $this->stored_settings[ 'horizontal_padding' ], $this->valid_horizontal_paddings ) ) { 
 			$horizontal_padding = absint( $this->stored_settings[ 'horizontal_padding' ] ); 
 		}
 		$bar_styles .= sprintf( ' padding: %spx %spx;', $vertical_padding, $horizontal_padding ); 
 
-		if ( isset( $this->stored_settings[ 'bg_transparent' ] ) && 1 == $this->stored_settings[ 'bg_transparent' ] ) { 
+		if ( isset( $this->stored_settings[ 'bg_transparent' ] ) and 1 == $this->stored_settings[ 'bg_transparent' ] ) { 
 			$bar_styles .= ' background-color: transparent;'; 
 		} else {
 			$bg_color = $this->default_settings[ 'bg_color' ];
-			if ( isset( $this->stored_settings[ 'bg_color' ] ) && '' != $this->stored_settings[ 'bg_color' ] ) { 
+			if ( isset( $this->stored_settings[ 'bg_color' ] ) and '' != $this->stored_settings[ 'bg_color' ] ) { 
 				$bg_color = esc_attr( $this->stored_settings[ 'bg_color' ] ); 
 			}
 			$bar_styles .= sprintf( ' background-color: %s;', $bg_color ); 
 		}
 
 		$text_color = $this->default_settings[ 'text_color' ];
-		if ( isset( $this->stored_settings[ 'text_color' ] ) && '' != $this->stored_settings[ 'text_color' ] ) { 
+		if ( isset( $this->stored_settings[ 'text_color' ] ) and '' != $this->stored_settings[ 'text_color' ] ) { 
 			$text_color = esc_attr( $this->stored_settings[ 'text_color' ] );
 		}
 		$bar_styles .= sprintf( ' color: %s;', $text_color ); 
 		$headline_color = sprintf( ' color: %s;', $text_color ); 
 
 		$content_alignment = $this->default_settings[ 'content_alignment' ];
-		if ( isset( $this->stored_settings[ 'content_alignment' ] ) && in_array( $this->stored_settings[ 'content_alignment' ], $this->valid_content_alignments ) ) { 
+		if ( isset( $this->stored_settings[ 'content_alignment' ] ) and in_array( $this->stored_settings[ 'content_alignment' ], $this->valid_content_alignments ) ) { 
 			$content_alignment = esc_attr( $this->stored_settings[ 'content_alignment' ] ); 
 		}
 		$bar_styles .= sprintf( ' text-align: %s;', $content_alignment ); 
 
 		// show shadow if desired and dependent of the bar's position
-		if ( isset( $this->stored_settings[ 'show_shadow' ] ) && 1 == $this->stored_settings[ 'show_shadow' ] ) { 
+		if ( isset( $this->stored_settings[ 'show_shadow' ] ) and 1 == $this->stored_settings[ 'show_shadow' ] ) { 
 			if ( 'bottom' == $position ) {
 				$bar_styles .= ' box-shadow: 0 -1px 6px 3px #ccc;'; 
 			} else {
@@ -969,7 +991,7 @@ class Speed_Contact_Bar {
 		
 		// styles of headline
 		$headline_tag = $this->default_settings[ 'headline_tag' ];
-		if ( isset( $this->stored_settings[ 'headline_tag' ] ) && in_array( $this->stored_settings[ 'headline_tag' ], $this->valid_headline_tags ) ) {
+		if ( isset( $this->stored_settings[ 'headline_tag' ] ) and in_array( $this->stored_settings[ 'headline_tag' ], $this->valid_headline_tags ) ) {
 			$headline_tag = $this->stored_settings[ 'headline_tag' ];
 		}
 		$content .= sprintf( '#scb-wrapper %s { display: inline; margin: 0; padding: 0; font: normal normal bold 15px/1 sans-serif; ', $headline_tag );
@@ -978,7 +1000,7 @@ class Speed_Contact_Bar {
 		$content .= "\n";
 
 		// hide headline in tablets and smartphones if desired
-		if ( isset( $this->stored_settings[ 'keep_headline' ] ) && 0 == $this->stored_settings[ 'keep_headline' ] ) {
+		if ( isset( $this->stored_settings[ 'keep_headline' ] ) and 0 == $this->stored_settings[ 'keep_headline' ] ) {
 			$content .= sprintf( '@media screen and (max-width: 768px) { #scb-wrapper %s { display: none; } }', $headline_tag );
 			$content .= "\n";
 		}
@@ -986,7 +1008,7 @@ class Speed_Contact_Bar {
 
 		// color of links
 		$link_color = $this->default_settings[ 'link_color' ];
-		if ( isset( $this->stored_settings[ 'link_color' ] ) && '' != $this->stored_settings[ 'link_color' ] ) { 
+		if ( isset( $this->stored_settings[ 'link_color' ] ) and '' != $this->stored_settings[ 'link_color' ] ) { 
 			$link_color = esc_attr( $this->stored_settings[ 'link_color' ] ); 
 		}
 		$content .= sprintf( '#scb-wrapper a { color: %s; } ', $link_color );
@@ -994,14 +1016,14 @@ class Speed_Contact_Bar {
 
 		// size of text
 		$font_size = $this->default_settings[ 'font_size' ];
-		if ( isset( $this->stored_settings[ 'font_size' ] ) && in_array( $this->stored_settings[ 'font_size' ], $this->valid_font_sizes ) ) { 
+		if ( isset( $this->stored_settings[ 'font_size' ] ) and in_array( $this->stored_settings[ 'font_size' ], $this->valid_font_sizes ) ) { 
 			$font_size = $this->stored_settings[ 'font_size' ]; 
 		}
 		$content .= sprintf( '#scb-wrapper %s, #scb-wrapper ul, #scb-wrapper li, #scb-wrapper a, #scb-wrapper a span { font-size: %dpx; } ', $headline_tag, $font_size );
 		$content .= "\n";
 
 		// hide headline if desired
-		if ( isset( $this->stored_settings[ 'show_headline' ] ) && 0 == $this->stored_settings[ 'show_headline' ] ) {
+		if ( isset( $this->stored_settings[ 'show_headline' ] ) and 0 == $this->stored_settings[ 'show_headline' ] ) {
 			$content .= sprintf( '#scb-wrapper %s { display: inline; left: -32768px; margin: 0; padding: 0; position: absolute; top: 0; z-index: 1000; } ', $headline_tag );
 			$content .= "\n";
 		}
@@ -1032,8 +1054,9 @@ class Speed_Contact_Bar {
 	 * @since    1.0
 	 */
 	public function display_activation_message () {
+		$text = 'Settings';
 		$url  = esc_url( admin_url( sprintf( 'options-general.php?page=%s', 'speed-contact-bar' ) ) );
-		$link = sprintf( '<a href="%s">%s &rsaquo; %s</a>', $url, __( 'Settings' ), $this->plugin_name );
+		$link = sprintf( '<a href="%s">%s &rsaquo; %s</a>', $url, __( $text ), $this->plugin_name );
 		$msg  = sprintf( __( 'Welcome to the plugin %s! You can configure it at %s.', 'speed-contact-bar' ), $this->plugin_name, $link );
 		$html = sprintf( '<div class="updated"><p>%s</p></div>', $msg );
 		print $html;
